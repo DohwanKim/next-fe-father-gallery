@@ -1,4 +1,8 @@
+'use client';
 import Image from 'next/image';
+
+import { Post } from '@/types/posts.type';
+import dayjs from '@/utils/dayjs';
 
 import { css } from '../../../styled-system/css';
 
@@ -17,7 +21,14 @@ const tableItemWidthStyle = css.raw({
   '& th:nth-child(8)': { width: '120px' },
 });
 
-const Table = () => {
+interface Props {
+  items: Post[];
+  totalItems: number;
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
   return (
     <table
       className={css({
@@ -48,35 +59,45 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        <tr
-          className={css({
-            '& td': tableItemBaseStyle,
-            cursor: 'pointer',
-            _hover: {
-              backgroundColor: '#fafafa',
-            },
-          })}
-          onClick={() => {
-            console.log('click');
-          }}
-        >
-          <td
-            onClick={(e) => {
-              e.stopPropagation();
+        {items.map((item, index) => (
+          <tr
+            key={item.id}
+            className={css({
+              '& td': tableItemBaseStyle,
+              cursor: 'pointer',
+              _hover: {
+                backgroundColor: '#fafafa',
+              },
+            })}
+            onClick={() => {
+              console.log('click');
             }}
           >
-            <input type="checkbox" />
-          </td>
-          <td>1</td>
-          <td>
-            <Image width={100} height={100} src="/next.svg" alt="placeholder" />
-          </td>
-          <td className={css({ textAlign: 'left !important' })}>제목</td>
-          <td>타입</td>
-          <td>Y</td>
-          <td>2021-08-01</td>
-          <td>2021-08-01</td>
-        </tr>
+            <td
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <input type="checkbox" />
+            </td>
+            <td>{totalItems - itemsPerPage * (currentPage - 1) - index}</td>
+            <td>
+              <Image
+                width={100}
+                height={100}
+                src="/next.svg"
+                alt="placeholder"
+              />
+            </td>
+            <td className={css({ textAlign: 'left !important' })}>
+              {item.title}
+            </td>
+            <td>{item.artType}</td>
+            <td>{item.isSold ? 'Y' : 'N'}</td>
+            <td>{dayjs(item.createAt).format('YYYY-MM-DD')}</td>
+            <td>{dayjs(item.updateAt).format('YYYY-MM-DD')}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

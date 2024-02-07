@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { css } from '../../../styled-system/css';
-import AdminHeader from '../../components-admin/Header';
+import { css } from '../../../../styled-system/css';
+import AdminHeader from '../../../components-admin/Header';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

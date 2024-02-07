@@ -1,9 +1,5 @@
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaAnglesLeft,
-  FaAnglesRight,
-} from 'react-icons/fa6';
+'use client';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 import { usePagination } from '@/hooks/usePagination';
 
@@ -11,9 +7,11 @@ import { css } from '../../../styled-system/css';
 import { flex } from '../../../styled-system/patterns';
 
 export interface Props {
-  totalItemCount: number;
+  totalItems: number;
+  totalPages: number;
   currentPage: number;
-  perPageCount?: number;
+  itemsPerPage: number;
+  pageNumbersCount: number;
   onChangePage(page: number): void;
 }
 
@@ -28,43 +26,40 @@ const cursorPointer = css.raw({
 });
 
 const Pagination = ({
-  totalItemCount,
+  totalItems,
+  totalPages,
   currentPage,
-  perPageCount = 10,
+  itemsPerPage,
+  pageNumbersCount,
   onChangePage,
 }: Props) => {
   const {
-    firstPage,
-    lastPage,
+    isShowGoPrevGroup,
+    isShowGoNextGroup,
     pageNumbers,
-    goFirst,
-    goLast,
-    goNext,
-    goPrev,
-    goPageByNumber,
+    goPrevGroup,
+    goNextGroup,
+    goPage,
   } = usePagination({
-    onChangePage,
+    totalItems,
+    totalPages,
     currentPage,
-    totalItemCount,
-    perPageCount,
+    itemsPerPage,
+    pageNumbersCount,
+    onChangePage,
   });
 
   return (
     <div className={css(flexCenter, { mt: '16px' })}>
-      {totalItemCount > 1 && firstPage > 1 && (
-        <>
-          <button className={css(flexCenter, cursorPointer)} onClick={goFirst}>
-            <FaAnglesLeft />
-          </button>
-          <button
-            className={css(flexCenter, cursorPointer, {
-              mr: '8px',
-            })}
-            onClick={goPrev}
-          >
-            <FaAngleLeft />
-          </button>
-        </>
+      {!isShowGoPrevGroup && (
+        <button
+          className={css(flexCenter, cursorPointer, {
+            mr: '8px',
+          })}
+          onClick={goPrevGroup}
+        >
+          <FaAngleLeft />
+        </button>
       )}
       <div
         className={flex({
@@ -81,24 +76,19 @@ const Pagination = ({
               cursorPointer,
             )}
             aria-current={currentPage === page ? 'page' : undefined}
-            onClick={() => goPageByNumber(page)}
+            onClick={() => goPage(page)}
           >
             {page}
           </button>
         ))}
       </div>
-      {lastPage < totalItemCount && (
-        <>
-          <button
-            className={css(flexCenter, cursorPointer, { ml: '8px' })}
-            onClick={goNext}
-          >
-            <FaAngleRight />
-          </button>
-          <button className={css(flexCenter, cursorPointer)} onClick={goLast}>
-            <FaAnglesRight />
-          </button>
-        </>
+      {!isShowGoNextGroup && (
+        <button
+          className={css(flexCenter, cursorPointer, { ml: '8px' })}
+          onClick={goNextGroup}
+        >
+          <FaAngleRight />
+        </button>
       )}
     </div>
   );

@@ -1,57 +1,55 @@
-import { useMemo } from 'react';
-
 export interface IProps {
-  totalItemCount: number;
+  totalItems: number;
+  totalPages: number;
   currentPage: number;
-  perPageCount?: number;
+  itemsPerPage: number;
+  pageNumbersCount?: number;
   onChangePage(page: number): void;
 }
 
 export const usePagination = ({
-  onChangePage,
+  totalItems,
+  totalPages,
   currentPage,
-  totalItemCount,
-  perPageCount = 10,
+  itemsPerPage,
+  pageNumbersCount = 2,
+  onChangePage,
 }: IProps) => {
-  const viewPage = perPageCount;
-  const lastPageGroup = Math.ceil(totalItemCount / viewPage);
-  const pageGroup = Math.ceil(currentPage / viewPage);
-  const lastPage =
-    pageGroup * viewPage > totalItemCount
-      ? totalItemCount
-      : pageGroup * viewPage;
-  const firstPage = useMemo(() => {
-    if (pageGroup === 1) {
-      return 1;
+  const lastPage = Math.ceil(totalItems / itemsPerPage);
+  const isShowGoPrevGroup = currentPage / pageNumbersCount <= 1;
+  const isShowGoNextGroup =
+    Math.ceil(lastPage / pageNumbersCount) ===
+    Math.ceil(currentPage / pageNumbersCount);
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const startPage =
+      Math.floor((currentPage - 1) / pageNumbersCount) * pageNumbersCount + 1;
+    const endPage = Math.min(startPage + pageNumbersCount - 1, totalPages);
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
     }
-    if (pageGroup === lastPageGroup) {
-      const remainingPage = totalItemCount % viewPage;
-      return totalItemCount - remainingPage + 1;
-    } else {
-      return lastPage - (viewPage - 1) <= 0 ? 1 : lastPage - (viewPage - 1);
-    }
-  }, [pageGroup, lastPageGroup, totalItemCount, viewPage, lastPage]);
-  const pageNumbers = useMemo(() => {
-    const numbers = [];
-    for (let i = firstPage; i <= lastPage; i++) {
-      numbers.push(i);
-    }
-    return numbers;
-  }, [firstPage, lastPage]);
-  const goPrev = () => onChangePage(firstPage - 2);
-  const goNext = () => onChangePage(lastPage);
-  const goFirst = () => onChangePage(0);
-  const goLast = () => onChangePage(totalItemCount - 1);
-  const goPageByNumber = (page: number) => onChangePage(page);
+    return pageNumbers;
+  };
+  const pageNumbers = getPageNumbers();
+
+  const goPrevGroup = () =>
+    onChangePage(
+      currentPage - pageNumbersCount <= 0 ? currentPage - pageNumbersCount : 1,
+    );
+  const goNextGroup = () =>
+    onChangePage(
+      currentPage + pageNumbersCount >= lastPage
+        ? lastPage
+        : currentPage + pageNumbersCount,
+    );
+  const goPage = (page: number) => onChangePage(page);
 
   return {
-    firstPage,
-    lastPage,
+    isShowGoPrevGroup,
+    isShowGoNextGroup,
     pageNumbers,
-    goFirst,
-    goLast,
-    goNext,
-    goPrev,
-    goPageByNumber,
+    goNextGroup,
+    goPrevGroup,
+    goPage,
   };
 };

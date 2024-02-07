@@ -40,7 +40,7 @@ next-env.d.ts
 discord.xml
 
 # env
-/env
+.env.*
 
 ## Panda
 styled-system

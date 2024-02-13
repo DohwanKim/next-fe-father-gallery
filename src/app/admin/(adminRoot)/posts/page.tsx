@@ -4,7 +4,7 @@ import Posts from '@/components-admin/Posts';
 
 import { css } from '../../../../../styled-system/css';
 
-export default async function Page() {
+export default async function PostPage() {
   return (
     <>
       <h1 className={css({ fontSize: '22px', fontWeight: 'bold', mb: '16px' })}>

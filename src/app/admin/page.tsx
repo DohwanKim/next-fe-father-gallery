@@ -54,12 +54,13 @@ export default function AdminLogin() {
       <div
         className={css({
           position: 'absolute',
+          width: '400px',
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
+          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          borderRadius: '10px',
+          borderRadius: '20px',
           p: '40px',
           '& input': {
             backgroundColor: 'transparent',
@@ -73,6 +74,7 @@ export default function AdminLogin() {
               fontSize: '24px',
               fontWeight: 'bold',
               mb: '20px',
+              textAlign: 'center',
             })}
           >
             Father Gallery Admin
@@ -94,7 +96,7 @@ export default function AdminLogin() {
               type="text"
               {...register('username', { required: true })}
             />
-            {errors.password && <span>아아디를 입력해주세요.</span>}
+            {errors.username && <span>아아디를 입력해주세요.</span>}
           </div>
           <div>
             <div>비밀번호</div>

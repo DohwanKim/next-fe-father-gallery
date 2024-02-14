@@ -1,25 +1,11 @@
 import queryString from 'query-string';
 
-import { Paginate } from '@/types/paginate.type';
-import {
-  ArtType,
-  CreatePostDTO,
-  Post,
-  UpdatePostDTO,
-} from '@/types/posts.type';
+import { Paginate, PaginatePostsOptions } from '@/types/paginate.type';
+import { CreatePostDTO, Post, UpdatePostDTO } from '@/types/posts.type';
 import apiFetch from '@/utils/fetchIntance';
 
-interface GetPaginatePostsInterface {
-  page?: number;
-  limit?: number;
-  title?: string;
-  sort?: 'DESC' | 'ASC';
-  tags?: string[];
-  artTypes?: ArtType[];
-}
-
 export const getPaginatePosts = async (
-  options: GetPaginatePostsInterface,
+  options: PaginatePostsOptions,
 ): Promise<Paginate<Post>> => {
   const query = queryString.stringify(options, {
     arrayFormat: 'comma',

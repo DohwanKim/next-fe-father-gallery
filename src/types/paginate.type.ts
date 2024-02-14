@@ -1,3 +1,5 @@
+import { ArtType } from '@/constants/post.enum';
+
 export type Paginate<T> = {
   items: T[];
   meta: {
@@ -13,4 +15,13 @@ export type Paginate<T> = {
     next: string;
     last: string;
   };
+};
+
+export type PaginatePostsOptions = {
+  page?: number;
+  limit?: number;
+  title?: string;
+  sort?: 'DESC' | 'ASC';
+  tags?: string[];
+  artTypes?: ArtType[];
 };

@@ -3,11 +3,12 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import { useQueryState } from 'nuqs';
 
-import Pagination from '@/components-admin/Pagination';
-import Table from '@/components-admin/Table';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
+
+import Pagination from '../Pagination';
+import Table from '../Table';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,7 +35,7 @@ const Posts = () => {
   );
 
   if (!data) {
-    return null;
+    return <div>Loading...</div>;
   }
 
   const { items, meta } = data;

@@ -1,10 +1,11 @@
 'use client';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { Post } from '@/types/posts.type';
 import dayjs from '@/utils/dayjs';
 
-import { css } from '../../../styled-system/css';
+import { css } from '../../../../../styled-system/css';
 
 const tableItemBaseStyle = css.raw({
   p: '10px 0',
@@ -29,6 +30,8 @@ interface Props {
 }
 
 const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
+  const router = useRouter();
+
   return (
     <table
       className={css({
@@ -70,7 +73,7 @@ const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
               },
             })}
             onClick={() => {
-              console.log('click');
+              router.push(`/admin/posts/${item.id}`);
             }}
           >
             <td

@@ -3,8 +3,8 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 import { usePagination } from '@/hooks/usePagination';
 
-import { css } from '../../../styled-system/css';
-import { flex } from '../../../styled-system/patterns';
+import { css } from '../../../../../styled-system/css';
+import { flex } from '../../../../../styled-system/patterns';
 
 export interface Props {
   totalItems: number;

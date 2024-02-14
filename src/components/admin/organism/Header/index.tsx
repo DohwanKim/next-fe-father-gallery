@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { signOut } from '@/service/auth';
 
-import { css } from '../../../styled-system/css';
+import { css } from '../../../../../styled-system/css';
 
 const AdminHeader = () => {
   const height = '60px';
@@ -33,6 +33,7 @@ const AdminHeader = () => {
             fontSize: 20,
             fontWeight: 'bold',
           })}
+          scroll={false}
         >
           Father Gallery
         </Link>

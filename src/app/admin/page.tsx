@@ -49,7 +49,7 @@ export default function AdminLogin() {
     },
   });
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
-    signIn(data)
+    await signIn(data)
       .then(() => {
         router.push('/admin/dashboard');
       })

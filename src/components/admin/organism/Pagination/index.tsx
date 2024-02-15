@@ -3,9 +3,6 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 import { usePagination } from '@/hooks/usePagination';
 
-import { css } from '../../../../../styled-system/css';
-import { flex } from '../../../../../styled-system/patterns';
-
 export interface Props {
   totalItems: number;
   totalPages: number;
@@ -14,16 +11,6 @@ export interface Props {
   pageNumbersCount: number;
   onChangePage(page: number): void;
 }
-
-const flexCenter = css.raw({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-const cursorPointer = css.raw({
-  cursor: 'pointer',
-});
 
 const Pagination = ({
   totalItems,
@@ -50,31 +37,16 @@ const Pagination = ({
   });
 
   return (
-    <div className={css(flexCenter, { mt: '16px' })}>
+    <div>
       {!isShowGoPrevGroup && (
-        <button
-          className={css(flexCenter, cursorPointer, {
-            mr: '8px',
-          })}
-          onClick={goPrevGroup}
-        >
+        <button onClick={goPrevGroup}>
           <FaAngleLeft />
         </button>
       )}
-      <div
-        className={flex({
-          gap: '8px',
-        })}
-      >
+      <div>
         {pageNumbers.map((page) => (
           <button
             key={page}
-            className={css(
-              {
-                fontWeight: currentPage === page ? 'bold' : 'normal',
-              },
-              cursorPointer,
-            )}
             aria-current={currentPage === page ? 'page' : undefined}
             onClick={() => goPage(page)}
           >
@@ -83,10 +55,7 @@ const Pagination = ({
         ))}
       </div>
       {!isShowGoNextGroup && (
-        <button
-          className={css(flexCenter, cursorPointer, { ml: '8px' })}
-          onClick={goNextGroup}
-        >
+        <button onClick={goNextGroup}>
           <FaAngleRight />
         </button>
       )}

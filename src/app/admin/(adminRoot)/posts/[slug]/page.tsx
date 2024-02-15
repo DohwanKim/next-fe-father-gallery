@@ -7,9 +7,6 @@ import { getImageUploadUrl, uploadImage } from '@/service/images';
 import { getPost } from '@/service/posts';
 import { PostForm } from '@/types/posts.type';
 
-import { css } from '../../../../../../styled-system/css';
-import { flex } from '../../../../../../styled-system/patterns';
-
 interface Props {
   params: { slug: `${number}` | 'new' };
 }
@@ -56,15 +53,7 @@ export default function PostDetailPage({ params }: Props) {
   return (
     <>
       <h1>페이지 이름</h1>
-      <form
-        id="hook-form"
-        className={css({
-          '& input': {
-            border: '1px solid #ddd',
-          },
-        })}
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form id="hook-form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div>image</div>
           <div>
@@ -122,8 +111,8 @@ export default function PostDetailPage({ params }: Props) {
           </div>
         </div>
       </form>
-      <div className={flex()}>
-        <button className={css({ mr: 'auto' })}>[삭제]</button>
+      <div>
+        <button>[삭제]</button>
         <button>[취소]</button>
         <button type="submit" form="hook-form">
           [저장]

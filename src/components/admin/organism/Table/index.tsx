@@ -5,23 +5,6 @@ import { useRouter } from 'next/navigation';
 import { Post } from '@/types/posts.type';
 import dayjs from '@/utils/dayjs';
 
-import { css } from '../../../../../styled-system/css';
-
-const tableItemBaseStyle = css.raw({
-  p: '10px 0',
-  textAlign: 'center',
-});
-const tableItemWidthStyle = css.raw({
-  '& th:nth-child(1)': { width: '40px' },
-  '& th:nth-child(2)': { width: '50px' },
-  '& th:nth-child(3)': { width: '200px' },
-  '& th:nth-child(4)': { width: 'auto', textAlign: 'left' },
-  '& th:nth-child(5)': { width: '100px' },
-  '& th:nth-child(6)': { width: '40px' },
-  '& th:nth-child(7)': { width: '120px' },
-  '& th:nth-child(8)': { width: '120px' },
-});
-
 interface Props {
   items: Post[];
   totalItems: number;
@@ -33,24 +16,9 @@ const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
   const router = useRouter();
 
   return (
-    <table
-      className={css({
-        width: '100%',
-      })}
-    >
-      <thead
-        className={css({
-          bgColor: 'whitesmoke',
-        })}
-      >
-        <tr
-          className={css(
-            {
-              '& th': { ...tableItemBaseStyle, fontWeight: 'bold' },
-            },
-            tableItemWidthStyle,
-          )}
-        >
+    <table>
+      <thead>
+        <tr>
           <th />
           <th>No.</th>
           <th>이미지</th>
@@ -65,13 +33,6 @@ const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
         {items.map((item, index) => (
           <tr
             key={item.id}
-            className={css({
-              '& td': tableItemBaseStyle,
-              cursor: 'pointer',
-              _hover: {
-                backgroundColor: '#fafafa',
-              },
-            })}
             onClick={() => {
               router.push(`/admin/posts/${item.id}`);
             }}
@@ -92,9 +53,7 @@ const Table = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
                 alt="placeholder"
               />
             </td>
-            <td className={css({ textAlign: 'left !important' })}>
-              {item.title}
-            </td>
+            <td>{item.title}</td>
             <td>{item.artType}</td>
             <td>{item.isSold ? 'Y' : 'N'}</td>
             <td>{dayjs(item.createAt).format('YYYY-MM-DD')}</td>

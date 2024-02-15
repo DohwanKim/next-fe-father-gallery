@@ -1,6 +1,13 @@
 'use client';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import { usePagination } from '@/hooks/usePagination';
 
 export interface Props {
@@ -12,7 +19,7 @@ export interface Props {
   onChangePage(page: number): void;
 }
 
-const Pagination = ({
+const BasicPagination = ({
   totalItems,
   totalPages,
   currentPage,
@@ -37,30 +44,32 @@ const Pagination = ({
   });
 
   return (
-    <div>
-      {!isShowGoPrevGroup && (
-        <button onClick={goPrevGroup}>
-          <FaAngleLeft />
-        </button>
-      )}
-      <div>
+    <Pagination>
+      <PaginationContent>
+        {!isShowGoPrevGroup && (
+          <PaginationItem>
+            <PaginationPrevious onClick={goPrevGroup} />
+          </PaginationItem>
+        )}
         {pageNumbers.map((page) => (
-          <button
+          <PaginationItem
             key={page}
             aria-current={currentPage === page ? 'page' : undefined}
             onClick={() => goPage(page)}
           >
-            {page}
-          </button>
+            <PaginationLink isActive={currentPage === page}>
+              {page}
+            </PaginationLink>
+          </PaginationItem>
         ))}
-      </div>
-      {!isShowGoNextGroup && (
-        <button onClick={goNextGroup}>
-          <FaAngleRight />
-        </button>
-      )}
-    </div>
+        {!isShowGoNextGroup && (
+          <PaginationItem>
+            <PaginationNext onClick={goNextGroup} />
+          </PaginationItem>
+        )}
+      </PaginationContent>
+    </Pagination>
   );
 };
 
-export default Pagination;
+export default BasicPagination;

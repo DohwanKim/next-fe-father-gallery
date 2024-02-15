@@ -26,6 +26,8 @@ export const createPost = async (
   id: number,
   data: CreatePostDTO,
 ): Promise<boolean> => {
+  data.tags = [];
+
   return await apiFetch(`/api/posts/${id}`, {
     method: 'POST',
     body: data,
@@ -36,6 +38,8 @@ export const updatePost = async (
   id: number,
   data: UpdatePostDTO,
 ): Promise<boolean> => {
+  data.tags = [];
+
   return await apiFetch(`/api/posts/${id}`, {
     method: 'PATCH',
     body: data,

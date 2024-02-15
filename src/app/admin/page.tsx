@@ -1,24 +1,52 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { signIn } from '@/service/auth';
 import regExpPatterns from '@/utils/regExpPatterns';
 
-type FormLogin = {
-  username: string;
-  password: string;
-};
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(4, {
+      message: '유저이름은 4자 이상 20자 이하 입니다.',
+    })
+    .max(20, {
+      message: '유저이름은 4자 이상 20자 이하 입니다.',
+    }),
+  password: z
+    .string()
+    .min(8, {
+      message: '비밀번호는 8자 이상 20자 이하 입니다.',
+    })
+    .regex(regExpPatterns.password, {
+      message:
+        '비밀번호는 영문 대소문자, 숫자, 특수문자를 포함하여 8자 이상 20자 이하 입니다.',
+    }),
+});
 
 export default function AdminLogin() {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormLogin>();
-  const onSubmit: SubmitHandler<FormLogin> = async (data) => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+    },
+  });
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     signIn(data)
       .then(() => {
         router.push('/admin/dashboard');
@@ -29,46 +57,57 @@ export default function AdminLogin() {
   };
 
   return (
-    <div>
-      <div />
-      <div>
-        <div>
-          <div>hello</div>
-          <h1>Father Gallery Admin</h1>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <div>아이디</div>
-            <input
-              placeholder={'아이디'}
-              type="text"
-              {...register('username', { required: true })}
+    <div className={'h-dvh w-dvw relative flex justify-center items-center'}>
+      <div
+        className={
+          'absolute top-0 left-0 w-full h-full blur-sm bg-no-repeat bg-cover'
+        }
+        style={{ backgroundImage: 'url(/img/admin-login-bg.jpg)' }}
+      />
+      <div className={'relative w-96 bg-accent rounded-md backdrop-blur p-5'}>
+        <h1 className={'text-3xl font-bold text-center pb-5'}>
+          Father Gallery Admin
+        </h1>
+        <Form {...form}>
+          <form
+            className={'flex flex-col gap-3'}
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>아이디</FormLabel>
+                  <FormControl>
+                    <Input placeholder="아이디" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {errors.username && <span>아아디를 입력해주세요.</span>}
-          </div>
-          <div>
-            <div>비밀번호</div>
-            <input
-              placeholder={'비밀번호'}
-              type="password"
-              {...register('password', {
-                required: true,
-                pattern: {
-                  value: regExpPatterns.password,
-                  message:
-                    '비밀번호는 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.',
-                },
-              })}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>비밀번호</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="비밀번호"
+                      type={'password'}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {errors.password?.type === 'pattern' && (
-              <span>{errors.password.message}</span>
-            )}
-            {errors.password?.type === 'required' && (
-              <span>비밀번호를 입력해주세요.</span>
-            )}
-          </div>
-          <button type={'submit'}>로그인</button>
-        </form>
+            <Button className={'mt-3.5'} type="submit">
+              로그인
+            </Button>
+          </form>
+        </Form>
       </div>
     </div>
   );

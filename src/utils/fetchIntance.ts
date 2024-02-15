@@ -35,7 +35,6 @@ export const returnFetchJson = (args?: ReturnFetchDefaultOptions) => {
       credentials: 'include',
       body: init?.body && JSON.stringify(init.body),
     });
-
     const body = parseJsonSafely(await response.text()) as T;
 
     return {
@@ -76,7 +75,7 @@ const apiFetch = returnFetchJson({
     },
     response: async (response, requestArgs) => {
       if (!response.ok && response.status === 401) {
-        const message = JSON.parse(await response.text()).message;
+        const message = JSON.parse(await response.clone().text()).message;
 
         if (message === ErrorMessages.JWT_ACCESS_TOKEN_UNAUTHORIZED) {
           try {
@@ -99,6 +98,13 @@ const apiFetch = returnFetchJson({
 
         if (message === ErrorMessages.JWT_REFRESH_TOKEN_INVALID) {
           window.location.href = '/admin';
+        }
+
+        if (
+          message === ErrorMessages.INVALID_PASSWORD ||
+          message === ErrorMessages.INVALID_ID
+        ) {
+          throw new Error(message);
         }
       }
 

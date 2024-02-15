@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { ErrorMessages } from '@/constants/error-messages.enum';
 import { signIn } from '@/service/auth';
 import regExpPatterns from '@/utils/regExpPatterns';
 
@@ -44,6 +45,7 @@ export default function AdminLogin() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: '',
+      password: '',
     },
   });
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
@@ -52,12 +54,20 @@ export default function AdminLogin() {
         router.push('/admin/dashboard');
       })
       .catch((err) => {
-        console.log(err.data.message);
+        if (err.message === ErrorMessages.INVALID_ID) {
+          form.setError('username', {
+            message: '아이디가 존재하지 않습니다.',
+          });
+        } else if (err.message === ErrorMessages.INVALID_PASSWORD) {
+          form.setError('password', {
+            message: '비밀번호가 일치하지 않습니다.',
+          });
+        }
       });
   };
 
   return (
-    <div className={'h-dvh w-dvw relative flex justify-center items-center'}>
+    <main className={'h-dvh w-dvw relative flex justify-center items-center'}>
       <div
         className={
           'absolute top-0 left-0 w-full h-full blur-sm bg-no-repeat bg-cover'
@@ -109,6 +119,6 @@ export default function AdminLogin() {
           </form>
         </Form>
       </div>
-    </div>
+    </main>
   );
 }

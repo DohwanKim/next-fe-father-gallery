@@ -9,7 +9,7 @@ export interface ImageUploadedResult {
   variants: string[];
 }
 
-interface PostCore {
+export interface PostCore {
   title: string;
   artType: ArtType;
   canvasSize: string;
@@ -25,6 +25,7 @@ export interface Post extends PostCore {
   id: number;
   createAt: Date;
   updateAt: Date;
+  version: number;
 }
 
 export interface PostForm extends Omit<PostCore, 'img'> {

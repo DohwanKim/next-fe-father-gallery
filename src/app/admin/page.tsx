@@ -1,140 +1,112 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { css } from '@/../styled-system/css';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { ErrorMessages } from '@/constants/error-messages.enum';
 import { signIn } from '@/service/auth';
 import regExpPatterns from '@/utils/regExpPatterns';
+import { z } from '@/utils/zod-i18n';
 
-type FormLogin = {
-  username: string;
-  password: string;
-};
+const formSchema = z.object({
+  username: z.string().min(4).max(20),
+  password: z.string().min(8).max(20).regex(regExpPatterns.password, {
+    message:
+      '비밀번호는 영문 대소문자, 숫자, 특수문자를 포함하여 8자 이상 20자 이하 입니다.',
+  }),
+});
 
 export default function AdminLogin() {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormLogin>();
-  const onSubmit: SubmitHandler<FormLogin> = async (data) => {
-    signIn(data)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
+    await signIn(data)
       .then(() => {
-        router.push('/admin/dashboard');
+        router.push('/admin/posts');
       })
       .catch((err) => {
-        console.log(err.data.message);
+        if (err.message === ErrorMessages.INVALID_ID) {
+          form.setError('username', {
+            message: '아이디가 존재하지 않습니다.',
+          });
+        } else if (err.message === ErrorMessages.INVALID_PASSWORD) {
+          form.setError('password', {
+            message: '비밀번호가 일치하지 않습니다.',
+          });
+        }
       });
   };
 
   return (
-    <div
-      className={css({
-        position: 'relative',
-        width: '100%',
-        height: '100vh',
-      })}
-    >
+    <main className={'h-dvh w-dvw relative flex justify-center items-center'}>
       <div
-        className={css({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          bgImage: 'url(/img/admin-login-bg.jpg)',
-          bgPosition: 'center center',
-          bgRepeat: 'no-repeat',
-          bgSize: 'cover',
-          filter: 'blur(3px)',
-        })}
+        className={
+          'absolute top-0 left-0 w-full h-full blur-sm bg-no-repeat bg-cover'
+        }
+        style={{ backgroundImage: 'url(/img/admin-login-bg.jpg)' }}
       />
-      <div
-        className={css({
-          position: 'absolute',
-          width: '400px',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          borderRadius: '20px',
-          p: '40px',
-          '& input': {
-            backgroundColor: 'transparent',
-            border: '1px solid black',
-          },
-        })}
-      >
-        <div>
-          <h1
-            className={css({
-              fontSize: '24px',
-              fontWeight: 'bold',
-              mb: '20px',
-              textAlign: 'center',
-            })}
+      <div className={'relative w-96 bg-accent rounded-md backdrop-blur p-5'}>
+        <h1 className={'text-3xl font-bold text-center pb-5'}>
+          Father Gallery Admin
+        </h1>
+        <Form {...form}>
+          <form
+            className={'flex flex-col gap-3'}
+            onSubmit={form.handleSubmit(onSubmit)}
           >
-            Father Gallery Admin
-          </h1>
-        </div>
-        <form
-          className={css({
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-          })}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div>
-            <div>아이디</div>
-            <input
-              placeholder={'아이디'}
-              className={css({ width: '100%', padding: '2px 10px' })}
-              type="text"
-              {...register('username', { required: true })}
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>아이디</FormLabel>
+                  <FormControl>
+                    <Input placeholder="아이디" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {errors.username && <span>아아디를 입력해주세요.</span>}
-          </div>
-          <div>
-            <div>비밀번호</div>
-            <input
-              placeholder={'비밀번호'}
-              className={css({ width: '100%', padding: '2px 10px' })}
-              type="password"
-              {...register('password', {
-                required: true,
-                pattern: {
-                  value: regExpPatterns.password,
-                  message:
-                    '비밀번호는 8자 이상, 영문, 숫자, 특수문자를 포함해야 합니다.',
-                },
-              })}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>비밀번호</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="비밀번호"
+                      type={'password'}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-            {errors.password?.type === 'pattern' && (
-              <span>{errors.password.message}</span>
-            )}
-            {errors.password?.type === 'required' && (
-              <span>비밀번호를 입력해주세요.</span>
-            )}
-          </div>
-          <button
-            type={'submit'}
-            className={css({
-              cursor: 'pointer',
-              backgroundColor: 'gray.500',
-              fontWeight: 'bold',
-              color: 'white',
-              padding: '5px',
-              borderRadius: '5px',
-            })}
-          >
-            로그인
-          </button>
-        </form>
+            <Button className={'mt-3.5'} type="submit">
+              로그인
+            </Button>
+          </form>
+        </Form>
       </div>
-    </div>
+    </main>
   );
 }

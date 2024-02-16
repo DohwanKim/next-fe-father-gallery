@@ -3,12 +3,12 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import { useQueryState } from 'nuqs';
 
+import PostTable from '@/components/admin/organism/PostTable';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
-import Pagination from '../Pagination';
-import Table from '../Table';
+import BasicPagination from '../BasicPagination';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,30 +30,24 @@ const Posts = () => {
           limit: Number(limitQuery || 10),
         });
       },
+      placeholderData: (previousData) => previousData,
     },
     queryClient,
   );
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
-  const { items, meta } = data;
-  const { totalItems, currentPage, itemsPerPage, totalPages } = meta;
-
   return (
-    <div>
-      <Table
-        items={items}
-        totalItems={totalItems}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
+    <div className={'flex flex-col gap-5'}>
+      <PostTable
+        items={data?.items || []}
+        totalItems={data?.meta.totalItems || 0}
+        currentPage={data?.meta.currentPage || 1}
+        itemsPerPage={data?.meta.itemsPerPage || 10}
       />
-      <Pagination
-        totalItems={totalItems}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
+      <BasicPagination
+        totalItems={data?.meta.totalItems || 0}
+        totalPages={data?.meta.totalPages || 0}
+        currentPage={data?.meta.currentPage || 1}
+        itemsPerPage={data?.meta.itemsPerPage || 10}
         pageNumbersCount={limitQuery ? Number(limitQuery) : 10}
         onChangePage={async (page) => {
           await setPageQuery(`${page}`);

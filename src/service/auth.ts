@@ -4,7 +4,7 @@ export const signIn = async (data: { username: string; password: string }) => {
   return await apiFetch('/api/auth/signin', {
     method: 'POST',
     body: data,
-  }).then((res) => res.body);
+  });
 };
 
 export const signOut = async () => {

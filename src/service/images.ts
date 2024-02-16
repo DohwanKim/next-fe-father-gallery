@@ -1,3 +1,4 @@
+import { ImageUploadedResult } from '@/types/posts.type';
 import apiFetch from '@/utils/fetchIntance';
 
 type ImageUploadUrl = {
@@ -10,9 +11,12 @@ export const getImageUploadUrl = async (): Promise<string> => {
   );
 };
 
-export const uploadImage = async (url: string, file: FileList) => {
+export const uploadImage = async (
+  url: string,
+  file: File,
+): Promise<ImageUploadedResult> => {
   const formData = new FormData();
-  formData.append('file', file[0]);
+  formData.append('file', file);
 
   return await fetch(url, {
     method: 'POST',

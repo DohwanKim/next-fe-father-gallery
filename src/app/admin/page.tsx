@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,25 +17,14 @@ import { Input } from '@/components/ui/input';
 import { ErrorMessages } from '@/constants/error-messages.enum';
 import { signIn } from '@/service/auth';
 import regExpPatterns from '@/utils/regExpPatterns';
+import { z } from '@/utils/zod-i18n';
 
 const formSchema = z.object({
-  username: z
-    .string()
-    .min(4, {
-      message: '유저이름은 4자 이상 20자 이하 입니다.',
-    })
-    .max(20, {
-      message: '유저이름은 4자 이상 20자 이하 입니다.',
-    }),
-  password: z
-    .string()
-    .min(8, {
-      message: '비밀번호는 8자 이상 20자 이하 입니다.',
-    })
-    .regex(regExpPatterns.password, {
-      message:
-        '비밀번호는 영문 대소문자, 숫자, 특수문자를 포함하여 8자 이상 20자 이하 입니다.',
-    }),
+  username: z.string().min(4).max(20),
+  password: z.string().min(8).max(20).regex(regExpPatterns.password, {
+    message:
+      '비밀번호는 영문 대소문자, 숫자, 특수문자를 포함하여 8자 이상 20자 이하 입니다.',
+  }),
 });
 
 export default function AdminLogin() {

@@ -39,7 +39,7 @@ export default function AdminLogin() {
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     await signIn(data)
       .then(() => {
-        router.push('/admin/dashboard');
+        router.push('/admin/posts');
       })
       .catch((err) => {
         if (err.message === ErrorMessages.INVALID_ID) {

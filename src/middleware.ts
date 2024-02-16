@@ -42,6 +42,8 @@ const isLoggedUser = async (headers: Headers) => {
           headers,
           credentials: 'include',
         });
+      } catch (e) {
+        console.error(e);
       } finally {
         const requestHeaders = new Headers(headers);
 
@@ -70,7 +72,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname === '/admin' && isLogged) {
-    return NextResponse.redirect(new URL('/admin/dashboard', origin));
+    return NextResponse.redirect(new URL('/admin/posts', origin));
   }
 
   if (newResponse) {

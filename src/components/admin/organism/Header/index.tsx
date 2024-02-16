@@ -15,9 +15,9 @@ import {
 import { signOut } from '@/service/auth';
 
 const navItems = [
-  { name: '대시보드', href: '/admin/dashboard' },
+  // { name: '대시보드', href: '/admin/dashboard' },
   { name: '게시글', href: '/admin/posts' },
-  { name: '통계', href: '/admin/analytics' },
+  // { name: '통계', href: '/admin/analytics' },
 ];
 
 const AdminHeader = () => {

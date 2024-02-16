@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 
 import { Paginate, PaginatePostsOptions } from '@/types/paginate.type';
-import { CreatePostDTO, Post, UpdatePostDTO } from '@/types/posts.type';
+import { Post, PostCore } from '@/types/posts.type';
 import apiFetch from '@/utils/fetchIntance';
 
 export const getPaginatePosts = async (
@@ -22,13 +22,8 @@ export const getPost = async (id: number): Promise<Post> => {
   return await apiFetch(`/api/posts/${id}`).then((res) => res.body as Post);
 };
 
-export const createPost = async (
-  id: number,
-  data: CreatePostDTO,
-): Promise<boolean> => {
-  data.tags = [];
-
-  return await apiFetch(`/api/posts/${id}`, {
+export const createPost = async (data: PostCore): Promise<boolean> => {
+  return await apiFetch(`/api/posts`, {
     method: 'POST',
     body: data,
   }).then((res) => res.body as boolean);
@@ -36,10 +31,8 @@ export const createPost = async (
 
 export const updatePost = async (
   id: number,
-  data: UpdatePostDTO,
+  data: PostCore,
 ): Promise<boolean> => {
-  data.tags = [];
-
   return await apiFetch(`/api/posts/${id}`, {
     method: 'PATCH',
     body: data,

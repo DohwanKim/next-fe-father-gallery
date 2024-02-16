@@ -30,11 +30,4 @@ export interface Post extends PostCore {
 
 export interface PostForm extends Omit<PostCore, 'img'> {
   id?: number;
-  img: null | FileList | ImageUploadedResult;
-}
-
-export interface CreatePostDTO extends PostCore {}
-
-export interface UpdatePostDTO extends PostCore {
-  id: number;
 }

@@ -38,7 +38,8 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
-    "zod-i18n-map": "^2.27.0"
+    "zod-i18n-map": "^2.27.0",
+    "zustand": "^4.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.4",

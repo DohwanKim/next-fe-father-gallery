@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { Spinner } from '@/components/admin/organism/Loading';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -22,8 +23,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
-import { ArtType } from '@/constants/post.enum';
+import { ArtType, ImageStatus } from '@/constants/post.enum';
+import { useModal } from '@/hooks/useModal';
 import { getImageUploadUrl, uploadImage } from '@/service/images';
 import { createPost, deletePost, getPost, updatePost } from '@/service/posts';
 import { ImageUploadedResult, Post, PostCore } from '@/types/posts.type';
@@ -34,8 +37,6 @@ interface Props {
   params: { slug: `${number}` | 'new' };
 }
 
-// type ImageStatus = 'NONE' | 'CHANGED' | 'UPLOADED';
-
 const formSchema = z.object({
   title: z.string().min(1),
   artType: z.nativeEnum(ArtType),
@@ -45,12 +46,12 @@ const formSchema = z.object({
   contents: z.string(),
   isSold: z.boolean(),
   tags: z.optional(z.array(z.string())).default([]),
-  img: z
-    .union([z.literal('NONE'), z.literal('CHANGED'), z.literal('UPLOADED')])
-    .nullable(),
+  img: z.nativeEnum(ImageStatus).nullable(),
 });
 
 export default function PostDetailPage({ params }: Props) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { alertDialog } = useModal();
   const router = useRouter();
   const [editData, setEditData] = useState<Post | null>(null);
   const imgFileInputRef = useRef<HTMLInputElement>(null);
@@ -65,61 +66,56 @@ export default function PostDetailPage({ params }: Props) {
       frameType: '',
       contents: '',
       isSold: false,
-      img: 'NONE',
+      img: ImageStatus.NONE,
     },
   });
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
-    if (data.img === 'NONE') {
+    if (data.img === ImageStatus.NONE) {
       form.setError('img', { message: '이미지를 등록해주세요.' });
       return;
     }
+    const getNewData = async (
+      data: z.infer<typeof formSchema>,
+    ): Promise<PostCore> => {
+      let newImgData: ImageUploadedResult | null = null;
 
-    // TODO: 로딩 표시 만들기
-    let newImgData: ImageUploadedResult | null = null;
-    if (data.img === 'CHANGED') {
-      const file = imgFileInputRef.current?.files?.[0];
+      if (data.img === ImageStatus.CHANGED) {
+        const file = imgFileInputRef.current?.files?.[0];
 
-      if (file) {
-        newImgData = await getImageUploadUrl()
-          .then(async (cloudflareUrl) => {
-            return await uploadImage(cloudflareUrl, file);
-          })
-          .catch((e) => {
-            console.log(e);
-            // TODO: 실패 시 얼럿 출력
-            return null;
-          });
-
-        if (!newImgData) {
-          return;
+        if (file) {
+          const imageUploadUrl = await getImageUploadUrl();
+          newImgData = await uploadImage(imageUploadUrl, file);
         }
+      } else if (data.img === ImageStatus.UPLOADED && editData?.img) {
+        newImgData = editData.img;
       }
-    } else if (data.img === 'UPLOADED' && editData?.img) {
-      newImgData = editData.img;
-    }
 
-    const newData = {
-      ...data,
-      img: newImgData,
+      if (!newImgData) {
+        throw new Error('이미지 업로드에 실패했습니다.');
+      }
+
+      return {
+        ...data,
+        img: newImgData,
+      };
     };
 
     try {
-      if (params.slug === 'new') {
-        await createPost(newData).catch((e) => {
-          // TODO: 실패 시 모달 출력
-          console.log(e);
-        });
-        alert('등록되었습니다.');
-      } else {
-        await updatePost(Number(params.slug), newData).catch((e) => {
-          // TODO: 실패 시 모달 출력
-          console.log(e);
-        });
-        alert('수정되었습니다.');
-      }
+      setIsLoading(true);
+      const newData = await getNewData(data);
+
+      params.slug === 'new'
+        ? await createPost(newData)
+        : await updatePost(Number(params.slug), newData);
     } catch (e) {
-      console.log(e);
+      alert('에러 발생');
+      console.error(e);
     } finally {
+      setIsLoading(false);
+      await alertDialog({
+        description: '등록되었습니다.',
+        isHideCancel: true,
+      });
       router.push('/admin/posts');
     }
   };
@@ -138,7 +134,7 @@ export default function PostDetailPage({ params }: Props) {
             const { variants } = value as ImageUploadedResult;
 
             setImgPreviewUrl(variants[0]);
-            form.setValue('img', 'UPLOADED');
+            form.setValue('img', ImageStatus.UPLOADED);
           } else {
             form.setValue(
               key as keyof PostCore,
@@ -155,20 +151,30 @@ export default function PostDetailPage({ params }: Props) {
       <h1 className={'text-3xl font-bold mb-10'}>
         {params.slug === 'new' ? '새 게시글 등록' : '게시글 수정'}
       </h1>
-      {editData && (
+      {params.slug !== 'new' && (
         <div className={'flex gap-3 border-b mb-5 pb-5 text-sm'}>
-          <dl className={'flex gap-1'}>
-            <dt className={'font-bold'}>생성일: </dt>
-            <dd>{dayjs(editData.createAt).format('YYYY-MM-DD HH:mm:ss')}</dd>
-          </dl>
-          <dl className={'flex gap-1'}>
-            <dt className={'font-bold'}>수정일:</dt>
-            <dd>{dayjs(editData.updateAt).format('YYYY-MM-DD HH:mm:ss')}</dd>
-          </dl>
-          <dl className={'flex gap-1'}>
-            <dt className={'font-bold'}>수정 횟수:</dt>
-            <dd>{editData.version}</dd>
-          </dl>
+          {editData ? (
+            <>
+              <dl className={'flex gap-1'}>
+                <dt className={'font-bold'}>생성일:</dt>
+                <dd>
+                  {dayjs(editData.createAt).format('YYYY-MM-DD HH:mm:ss')}
+                </dd>
+              </dl>
+              <dl className={'flex gap-1'}>
+                <dt className={'font-bold'}>수정일:</dt>
+                <dd>
+                  {dayjs(editData.updateAt).format('YYYY-MM-DD HH:mm:ss')}
+                </dd>
+              </dl>
+              <dl className={'flex gap-1'}>
+                <dt className={'font-bold'}>수정 횟수:</dt>
+                <dd>{editData.version}</dd>
+              </dl>
+            </>
+          ) : (
+            <Skeleton className="w-[100px] h-[20px] rounded-full" />
+          )}
         </div>
       )}
       <Form {...form}>
@@ -188,13 +194,18 @@ export default function PostDetailPage({ params }: Props) {
                     <>
                       {field.value !== 'NONE' && (
                         <div className={'w-1/2 mb-5'}>
-                          <p className={'text-xs text-foreground/80'}>
-                            미리보기
-                            {field.value === 'UPLOADED' &&
+                          <img
+                            src={imgPreviewUrl}
+                            alt={''}
+                            className={'rounded'}
+                          />
+                          <p
+                            className={'text-xs text-foreground/80 text-center'}
+                          >
+                            {field.value === ImageStatus.UPLOADED &&
                               editData?.img &&
-                              ` (${editData.img.filename})`}
+                              editData.img.filename}
                           </p>
-                          <img src={imgPreviewUrl} alt={''} />
                         </div>
                       )}
                       <div className={'flex gap-3'}>
@@ -221,14 +232,14 @@ export default function PostDetailPage({ params }: Props) {
                                 URL.createObjectURL(e.target.files[0]),
                               );
 
-                              field.onChange('CHANGED');
+                              field.onChange(ImageStatus.CHANGED);
                             }
                           }}
                         />
                         {imgPreviewUrl && (
                           <Button
                             onClick={() => {
-                              form.setValue('img', 'NONE');
+                              form.setValue('img', ImageStatus.NONE);
                               setImgPreviewUrl('');
                               if (imgFileInputRef.current) {
                                 imgFileInputRef.current.files = null;
@@ -399,10 +410,18 @@ export default function PostDetailPage({ params }: Props) {
                 type={'button'}
                 variant={'destructive'}
                 onClick={async () => {
-                  if (confirm('정말로 삭제하시겠습니까?')) {
-                    await deletePost(Number(params.slug)).then(() => {
-                      alert('삭제되었습니다.');
-                      router.push('/admin/posts');
+                  const isConfirm = await alertDialog({
+                    description: '정말로 삭제하시겠습니까?',
+                  });
+
+                  if (isConfirm) {
+                    await deletePost(Number(params.slug)).then(async () => {
+                      await alertDialog({
+                        isHideCancel: true,
+                        description: '삭제되었습니다.',
+                      }).then(() => {
+                        router.push('/admin/posts');
+                      });
                     });
                   }
                 }}
@@ -423,7 +442,7 @@ export default function PostDetailPage({ params }: Props) {
                 취소
               </Button>
               <Button className={'font-bold'} type="submit">
-                저장
+                저장{isLoading && <Spinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

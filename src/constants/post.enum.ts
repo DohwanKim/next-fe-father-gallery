@@ -5,3 +5,9 @@ export enum ArtType {
   'ACRYLIC_PAINTING' = 'ACRYLIC_PAINTING',
   'OIL_PAINTING' = 'OIL_PAINTING',
 }
+
+export enum ImageStatus {
+  NONE = 'NONE',
+  CHANGED = 'CHANGED',
+  UPLOADED = 'UPLOADED',
+}

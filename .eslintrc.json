@@ -11,6 +11,7 @@
     "jsx": true,
     "useJSXTextNode": true
   },
+  "ignorePatterns": ["*.md"],
   "extends": [
     "next",
     "plugin:@typescript-eslint/recommended",

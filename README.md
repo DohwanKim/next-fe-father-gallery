@@ -1,4 +1,80 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Father Gallery FE
+<p style="text-align: center;background-color: #fff;padding: 15px 0 10px;border-radius: 20px">
+  <a href="https://nextjs.org/" target="blank"><img src="./public/next.svg" width="200" alt="Nest Logo" /></a>
+</p>
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
+
+<p align="center">
+Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
+
+
+<br>
+</p>
+<p align="center">
+<a target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+</p>
+
+## 스택
+- Next.js 14 boilerplate 
+  - typescript
+  - app router
+  - import alias: '@'
+- UI 라이브러리
+  - tailwindcss 
+  - shadcn/ui
+- 유틸
+  - Data fetching
+    - return-fetch
+    - query-string
+  - Data form
+    - react-hook-form
+    - zod(;zod-i18n-map)
+  - Date
+    - dayjs
+    - lodash
+  - Others
+    - nuqs
+- 상태관리
+  - Zustand
+  - TanStack React Query
+- 린팅 및 포맷팅
+  - eslint
+  - prettier
+  - husky
+
+
+## 설명
+아버지의 그림 작품들을 전시하는 사이트 위한 프론트엔드 프로젝트 입니다.<br>
+차후 실제 서비스를 할 예정입니다.<br>
+현재는 개발을 위한 테스트용으로 사용하고 있습니다.<br>
+개인 프로젝트이지만 코드 작성의 맥락은 협업을 전제로 하여 작성하였습니다.<br>
+협업의 기준은 이 프로젝트의 맥락을 쉽게 이해하여 투입 될 수 있는가 입니다.<br>
+
+## 구현
+- [ ] 어드민 페이지
+  - [x] `httponly=true` 값을 가진 엑세스 토큰과 리플래시 토큰으로 인증 구현
+  - [x] 클라우드 플레어 이미지 업로드 구현
+  - [ ] 게시글 관리 페이지 구현
+- [ ] 유저페이지
+  - [ ] 소개 페이지
+  - [ ] 게시글 페이지
+- [ ] 공통
+  - [ ] 페이지네이션 구현 (레퍼런스 [루리웹](https://bbs.ruliweb.com/pc/board/1020))
+  - [ ] 테스팅
+- [ ] Vercel을 이용한 배포
+  - [ ] CI/CD 구축
+- 추가 작업 옵션
+  - [ ] 차후 벡엔드 프로젝트와 함께 Mono Repo로 변경
+
+## TMI
+- PandaCSS를 사용하려 했으나 시간 단축을 위해 TailwindCSS + shadcn/ui 로 변경하였습니다.
+  - 차후 디자인만 차용하여 PandaCSS로 변경할 의향이 있습니다. 
+- Next.js 데이터 캐싱 기능으로 인한 변화
+  - axios를 사용하지 않았습니다. (`cache()` 함수로 사용하는 솔루션이 있으나 이번엔 다르게 해보고 싶었습니다.)
+  - 내장 fetch 함수는 구현 할 분량이 많아 시간 단축을 위해 oFetch를 사용하려고 하였으나 에로사항이 많아 국산 모듈 return-fetch를 사용하게 되었습니다. 
 
 ## Getting Started
 
@@ -14,23 +90,5 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

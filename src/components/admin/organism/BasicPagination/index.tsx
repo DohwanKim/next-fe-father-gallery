@@ -48,7 +48,10 @@ const BasicPagination = ({
       <PaginationContent>
         {!isShowGoPrevGroup && (
           <PaginationItem>
-            <PaginationPrevious onClick={goPrevGroup} />
+            <PaginationPrevious
+              onClick={goPrevGroup}
+              className={'cursor-pointer'}
+            />
           </PaginationItem>
         )}
         {pageNumbers.map((page) => (
@@ -56,6 +59,7 @@ const BasicPagination = ({
             key={page}
             aria-current={currentPage === page ? 'page' : undefined}
             onClick={() => goPage(page)}
+            className={'cursor-pointer'}
           >
             <PaginationLink isActive={currentPage === page}>
               {page}
@@ -64,7 +68,10 @@ const BasicPagination = ({
         ))}
         {!isShowGoNextGroup && (
           <PaginationItem>
-            <PaginationNext onClick={goNextGroup} />
+            <PaginationNext
+              onClick={goNextGroup}
+              className={'cursor-pointer'}
+            />
           </PaginationItem>
         )}
       </PaginationContent>

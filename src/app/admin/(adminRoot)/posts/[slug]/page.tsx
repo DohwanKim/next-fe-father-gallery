@@ -30,6 +30,7 @@ import { useModal } from '@/hooks/useModal';
 import { getImageUploadUrl, uploadImage } from '@/service/images';
 import { createPost, deletePost, getPost, updatePost } from '@/service/posts';
 import { ImageUploadedResult, Post, PostCore } from '@/types/posts.type';
+import { getCFUrl } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 import { z } from '@/utils/zod-i18n';
 
@@ -131,9 +132,9 @@ export default function PostDetailPage({ params }: Props) {
         setEditData({ id, createAt, updateAt, version, ...others });
         Object.entries({ ...others }).forEach(([key, value]) => {
           if (key === 'img' && value) {
-            const { variants } = value as ImageUploadedResult;
+            const { id } = value as ImageUploadedResult;
 
-            setImgPreviewUrl(variants[0]);
+            setImgPreviewUrl(getCFUrl(id));
             form.setValue('img', ImageStatus.UPLOADED);
           } else {
             form.setValue(

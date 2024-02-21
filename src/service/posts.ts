@@ -39,8 +39,10 @@ export const updatePost = async (
   }).then((res) => res.body as boolean);
 };
 
-export const deletePost = async (id: number): Promise<boolean> => {
-  return await apiFetch(`/api/posts/${id}`, {
+export const deletePost = async (id: number | number[]): Promise<boolean> => {
+  const data = Array.isArray(id) ? id : [id];
+
+  return await apiFetch(`/api/posts/${data}`, {
     method: 'DELETE',
   }).then((res) => res.body as boolean);
 };

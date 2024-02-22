@@ -1,6 +1,6 @@
 # Father Gallery FE
-<p style="text-align: center;background-color: #fff;padding: 15px 0 10px;border-radius: 20px">
-  <a href="https://nextjs.org/" target="blank"><img src="./public/next.svg" width="200" alt="Nest Logo" /></a>
+<p align="center">
+  <img src="./public/readme-logo.png" alt="Nest Logo" style="border-radius: 20px" />
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -54,15 +54,15 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 협업의 기준은 이 프로젝트의 맥락을 쉽게 이해하여 투입 될 수 있는가 입니다.<br>
 
 ## 구현
-- [ ] 어드민 페이지
+- [x] 어드민 페이지
   - [x] `httponly=true` 값을 가진 엑세스 토큰과 리플래시 토큰으로 인증 구현
   - [x] 클라우드 플레어 이미지 업로드 구현
-  - [ ] 게시글 관리 페이지 구현
+  - [x] 게시글 관리 페이지 구현
 - [ ] 유저페이지
   - [ ] 소개 페이지
   - [ ] 게시글 페이지
 - [ ] 공통
-  - [ ] 페이지네이션 구현 (레퍼런스 [루리웹](https://bbs.ruliweb.com/pc/board/1020))
+  - [x] 페이지네이션 구현 (레퍼런스 [루리웹](https://bbs.ruliweb.com/pc/board/1020))
   - [ ] 테스팅
 - [ ] Vercel을 이용한 배포
   - [ ] CI/CD 구축

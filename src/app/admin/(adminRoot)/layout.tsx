@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import AdminHeader from '@/components/admin/organism/Header';
+import AdminHeader from '@/components/admin/organism/AdminHeader';
 import Modal from '@/components/admin/organism/Modal';
 
 export default function Layout({ children }: { children: ReactNode }) {

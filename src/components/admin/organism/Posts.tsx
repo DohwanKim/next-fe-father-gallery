@@ -12,7 +12,7 @@ import useAdminPostsStore from '@/store/admin-posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
-import BasicPagination from '../BasicPagination';
+import BasicPagination from './BasicPagination';
 
 const queryClient = new QueryClient();
 

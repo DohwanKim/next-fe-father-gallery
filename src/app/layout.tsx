@@ -1,12 +1,12 @@
 import '@/styles/globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Faustina } from 'next/font/google';
 import { ReactNode } from 'react';
 
 import { ThemeProvider } from '@/components/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const faustina = Faustina({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${inter.className} flex flex-col min-h-dvh`}>
+      <body className={`${faustina.className} flex flex-col min-h-dvh`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

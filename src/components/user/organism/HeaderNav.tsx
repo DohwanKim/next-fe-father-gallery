@@ -10,8 +10,6 @@ const navItems = [
 const HeaderNav = () => {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
     <nav
       className={
@@ -21,7 +19,7 @@ const HeaderNav = () => {
       {navItems.map((item) => (
         <Link
           key={item.href}
-          className={`h-full transition-colors hover:text-foreground/80 ${
+          className={`flex items-center h-full transition-colors hover:text-foreground/80 ${
             pathname === item.href ? '' : 'text-foreground/60'
           }`}
           href={item.href}

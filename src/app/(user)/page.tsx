@@ -1,3 +1,9 @@
+import Posts from '@/components/user/organism/Posts';
+
 export default function Home() {
-  return <div>Hello 🐼!</div>;
+  return (
+    <>
+      <Posts />
+    </>
+  );
 }

@@ -1,12 +1,14 @@
 import { ReactNode } from 'react';
 
+import UserFooter from '@/components/user/organism/UserFooter';
 import UserHeader from '@/components/user/organism/UserHeader';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <UserHeader />
-      <main>{children}</main>
+      <main className={'flex-auto py-12'}>{children}</main>
+      <UserFooter />
     </>
   );
 }

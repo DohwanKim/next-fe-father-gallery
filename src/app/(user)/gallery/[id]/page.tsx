@@ -1,3 +1,3 @@
 export default function GalleryDetail() {
-  return <div>Hello 🐼!</div>;
+  return <div>Detail page</div>;
 }

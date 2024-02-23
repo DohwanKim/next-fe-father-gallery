@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <UserHeader />
-      <main className={'flex-auto'}>{children}</main>
+      <main className={'flex-auto py-12'}>{children}</main>
       <UserFooter />
     </>
   );

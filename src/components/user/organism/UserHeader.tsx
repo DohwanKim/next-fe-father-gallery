@@ -23,7 +23,7 @@ const UserHeader = () => {
           }
         >
           <Link href={'/'} scroll={false}>
-            <Image src={'/readme-logo.png'} alt={'next.js'} layout={'fill'} />
+            <Image src={'/readme-logo.png'} alt={'next.js'} fill={true} />
           </Link>
         </h1>
         <HeaderSocial />

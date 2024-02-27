@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API_URL}`;
 let newResponse: Response;
 
-const isLoggedUser = async (headers: Headers) => {
+const isUserLogged = async (headers: Headers) => {
   let isLogged = false;
 
   await fetch(`${BASE_URL}/users/info`, {
@@ -35,7 +35,8 @@ const isLoggedUser = async (headers: Headers) => {
         });
       }
     })
-    .catch(async () => {
+    .catch(async (e) => {
+      console.log(e);
       try {
         await fetch(`${BASE_URL}/auth/signout`, {
           method: 'POST',
@@ -65,7 +66,9 @@ const isLoggedUser = async (headers: Headers) => {
 export async function middleware(request: NextRequest) {
   const { headers } = request;
   const { pathname, origin } = request.nextUrl;
-  const isLogged = await isLoggedUser(headers);
+  const isLogged = await isUserLogged(headers);
+
+  console.log(isLogged);
 
   if (pathname !== '/admin' && !isLogged) {
     return NextResponse.redirect(new URL('/admin', origin));

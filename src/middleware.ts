@@ -6,6 +6,8 @@ let newResponse: Response;
 const isUserLogged = async (headers: Headers) => {
   let isLogged = false;
 
+  console.log('cookie:', headers.get('cookie'));
+
   await fetch(`${BASE_URL}/users/info`, {
     method: 'GET',
     headers,
@@ -35,8 +37,7 @@ const isUserLogged = async (headers: Headers) => {
         });
       }
     })
-    .catch(async (e) => {
-      console.log(e);
+    .catch(async () => {
       try {
         await fetch(`${BASE_URL}/auth/signout`, {
           method: 'POST',
@@ -64,19 +65,18 @@ const isUserLogged = async (headers: Headers) => {
 };
 
 export async function middleware(request: NextRequest) {
-  const sid = request.cookies.get('sid')?.value;
-  console.log(sid);
-  if (!sid) {
-    const id = crypto.randomUUID();
-    const response = NextResponse.redirect(request.url);
-    response.cookies.set('sid', id);
-    return response;
-  }
+  // const sid = request.cookies.get('sid')?.value;
+  // if (!sid) {
+  //   const id = crypto.randomUUID();
+  //   const response = NextResponse.redirect(request.url);
+  //   response.cookies.set('sid', id);
+  //   return response;
+  // }
   const { headers } = request;
   const { pathname, origin } = request.nextUrl;
   const isLogged = await isUserLogged(headers);
 
-  console.log(isLogged);
+  // console.log('isLogged', isLogged);
 
   if (pathname !== '/admin' && !isLogged) {
     return NextResponse.redirect(new URL('/admin', origin));

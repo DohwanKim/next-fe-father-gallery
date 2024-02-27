@@ -89,11 +89,12 @@ const isUserLogged = async (headers: Headers) => {
 };
 
 export async function middleware(request: NextRequest) {
+  const res = NextResponse.next();
   const sid = request.cookies.get('sid')?.value;
   if (!sid) {
     const id = crypto.randomUUID();
     const response = NextResponse.redirect(request.url);
-    applySetCookie(request, response);
+    applySetCookie(request, res);
     response.cookies.set('sid', id);
     return response;
   }

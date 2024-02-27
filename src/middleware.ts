@@ -6,6 +6,8 @@ let newResponse: Response;
 const isUserLogged = async (headers: Headers) => {
   let isLogged = false;
 
+  console.log(headers);
+
   await fetch(`${BASE_URL}/users/info`, {
     method: 'GET',
     headers,

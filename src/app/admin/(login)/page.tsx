@@ -50,6 +50,8 @@ export default function AdminLogin() {
           form.setError('password', {
             message: '비밀번호가 일치하지 않습니다.',
           });
+        } else {
+          console.log(err);
         }
       });
   };

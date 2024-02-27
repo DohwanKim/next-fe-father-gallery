@@ -18,8 +18,8 @@
   ],
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://api.father-gallery.p-e.kr/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://api.father-gallery.p-e.kr/api/$1"
     }
   ]
 }

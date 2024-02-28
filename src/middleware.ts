@@ -10,8 +10,6 @@ let newResponse: Response;
 const isUserLogged = async (headers: Headers) => {
   let isLogged = false;
 
-  console.log('cookie:', headers.get('cookie'));
-
   await fetch(`${BASE_URL}/users/info`, {
     method: 'GET',
     headers,
@@ -91,6 +89,10 @@ function applySetCookie(req: NextRequest, res: NextResponse): void {
 export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
   applySetCookie(request, res);
+
+  const allCookies = request.cookies.getAll();
+  console.log('allCookies', allCookies);
+
   const { headers } = request;
   const { pathname, origin } = request.nextUrl;
   const isLogged = await isUserLogged(headers);

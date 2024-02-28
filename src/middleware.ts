@@ -69,6 +69,8 @@ export async function middleware(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
   const isLogged = await isUserLogged(headers);
 
+  console.log('isLogged', isLogged);
+
   if (pathname !== '/admin' && !isLogged) {
     return NextResponse.redirect(new URL('/admin', origin));
   }

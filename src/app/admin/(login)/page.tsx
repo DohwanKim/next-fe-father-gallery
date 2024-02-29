@@ -62,7 +62,7 @@ export default function AdminLogin() {
         className={
           'absolute top-0 left-0 w-full h-full blur-sm bg-no-repeat bg-cover'
         }
-        style={{ backgroundImage: 'url(/img/admin-login-bg.jpg)' }}
+        style={{ backgroundImage: 'url(/img/admin_login_bg.jpg)' }}
       />
       <div className={'relative w-96 bg-accent rounded-md backdrop-blur p-5'}>
         <h1 className={'text-3xl font-bold text-center pb-5'}>

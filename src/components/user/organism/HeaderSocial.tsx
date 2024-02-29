@@ -1,11 +1,32 @@
 'use client';
 
-import { Instagram } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
+const NaverBlogIcon = () => {
+  return (
+    <Image src={'/img/naver_blog_icon.svg'} alt={''} width={24} height={24} />
+  );
+};
+
+const InstagramIcon = () => {
+  return (
+    <Image
+      src={'/img/instagram_logo_icon.svg'}
+      alt={''}
+      width={24}
+      height={24}
+    />
+  );
+};
+
 const socialItems = [
-  { name: 'Instagram', href: '/', render: <Instagram /> },
-  { name: 'About', href: '/about', render: <Instagram /> },
+  {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/dongcheolkim_watercolor/',
+    render: <InstagramIcon />,
+  },
+  { name: 'About', href: '/about', render: <NaverBlogIcon /> },
 ];
 
 const HeaderSocial = () => {

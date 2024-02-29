@@ -1,3 +1,3 @@
 export default function GalleryDetail() {
-  return <div>Detail page</div>;
+  return <div className={'container'}>Detail page</div>;
 }

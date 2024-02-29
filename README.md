@@ -65,7 +65,8 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
   - [x] 페이지네이션 구현 (레퍼런스 [루리웹](https://bbs.ruliweb.com/pc/board/1020))
   - [ ] 테스팅
 - [ ] Vercel을 이용한 배포
-  - [ ] CI/CD 구축
+  - [x] 배포 및 도메인 연결
+  - [ ] CI 구축 (CD는 Vercel에서 제공)
 - 추가 작업 옵션
   - [ ] 차후 벡엔드 프로젝트와 함께 Mono Repo로 변경
 

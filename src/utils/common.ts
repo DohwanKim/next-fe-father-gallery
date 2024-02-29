@@ -36,12 +36,7 @@ export const getCFUrl = (
   cloudflareImgId: string,
   variants: ImagesVariants = ImagesVariants.PUBLIC,
 ) => {
-  console.log(cloudflareImgId);
   const accountId = process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID;
-
-  console.log(
-    `https://imagedelivery.net/${accountId}/${cloudflareImgId}/${variants}`,
-  );
 
   return `https://imagedelivery.net/${accountId}/${cloudflareImgId}/${variants}`;
 };

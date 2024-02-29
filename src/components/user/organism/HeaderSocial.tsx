@@ -24,7 +24,11 @@ const socialItems = [
     href: 'https://www.instagram.com/dongcheolkim_watercolor/',
     render: <InstagramIcon />,
   },
-  { name: 'About', href: '/about', render: <NaverBlogIcon /> },
+  {
+    name: 'About',
+    href: 'https://blog.naver.com/kreator2006',
+    render: <NaverBlogIcon />,
+  },
 ];
 
 const HeaderSocial = () => {
@@ -34,6 +38,7 @@ const HeaderSocial = () => {
         <Link
           key={item.name}
           href={item.href}
+          target={'_blank'}
           scroll={false}
           className={'transition-colors hover:text-foreground/80'}
         >

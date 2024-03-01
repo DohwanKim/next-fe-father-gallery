@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { AnchorHTMLAttributes } from 'react';
 
 import { Post } from '@/types/posts.type';
-import { getCFUrl } from '@/utils/common';
+import { artTypeToKorean, getCFUrl } from '@/utils/common';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   postItem: Post;
@@ -34,7 +34,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
       )}
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
-        <p className={'font-light'}>{artType}</p>
+        <p className={'font-light'}>{artTypeToKorean(artType)}</p>
       </div>
     </Link>
   );

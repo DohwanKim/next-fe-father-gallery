@@ -11,6 +11,7 @@ export interface ImageUploadedResult {
 
 export interface PostCore {
   title: string;
+  drawingDate: Date;
   artType: ArtType;
   canvasSize: string;
   price: number;

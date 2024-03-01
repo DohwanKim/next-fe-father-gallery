@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Spinner } from '@/components/admin/atom/Loading';
+import DatePicker from '@/components/common/organism/DatePicker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -40,6 +41,7 @@ interface Props {
 
 const formSchema = z.object({
   title: z.string().min(1),
+  drawingDate: z.date(),
   artType: z.nativeEnum(ArtType),
   canvasSize: z.string(),
   price: z.number(),
@@ -51,7 +53,8 @@ const formSchema = z.object({
 });
 
 export default function PostDetailPage({ params }: Props) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const { alertDialog } = useModal();
   const router = useRouter();
   const [editData, setEditData] = useState<Post | null>(null);
@@ -61,6 +64,7 @@ export default function PostDetailPage({ params }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
+      drawingDate: new Date(),
       artType: 'NONE' as ArtType,
       canvasSize: '',
       price: 0,
@@ -70,6 +74,7 @@ export default function PostDetailPage({ params }: Props) {
       img: ImageStatus.NONE,
     },
   });
+
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     if (data.img === ImageStatus.NONE) {
       form.setError('img', { message: '이미지를 등록해주세요.' });
@@ -102,22 +107,23 @@ export default function PostDetailPage({ params }: Props) {
     };
 
     try {
-      setIsLoading(true);
+      setIsSaving(true);
       const newData = await getNewData(data);
 
       params.slug === 'new'
         ? await createPost(newData)
         : await updatePost(Number(params.slug), newData);
-    } catch (e) {
-      alert('에러 발생');
-      console.error(e);
-    } finally {
-      setIsLoading(false);
+
       await alertDialog({
         description: '등록되었습니다.',
         isHideCancel: true,
       });
       router.push('/admin/posts');
+    } catch (e) {
+      alert(e);
+      console.error(e);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -130,12 +136,15 @@ export default function PostDetailPage({ params }: Props) {
         );
 
         setEditData({ id, createAt, updateAt, version, ...others });
+        console.log({ ...others });
         Object.entries({ ...others }).forEach(([key, value]) => {
           if (key === 'img' && value) {
             const { id } = value as ImageUploadedResult;
 
             setImgPreviewUrl(getCFUrl(id));
             form.setValue('img', ImageStatus.UPLOADED);
+          } else if (key === 'drawingDate') {
+            form.setValue('drawingDate', dayjs(value as Date).toDate());
           } else {
             form.setValue(
               key as keyof PostCore,
@@ -272,6 +281,18 @@ export default function PostDetailPage({ params }: Props) {
                   </FormControl>
                   <FormMessage />
                 </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="drawingDate"
+            render={({ field }) => (
+              <FormItem>
+                {field.value && ''}
+                <FormLabel className={'w-24 font-bold'}>그린 날짜</FormLabel>
+                <DatePicker onChange={field.onChange} value={field.value} />
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -416,7 +437,9 @@ export default function PostDetailPage({ params }: Props) {
                   });
 
                   if (isConfirm) {
+                    setIsDeleting(true);
                     await deletePost(Number(params.slug)).then(async () => {
+                      setIsDeleting(false);
                       await alertDialog({
                         isHideCancel: true,
                         description: '삭제되었습니다.',
@@ -427,7 +450,7 @@ export default function PostDetailPage({ params }: Props) {
                   }
                 }}
               >
-                삭제
+                삭제{isDeleting && <Spinner className={'ml-2'} />}
               </Button>
             ) : (
               <span />
@@ -443,7 +466,7 @@ export default function PostDetailPage({ params }: Props) {
                 취소
               </Button>
               <Button className={'font-bold'} type="submit">
-                저장{isLoading && <Spinner className={'ml-2'} />}
+                저장{isSaving && <Spinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

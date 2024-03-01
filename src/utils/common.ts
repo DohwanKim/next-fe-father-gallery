@@ -1,4 +1,5 @@
 import { ImagesVariants } from '@/constants/images.enum';
+import { ArtType } from '@/constants/post.enum';
 
 export const threeCommaNum = (numString: string | number) => {
   numString = `${numString}`;
@@ -39,4 +40,22 @@ export const getCFUrl = (
   const accountId = process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID;
 
   return `https://imagedelivery.net/${accountId}/${cloudflareImgId}/${variants}`;
+};
+
+export const artTypeToKorean = (artType: ArtType) => {
+  let artTypeKorean = '';
+
+  if (artType === 'NONE') {
+    artTypeKorean = '미지정';
+  } else if (artType === 'WATERCOLOR') {
+    artTypeKorean = '수채화';
+  } else if (artType === 'PENCIL_DRAWING') {
+    artTypeKorean = '연필화';
+  } else if (artType === 'ACRYLIC_PAINTING') {
+    artTypeKorean = '아크릴화';
+  } else if (artType === 'OIL_PAINTING') {
+    artTypeKorean = '유화';
+  }
+
+  return artTypeKorean;
 };

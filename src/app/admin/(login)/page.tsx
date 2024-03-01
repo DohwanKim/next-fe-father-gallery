@@ -66,7 +66,7 @@ export default function AdminLogin() {
       />
       <div className={'relative w-96 bg-accent rounded-md backdrop-blur p-5'}>
         <h1 className={'text-3xl font-bold text-center pb-5'}>
-          Father Gallery Admin
+          KimDongCheol Art Admin
         </h1>
         <Form {...form}>
           <form

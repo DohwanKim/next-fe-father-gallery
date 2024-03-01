@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getPost } from '@/service/posts';
-import { getCFUrl } from '@/utils/common';
+import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
 
 interface Props {
   params: {
@@ -28,7 +28,7 @@ export default async function GalleryDetail({ params }: Props) {
         </Link>
       </div>
       <div className={'flex flex-col md:flex-row gap-x-10 gap-y-5 mb-10'}>
-        <div className={'relative basis-7/12 border-2 rounded object-left'}>
+        <div className={'relative basis-7/12 object-left'}>
           <Image
             src={getCFUrl(detailData.img!.id)}
             width={0}
@@ -36,15 +36,27 @@ export default async function GalleryDetail({ params }: Props) {
             sizes={'100vw'}
             priority
             alt={''}
-            className={'object-contain w-full h-auto'}
+            className={'object-contain rounded w-full h-auto'}
           />
         </div>
-        <div className={'grow'}>
+        <div className={'grow [&_dl]:mb-2 [&_dd]:text-foreground/80'}>
           <h1 className={'text-3xl mb-10'}>{detailData.title}</h1>
-          <p className={'text-foreground/80 mb-2'}>{detailData.price}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.isSold}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.artType}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.canvasSize}</p>
+          <dl>
+            <dt>Category</dt>
+            <dd>{artTypeToKorean(detailData.artType)}</dd>
+          </dl>
+          <dl>
+            <dt>Canvas</dt>
+            <dd>{detailData.frameType}</dd>
+          </dl>
+          <dl>
+            <dt>Canvas Size</dt>
+            <dd>{detailData.canvasSize}</dd>
+          </dl>
+          <dl>
+            <dt>Price</dt>
+            <dd>{threeCommaNum(detailData.price)} ₩</dd>
+          </dl>
           <p className={'text-foreground/80'}>{detailData.contents}</p>
         </div>
       </div>

@@ -31,7 +31,7 @@ const AdminHeader = () => {
             className={'font-bold mr-6 flex items-center space-x-2'}
             scroll={false}
           >
-            Father Gallery Admin
+            KimDongCheol Art Admin
           </Link>
           <nav className={'flex items-center gap-6 text-sm'}>
             {navItems.map((item) => (
@@ -48,22 +48,21 @@ const AdminHeader = () => {
             ))}
           </nav>
         </div>
-        <div className={'flex flex-1 items-center  space-x-2 justify-end'}>
+        <div className={'flex flex-1 items-center space-x-2 justify-end'}>
           <ThemeToggleButton />
           <Button
             variant="outline"
             size="icon"
             onClick={async () => {
-              await signOut().then(() => {
-                router.push('/admin');
-              });
+              await signOut();
+              router.push('/admin');
             }}
           >
-            <LogOut className="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+            <LogOut className="absolute h-[1.2rem] w-[1.2rem] transition-all" />
           </Button>
           <Button variant="outline" size="icon" asChild>
             <Link href={'/'} scroll={false}>
-              <Home className="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
+              <Home className="absolute h-[1.2rem] w-[1.2rem] transition-all" />
             </Link>
           </Button>
         </div>

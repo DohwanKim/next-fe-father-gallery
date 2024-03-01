@@ -7,7 +7,7 @@ const UserFooter = () => {
     <footer className={'border-t'}>
       <div
         className={
-          'flex container text-xs justify-between h-[60px] gap-y-2 items-center flex-wrap py-4 text-foreground/60'
+          'flex container text-xs justify-between min-h-[60px] gap-y-2 items-center flex-wrap py-4 text-foreground/60'
         }
       >
         <div className={'flex gap-x-5 gap-y-2 mr-5 flex-wrap'}>

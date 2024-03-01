@@ -1,9 +1,10 @@
 import { MoveLeft } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
+import DetailImage from '@/components/user/organism/DetailImage';
 import { getPost } from '@/service/posts';
-import { getCFUrl } from '@/utils/common';
+import { artTypeToKorean, threeCommaNum } from '@/utils/common';
+import dayjs from '@/utils/dayjs';
 
 interface Props {
   params: {
@@ -28,24 +29,36 @@ export default async function GalleryDetail({ params }: Props) {
         </Link>
       </div>
       <div className={'flex flex-col md:flex-row gap-x-10 gap-y-5 mb-10'}>
-        <div className={'relative basis-7/12 border-2 rounded object-left'}>
-          <Image
-            src={getCFUrl(detailData.img!.id)}
-            width={0}
-            height={0}
-            sizes={'100vw'}
-            priority
-            alt={''}
-            className={'object-contain w-full h-auto'}
-          />
-        </div>
-        <div className={'grow'}>
-          <h1 className={'text-3xl mb-10'}>{detailData.title}</h1>
-          <p className={'text-foreground/80 mb-2'}>{detailData.price}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.isSold}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.artType}</p>
-          <p className={'text-foreground/80 mb-2'}>{detailData.canvasSize}</p>
-          <p className={'text-foreground/80'}>{detailData.contents}</p>
+        <DetailImage imgId={detailData.img!.id} />
+        <div
+          className={
+            'flex flex-col gap-y-2 grow [&_dl]:flex [&_dt]:w-[100px] [&_dd]:font-light [&_dd]:text-foreground/80'
+          }
+        >
+          <h1 className={'text-3xl border-b pb-2'}>{detailData.title}</h1>
+          <dl>
+            <dt>Category</dt>
+            <dd>{artTypeToKorean(detailData.artType)}</dd>
+          </dl>
+          <dl>
+            <dt>Date</dt>
+            <dd>{dayjs(detailData.drawingDate).format('YYYY.MM.DD')}</dd>
+          </dl>
+          <dl>
+            <dt>Canvas</dt>
+            <dd>{detailData.frameType}</dd>
+          </dl>
+          <dl>
+            <dt>Canvas Size</dt>
+            <dd>{detailData.canvasSize}</dd>
+          </dl>
+          <dl>
+            <dt>Price</dt>
+            <dd>{threeCommaNum(detailData.price)} ₩</dd>
+          </dl>
+          <p className={'text-sm font-light border-t pt-2'}>
+            {detailData.contents}
+          </p>
         </div>
       </div>
       <div>Bottom Area</div>

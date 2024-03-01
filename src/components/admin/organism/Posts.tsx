@@ -3,7 +3,9 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
+import { useState } from 'react';
 
+import { Spinner } from '@/components/admin/atom/Loading';
 import PostTable from '@/components/admin/organism/PostTable';
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/useModal';
@@ -17,6 +19,7 @@ import BasicPagination from './BasicPagination';
 const queryClient = new QueryClient();
 
 const Posts = () => {
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const { alertDialog } = useModal();
   const { checkedPosts, setCheckedPosts } = useAdminPostsStore();
   const [pageQuery, setPageQuery] = useQueryState('page');
@@ -52,6 +55,7 @@ const Posts = () => {
               });
 
               if (isConfirm) {
+                setIsDeleting(true);
                 await deletePost(checkedPosts);
                 setCheckedPosts([]);
                 await refetch().then((res) => {
@@ -64,11 +68,12 @@ const Posts = () => {
                     setPageQuery(`${totalPages}`);
                   }
                 });
+                setIsDeleting(false);
               }
             }
           }}
         >
-          일괄 삭제
+          일괄 삭제{isDeleting && <Spinner className={'ml-2'} />}
         </Button>
         <Button asChild>
           <Link href={'/admin/posts/new'}>새글 등록</Link>

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Spinner } from '@/components/admin/atom/Loading';
+import DatePicker from '@/components/common/organism/DatePicker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -40,6 +41,7 @@ interface Props {
 
 const formSchema = z.object({
   title: z.string().min(1),
+  drawingDate: z.date(),
   artType: z.nativeEnum(ArtType),
   canvasSize: z.string(),
   price: z.number(),
@@ -51,7 +53,8 @@ const formSchema = z.object({
 });
 
 export default function PostDetailPage({ params }: Props) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const { alertDialog } = useModal();
   const router = useRouter();
   const [editData, setEditData] = useState<Post | null>(null);
@@ -61,6 +64,7 @@ export default function PostDetailPage({ params }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
+      drawingDate: new Date(),
       artType: 'NONE' as ArtType,
       canvasSize: '',
       price: 0,
@@ -70,6 +74,7 @@ export default function PostDetailPage({ params }: Props) {
       img: ImageStatus.NONE,
     },
   });
+
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     if (data.img === ImageStatus.NONE) {
       form.setError('img', { message: '이미지를 등록해주세요.' });
@@ -102,22 +107,23 @@ export default function PostDetailPage({ params }: Props) {
     };
 
     try {
-      setIsLoading(true);
+      setIsSaving(true);
       const newData = await getNewData(data);
 
       params.slug === 'new'
         ? await createPost(newData)
         : await updatePost(Number(params.slug), newData);
-    } catch (e) {
-      alert('에러 발생');
-      console.error(e);
-    } finally {
-      setIsLoading(false);
+
       await alertDialog({
         description: '등록되었습니다.',
         isHideCancel: true,
       });
       router.push('/admin/posts');
+    } catch (e) {
+      alert(e);
+      console.error(e);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -136,6 +142,8 @@ export default function PostDetailPage({ params }: Props) {
 
             setImgPreviewUrl(getCFUrl(id));
             form.setValue('img', ImageStatus.UPLOADED);
+          } else if (key === 'drawingDate') {
+            form.setValue('drawingDate', dayjs(value as Date).toDate());
           } else {
             form.setValue(
               key as keyof PostCore,
@@ -277,6 +285,18 @@ export default function PostDetailPage({ params }: Props) {
           />
           <FormField
             control={form.control}
+            name="drawingDate"
+            render={({ field }) => (
+              <FormItem>
+                {field.value && ''}
+                <FormLabel className={'w-24 font-bold'}>그린 날짜</FormLabel>
+                <DatePicker onChange={field.onChange} value={field.value} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="artType"
             render={({ field }) => (
               <FormItem>
@@ -313,10 +333,30 @@ export default function PostDetailPage({ params }: Props) {
           />
           <FormField
             control={form.control}
-            name="canvasSize"
+            name="frameType"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className={'w-24 font-bold'}>캔버스 정보</FormLabel>
+                <FormControl>
+                  <Input
+                    className={'w-1/2'}
+                    placeholder="Oil on canvas"
+                    type={'text'}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="canvasSize"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={'w-24 font-bold'}>
+                  캔버스 사이즈
+                </FormLabel>
                 <FormControl>
                   <Input
                     className={'w-1/2'}
@@ -342,30 +382,13 @@ export default function PostDetailPage({ params }: Props) {
                     type={'text'}
                     {...field}
                     onChange={(e) => {
-                      const value = e.target.value.replace(/[^0-9]/g, '');
-
-                      if (value) {
-                        field.onChange(Number(value) || 0);
+                      if (e.target.value) {
+                        const value = e.target.value.replace(/[^0-9]/g, '');
+                        field.onChange(Number(value));
+                      } else {
+                        field.onChange(0);
                       }
                     }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="frameType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={'w-24 font-bold'}>액자 정보</FormLabel>
-                <FormControl>
-                  <Input
-                    className={'w-1/2'}
-                    placeholder="Oil on canvas"
-                    type={'text'}
-                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -394,7 +417,7 @@ export default function PostDetailPage({ params }: Props) {
             name="isSold"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={'w-24 font-bold'}>판매여부</FormLabel>
+                <FormLabel className={'w-24 font-bold'}>판매</FormLabel>
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -416,7 +439,9 @@ export default function PostDetailPage({ params }: Props) {
                   });
 
                   if (isConfirm) {
+                    setIsDeleting(true);
                     await deletePost(Number(params.slug)).then(async () => {
+                      setIsDeleting(false);
                       await alertDialog({
                         isHideCancel: true,
                         description: '삭제되었습니다.',
@@ -427,7 +452,7 @@ export default function PostDetailPage({ params }: Props) {
                   }
                 }}
               >
-                삭제
+                삭제{isDeleting && <Spinner className={'ml-2'} />}
               </Button>
             ) : (
               <span />
@@ -443,7 +468,7 @@ export default function PostDetailPage({ params }: Props) {
                 취소
               </Button>
               <Button className={'font-bold'} type="submit">
-                저장{isLoading && <Spinner className={'ml-2'} />}
+                저장{isSaving && <Spinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

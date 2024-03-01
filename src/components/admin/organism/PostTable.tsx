@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -15,7 +16,7 @@ import {
 import { ImagesVariants } from '@/constants/images.enum';
 import useAdminPostsStore from '@/store/admin-posts';
 import { Post } from '@/types/posts.type';
-import { getCFUrl } from '@/utils/common';
+import { artTypeToKorean, getCFUrl } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
@@ -44,6 +45,7 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
 
   return (
     <Table>
+      <TableCaption>*그린날 순서로 정렬됩니다</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className={'w-[50px]'}>
@@ -59,8 +61,9 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
           <TableHead className={'w-[70px]'}>No.</TableHead>
           <TableHead className={'w-[230px]'}>이미지</TableHead>
           <TableHead className={'w-[auto]'}>제목</TableHead>
-          <TableHead className={'w-[170px]'}>타입</TableHead>
+          <TableHead className={'w-[90px]'}>타입</TableHead>
           <TableHead className={'w-[60px] text-center'}>판매</TableHead>
+          <TableHead className={'w-[130px]'}>그린날</TableHead>
           <TableHead className={'w-[130px]'}>생성일</TableHead>
           <TableHead className={'w-[130px]'}>수정일</TableHead>
         </TableRow>
@@ -107,9 +110,13 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
                 )}
               </TableCell>
               <TableCell>{item.title}</TableCell>
-              <TableCell>{item.artType}</TableCell>
+              <TableCell>{artTypeToKorean(item.artType)}</TableCell>
               <TableCell className={'text-center'}>
                 {item.isSold ? 'Y' : 'N'}
+              </TableCell>
+              <TableCell>
+                {item.drawingDate &&
+                  dayjs(item.drawingDate).format('YYYY-MM-DD')}
               </TableCell>
               <TableCell>{dayjs(item.createAt).format('YYYY-MM-DD')}</TableCell>
               <TableCell>{dayjs(item.updateAt).format('YYYY-MM-DD')}</TableCell>

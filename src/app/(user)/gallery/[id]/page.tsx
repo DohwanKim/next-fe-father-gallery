@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import DetailImage from '@/components/user/organism/DetailImage';
 import { getPost } from '@/service/posts';
-import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
+import { artTypeToKorean, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
@@ -29,7 +29,7 @@ export default async function GalleryDetail({ params }: Props) {
         </Link>
       </div>
       <div className={'flex flex-col md:flex-row gap-x-10 gap-y-5 mb-10'}>
-        <DetailImage imgSrc={getCFUrl(detailData.img!.id)} />
+        <DetailImage imgId={detailData.img!.id} />
         <div
           className={
             'flex flex-col gap-y-2 grow [&_dl]:flex [&_dt]:w-[100px] [&_dd]:font-light [&_dd]:text-foreground/80'

@@ -136,7 +136,6 @@ export default function PostDetailPage({ params }: Props) {
         );
 
         setEditData({ id, createAt, updateAt, version, ...others });
-        console.log({ ...others });
         Object.entries({ ...others }).forEach(([key, value]) => {
           if (key === 'img' && value) {
             const { id } = value as ImageUploadedResult;
@@ -334,10 +333,30 @@ export default function PostDetailPage({ params }: Props) {
           />
           <FormField
             control={form.control}
-            name="canvasSize"
+            name="frameType"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className={'w-24 font-bold'}>캔버스 정보</FormLabel>
+                <FormControl>
+                  <Input
+                    className={'w-1/2'}
+                    placeholder="Oil on canvas"
+                    type={'text'}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="canvasSize"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className={'w-24 font-bold'}>
+                  캔버스 사이즈
+                </FormLabel>
                 <FormControl>
                   <Input
                     className={'w-1/2'}
@@ -363,30 +382,13 @@ export default function PostDetailPage({ params }: Props) {
                     type={'text'}
                     {...field}
                     onChange={(e) => {
-                      const value = e.target.value.replace(/[^0-9]/g, '');
-
-                      if (value) {
-                        field.onChange(Number(value) || 0);
+                      if (e.target.value) {
+                        const value = e.target.value.replace(/[^0-9]/g, '');
+                        field.onChange(Number(value));
+                      } else {
+                        field.onChange(0);
                       }
                     }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="frameType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className={'w-24 font-bold'}>액자 정보</FormLabel>
-                <FormControl>
-                  <Input
-                    className={'w-1/2'}
-                    placeholder="Oil on canvas"
-                    type={'text'}
-                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -415,7 +417,7 @@ export default function PostDetailPage({ params }: Props) {
             name="isSold"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={'w-24 font-bold'}>판매여부</FormLabel>
+                <FormLabel className={'w-24 font-bold'}>판매</FormLabel>
                 <FormControl>
                   <Checkbox
                     checked={field.value}

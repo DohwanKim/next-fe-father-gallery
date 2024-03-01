@@ -4,11 +4,13 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'Gallery', href: '/gallery' },
   { name: 'About', href: '/about' },
 ];
 
 const HeaderNav = () => {
   const pathname = usePathname();
+  const firstPath = pathname.split('/')[1];
 
   return (
     <nav
@@ -20,7 +22,7 @@ const HeaderNav = () => {
         <Link
           key={item.href}
           className={`flex items-center h-full transition-colors hover:text-foreground/80 ${
-            pathname === item.href ? '' : 'text-foreground/60'
+            `/${firstPath}` === item.href ? '' : 'text-foreground/60'
           }`}
           href={item.href}
           scroll={false}

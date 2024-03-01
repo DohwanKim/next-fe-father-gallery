@@ -143,7 +143,9 @@ export default function PostDetailPage({ params }: Props) {
             setImgPreviewUrl(getCFUrl(id));
             form.setValue('img', ImageStatus.UPLOADED);
           } else if (key === 'drawingDate') {
-            form.setValue('drawingDate', dayjs(value as Date).toDate());
+            if (value) {
+              form.setValue('drawingDate', dayjs(value as Date).toDate());
+            }
           } else {
             form.setValue(
               key as keyof PostCore,

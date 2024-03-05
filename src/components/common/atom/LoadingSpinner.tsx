@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 
-export const Spinner = (props: Props) => {
+export const LoadingSpinner = (props: Props) => {
   return (
     <div role="status" {...props}>
       <svg

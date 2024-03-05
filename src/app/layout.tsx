@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s | 김동철 그림세상',
     default: '김동철 그림세상',
   },
-  description: '김동철 그림세상 입니다.',
+  description: '비전공자의 그림 도전',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

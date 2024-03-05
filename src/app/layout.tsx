@@ -4,7 +4,8 @@ import type { Metadata } from 'next';
 import { Faustina } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import QueryProvider from '@/components/provider/query-provider';
+import { ThemeProvider } from '@/components/provider/theme-provider';
 
 const faustina = Faustina({ subsets: ['latin'] });
 
@@ -20,14 +21,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${faustina.className} flex flex-col min-h-dvh`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -1,12 +1,12 @@
 'use client';
 
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
 
-import { Spinner } from '@/components/admin/atom/Loading';
 import PostTable from '@/components/admin/organism/PostTable';
+import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/useModal';
 import { deletePost, getPaginatePosts } from '@/service/posts';
@@ -16,27 +16,22 @@ import { Post } from '@/types/posts.type';
 
 import BasicPagination from './BasicPagination';
 
-const queryClient = new QueryClient();
-
 const Posts = () => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const { alertDialog } = useModal();
   const { checkedPosts, setCheckedPosts } = useAdminPostsStore();
   const [pageQuery, setPageQuery] = useQueryState('page');
   const [limitQuery] = useQueryState('limit');
-  const { data, refetch } = useQuery<Paginate<Post>>(
-    {
-      queryKey: ['posts', pageQuery],
-      queryFn: () => {
-        return getPaginatePosts({
-          page: Number(pageQuery || 1),
-          limit: Number(limitQuery || 10),
-        });
-      },
-      placeholderData: (previousData) => previousData,
+  const { data, refetch } = useQuery<Paginate<Post>>({
+    queryKey: ['posts', pageQuery],
+    queryFn: () => {
+      return getPaginatePosts({
+        page: Number(pageQuery || 1),
+        limit: Number(limitQuery || 10),
+      });
     },
-    queryClient,
-  );
+    placeholderData: (previousData) => previousData,
+  });
 
   return (
     <>
@@ -73,7 +68,7 @@ const Posts = () => {
             }
           }}
         >
-          일괄 삭제{isDeleting && <Spinner className={'ml-2'} />}
+          일괄 삭제{isDeleting && <LoadingSpinner className={'ml-2'} />}
         </Button>
         <Button asChild>
           <Link href={'/admin/posts/new'}>새글 등록</Link>

@@ -4,7 +4,9 @@ import type { Metadata } from 'next';
 import { Faustina } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import QueryProvider from '@/components/provider/query-provider';
+import { ThemeProvider } from '@/components/provider/theme-provider';
+import MetaIconHeader from '@/components/user/meta-icon-header';
 
 const faustina = Faustina({ subsets: ['latin'] });
 
@@ -13,21 +15,27 @@ export const metadata: Metadata = {
     template: '%s | 김동철 그림세상',
     default: '김동철 그림세상',
   },
-  description: '김동철 그림세상 입니다.',
+  description: '비전공자의 그림 도전',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <title>김동철 그림세상</title>
+        <MetaIconHeader />
+      </head>
       <body className={`${faustina.className} flex flex-col min-h-dvh`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Spinner } from '@/components/admin/atom/Loading';
+import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
 import DatePicker from '@/components/common/organism/DatePicker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -454,7 +454,7 @@ export default function PostDetailPage({ params }: Props) {
                   }
                 }}
               >
-                삭제{isDeleting && <Spinner className={'ml-2'} />}
+                삭제{isDeleting && <LoadingSpinner className={'ml-2'} />}
               </Button>
             ) : (
               <span />
@@ -470,7 +470,7 @@ export default function PostDetailPage({ params }: Props) {
                 취소
               </Button>
               <Button className={'font-bold'} type="submit">
-                저장{isSaving && <Spinner className={'ml-2'} />}
+                저장{isSaving && <LoadingSpinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

@@ -22,6 +22,12 @@ export const getPost = async (id: number): Promise<Post> => {
   return await apiFetch(`/api/posts/${id}`).then((res) => res.body as Post);
 };
 
+export const getRandomPost = async (id: number): Promise<Post[]> => {
+  return await apiFetch(`/api/posts/random-post`)
+    .then((res) => res.body as Post[])
+    .then((res) => res.filter((post) => post.id !== id).slice(0, 3));
+};
+
 export const createPost = async (data: PostCore): Promise<boolean> => {
   return await apiFetch(`/api/posts`, {
     method: 'POST',

@@ -46,7 +46,7 @@ export const artTypeToKorean = (artType: ArtType) => {
   let artTypeKorean = '';
 
   if (artType === 'NONE') {
-    artTypeKorean = '미지정';
+    artTypeKorean = '기타';
   } else if (artType === 'WATERCOLOR') {
     artTypeKorean = '수채화';
   } else if (artType === 'PENCIL_DRAWING') {

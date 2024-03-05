@@ -2,7 +2,8 @@ import { MoveLeft } from 'lucide-react';
 import Link from 'next/link';
 
 import DetailImage from '@/components/user/organism/DetailImage';
-import { getPost } from '@/service/posts';
+import PostItem from '@/components/user/organism/PostItem';
+import { getPost, getRandomPost } from '@/service/posts';
 import { artTypeToKorean, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
@@ -15,6 +16,7 @@ interface Props {
 export default async function GalleryDetail({ params }: Props) {
   const { id } = params;
   const detailData = await getPost(Number(id));
+  const randomPost = await getRandomPost(Number(id));
 
   if (!detailData) {
     return null;
@@ -61,7 +63,18 @@ export default async function GalleryDetail({ params }: Props) {
           </p>
         </div>
       </div>
-      <div>Bottom Area</div>
+      <div className={'mt-16 border-t pt-16'}>
+        <h2 className={'text-2xl pb-4'}>다른 작품 감상하기</h2>
+        <div
+          className={
+            'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
+          }
+        >
+          {randomPost.map((post) => (
+            <PostItem key={post.id} postItem={post} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

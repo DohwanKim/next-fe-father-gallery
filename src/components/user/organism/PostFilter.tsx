@@ -3,19 +3,22 @@ import { ArtType } from '@/constants/post.enum';
 
 interface Props {
   value: ArtType | undefined;
-  onValueChange: (value: ArtType) => void;
+  onValueChange: (value: ArtType | undefined) => void;
 }
 
 const PostFilter = ({ value, onValueChange }: Props) => {
   return (
     <ToggleGroup
       type="single"
-      value={value}
+      value={value ? value : 'ALL'}
       size="lg"
       onValueChange={(value) => {
-        onValueChange(value as ArtType);
+        onValueChange(value === 'ALL' ? undefined : (value as ArtType));
       }}
     >
+      <ToggleGroupItem value={'ALL'} aria-label="Toggle 전체">
+        전체
+      </ToggleGroupItem>
       <ToggleGroupItem value="PENCIL_DRAWING" aria-label="Toggle 연필화">
         연필화
       </ToggleGroupItem>

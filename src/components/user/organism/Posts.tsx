@@ -1,37 +1,76 @@
 'use client';
 
-import { QueryClient, useQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 
-import PostItem from '@/components/user/organism/PostItem';
+import PostFilter from '@/components/user/organism/PostFilter';
+import PostItem, {
+  PostItemSkeleton,
+} from '@/components/user/organism/PostItem';
+import { ArtType } from '@/constants/post.enum';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
-const queryClient = new QueryClient();
-
 const Posts = () => {
-  const { data } = useQuery<Paginate<Post>>(
-    {
-      queryKey: ['posts'],
-      queryFn: () => {
-        return getPaginatePosts({
-          page: Number(1),
-          limit: Number(100),
-        });
+  const [artTypes, setArtTypes] = useState<ArtType | undefined>(undefined);
+  const { data, isPending, hasNextPage, fetchNextPage } =
+    useSuspenseInfiniteQuery<Paginate<Post>>({
+      queryKey: ['posts', artTypes],
+      queryFn: ({ pageParam = 1 }) =>
+        getPaginatePosts({
+          page: pageParam as number,
+          limit: 9,
+          artTypes: artTypes ? [artTypes] : [],
+        }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.meta.totalPages !== 0 &&
+          lastPage.meta.totalPages !== allPages.length
+          ? allPages.length + 1
+          : undefined;
       },
-      placeholderData: (previousData) => previousData,
-    },
-    queryClient,
-  );
+    });
 
   return (
-    <div
-      className={
-        'container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
-      }
-    >
-      {data &&
-        data.items.map((post) => <PostItem key={post.id} postItem={post} />)}
+    <div className={'relative container mx-auto'}>
+      <div className={'w-full pb-6'}>
+        <PostFilter
+          value={artTypes}
+          onValueChange={(value) => {
+            setArtTypes(value);
+          }}
+        />
+      </div>
+      {isPending ? (
+        <div
+          className={
+            'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
+          }
+        >
+          <PostItemSkeleton />
+          <PostItemSkeleton />
+          <PostItemSkeleton />
+        </div>
+      ) : (
+        data && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={() => fetchNextPage()}
+            hasMore={hasNextPage}
+            className={
+              'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
+            }
+          >
+            {data.pages.map((pageData) =>
+              pageData.items.map((post) => (
+                <PostItem key={post.id} postItem={post} />
+              )),
+            )}
+          </InfiniteScroll>
+        )
+      )}
     </div>
   );
 };

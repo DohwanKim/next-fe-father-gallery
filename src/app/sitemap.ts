@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-const ROUTE_LIST = ['', '/sitemap', '/about', '/gallery'];
+const ROUTE_LIST = ['', '/about', '/gallery'];
 
 type ChangeFrequency =
   | 'always'

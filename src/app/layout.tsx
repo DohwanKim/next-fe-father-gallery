@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 
 import QueryProvider from '@/components/provider/query-provider';
 import { ThemeProvider } from '@/components/provider/theme-provider';
+import MetaIconHeader from '@/components/user/meta-icon-header';
 
 const faustina = Faustina({ subsets: ['latin'] });
 
@@ -20,6 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <title>김동철 그림세상</title>
+        <MetaIconHeader />
+      </head>
       <body className={`${faustina.className} flex flex-col min-h-dvh`}>
         <QueryProvider>
           <ThemeProvider

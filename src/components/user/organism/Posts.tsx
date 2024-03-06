@@ -35,7 +35,7 @@ const Posts = () => {
 
   return (
     <div className={'relative container mx-auto'}>
-      <div className={'w-full pb-6'}>
+      <div className={'w-full pb-12'}>
         <PostFilter
           value={artTypes}
           onValueChange={(value) => {
@@ -60,7 +60,7 @@ const Posts = () => {
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
             className={
-              'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
+              'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-12 md:gap-y-24'
             }
           >
             {data.pages.map((pageData) =>

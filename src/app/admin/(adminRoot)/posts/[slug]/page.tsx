@@ -1,5 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -26,6 +27,7 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Textarea } from '@/components/ui/textarea';
+import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType, ImageStatus } from '@/constants/post.enum';
 import { useModal } from '@/hooks/useModal';
 import { getImageUploadUrl, uploadImage } from '@/service/images';
@@ -140,7 +142,7 @@ export default function PostDetailPage({ params }: Props) {
           if (key === 'img' && value) {
             const { id } = value as ImageUploadedResult;
 
-            setImgPreviewUrl(getCFUrl(id));
+            setImgPreviewUrl(getCFUrl(id, ImagesVariants.ADMIN_POST_DETAIL));
             form.setValue('img', ImageStatus.UPLOADED);
           } else if (key === 'drawingDate') {
             if (value) {
@@ -205,11 +207,19 @@ export default function PostDetailPage({ params }: Props) {
                     <>
                       {field.value !== 'NONE' && (
                         <div className={'w-1/2 mb-5'}>
-                          <img
-                            src={imgPreviewUrl}
-                            alt={''}
-                            className={'rounded'}
-                          />
+                          <div
+                            className={
+                              'relative h-[300px] bg-gray-100 aspect-square'
+                            }
+                          >
+                            <Image
+                              src={imgPreviewUrl}
+                              alt={''}
+                              fill={true}
+                              unoptimized
+                              className={'rounded object-contain'}
+                            />
+                          </div>
                           <p
                             className={'text-xs text-foreground/80 text-center'}
                           >

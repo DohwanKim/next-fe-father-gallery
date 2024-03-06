@@ -1,8 +1,10 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AnchorHTMLAttributes } from 'react';
+import { AnchorHTMLAttributes, useState } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
+import { ImagesVariants } from '@/constants/images.enum';
 import { Post } from '@/types/posts.type';
 import { artTypeToKorean, getCFUrl } from '@/utils/common';
 
@@ -23,6 +25,7 @@ export const PostItemSkeleton = () => {
 };
 
 const PostItem = ({ postItem, ...props }: Props) => {
+  const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
   const { img, title, artType } = postItem;
 
   return (
@@ -37,11 +40,23 @@ const PostItem = ({ postItem, ...props }: Props) => {
             'relative w-full aspect-square mb-5 overflow-hidden rounded-lg drop-shadow-lg'
           }
         >
+          {!originImgLoaded && (
+            <Image
+              fill={true}
+              src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
+              alt={''}
+              unoptimized
+              priority
+              className={'object-cover transition-transform duration-500'}
+            />
+          )}
           <Image
             fill={true}
-            src={getCFUrl(img.id)}
+            src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
+            unoptimized
             className={'object-cover transition-transform duration-500'}
+            onLoad={() => setOriginImgLoaded(true)}
           />
         </div>
       )}

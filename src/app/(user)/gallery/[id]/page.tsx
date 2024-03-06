@@ -1,13 +1,36 @@
 import BackButton from '@/components/user/atom/BackButton';
 import DetailImage from '@/components/user/organism/DetailImage';
 import PostItem from '@/components/user/organism/PostItem';
+import { ImagesVariants } from '@/constants/images.enum';
 import { getPost, getRandomPost } from '@/service/posts';
-import { artTypeToKorean, threeCommaNum } from '@/utils/common';
+import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
   params: {
     id: string;
+  };
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { id } = params;
+  const detailData = await getPost(Number(id));
+  const ogTitle = `${detailData.title || '갤러리'} | 김동철 그림세상`;
+
+  return {
+    title: detailData.title || '갤러리',
+    openGraph: {
+      title: ogTitle,
+      description: detailData.contents || '',
+      images: [
+        {
+          url: getCFUrl(detailData.img!.id, ImagesVariants.USER_POST_DETAIL_OG),
+          width: 1200,
+          height: 630,
+          alt: ogTitle,
+        },
+      ],
+    },
   };
 }
 

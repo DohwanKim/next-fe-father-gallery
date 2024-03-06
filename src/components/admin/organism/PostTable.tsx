@@ -101,7 +101,7 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
                 {item.img && (
                   <div className={'h-[100px] w-[200px] relative'}>
                     <Image
-                      fill={true}
+                      fill
                       src={getCFUrl(item.img.id, ImagesVariants.ADMIN_POST)}
                       alt="placeholder"
                       unoptimized

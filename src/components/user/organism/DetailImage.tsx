@@ -17,19 +17,17 @@ const DetailImage = ({ imgId }: Props) => {
         <DialogTrigger asChild>
           <div
             className={
-              'flex justify-center relative h-[400px] md:h-[500px] md:max-h-[700px] md:basis-7/12 bg-stone-100 drop-shadow-md cursor-pointer'
+              'flex justify-center relative max-h-[400px] md:h-[500px] md:max-h-[700px] grow md:basis-7/12 bg-stone-100 drop-shadow-md cursor-pointer'
             }
           >
             <Image
               src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
-              priority
-              fill={true}
               alt={''}
+              priority
               unoptimized
-              className={'object-contain w-full h-full'}
-              onLoad={() => {
-                console.log('!');
-              }}
+              className={'object-contain w-full h-auto'}
+              width={0}
+              height={0}
             />
           </div>
         </DialogTrigger>

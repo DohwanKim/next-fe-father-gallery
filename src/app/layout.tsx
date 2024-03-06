@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Faustina } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
           </ThemeProvider>
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );

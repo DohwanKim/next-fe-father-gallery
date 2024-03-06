@@ -42,7 +42,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
         >
           {!originImgLoaded && (
             <Image
-              fill={true}
+              fill
               src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
               alt={''}
               unoptimized
@@ -51,7 +51,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
             />
           )}
           <Image
-            fill={true}
+            fill
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
             unoptimized

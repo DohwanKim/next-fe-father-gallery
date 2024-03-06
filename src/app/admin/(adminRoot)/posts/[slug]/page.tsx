@@ -215,7 +215,7 @@ export default function PostDetailPage({ params }: Props) {
                             <Image
                               src={imgPreviewUrl}
                               alt={''}
-                              fill={true}
+                              fill
                               unoptimized
                               className={'rounded object-contain'}
                             />

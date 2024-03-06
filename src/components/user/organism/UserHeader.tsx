@@ -70,7 +70,7 @@ const UserHeader = () => {
             <Image
               src={'/sample-logo.png'}
               alt={'김동철 그림세상'}
-              fill={true}
+              fill
               objectFit={'contain'}
             />
           </Link>

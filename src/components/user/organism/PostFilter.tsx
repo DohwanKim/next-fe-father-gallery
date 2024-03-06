@@ -12,6 +12,7 @@ const PostFilter = ({ value, onValueChange }: Props) => {
       type="single"
       value={value ? value : 'ALL'}
       size="lg"
+      className={'flex-wrap'}
       onValueChange={(value) => {
         onValueChange(value === 'ALL' ? undefined : (value as ArtType));
       }}

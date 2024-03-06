@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { HTMLAttributes } from 'react';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { ImagesVariants } from '@/constants/images.enum';
 import { getCFUrl } from '@/utils/common';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -16,17 +17,19 @@ const DetailImage = ({ imgId }: Props) => {
         <DialogTrigger asChild>
           <div
             className={
-              'flex justify-center relative h-[500px] md:h-[50vh] basis-7/12 bg-stone-100 drop-shadow-md cursor-pointer'
+              'flex justify-center relative h-[400px] md:h-[500px] md:max-h-[700px] md:basis-7/12 bg-stone-100 drop-shadow-md cursor-pointer'
             }
           >
             <Image
-              src={getCFUrl(imgId)}
-              width={0}
-              height={0}
-              sizes={'100vw'}
+              src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
               priority
+              fill={true}
               alt={''}
-              className={'object-contain w-auto h-full'}
+              unoptimized
+              className={'object-contain w-full h-full'}
+              onLoad={() => {
+                console.log('!');
+              }}
             />
           </div>
         </DialogTrigger>
@@ -38,6 +41,7 @@ const DetailImage = ({ imgId }: Props) => {
             sizes={'100vw'}
             priority
             alt={''}
+            unoptimized
             className={'object-contain max-h-[90dvh] w-full h-auto'}
           />
         </DialogContent>

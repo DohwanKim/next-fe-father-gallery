@@ -67,7 +67,12 @@ const UserHeader = () => {
           }
         >
           <Link href={'/'} scroll={false}>
-            <Image src={'/readme-logo.png'} alt={'next.js'} fill={true} />
+            <Image
+              src={'/sample-logo.png'}
+              alt={'김동철 그림세상'}
+              fill={true}
+              objectFit={'contain'}
+            />
           </Link>
         </h1>
         <HeaderSocial />

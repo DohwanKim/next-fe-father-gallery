@@ -16,6 +16,7 @@ const navItems = [
 
 const AdminHeader = () => {
   const pathname = usePathname();
+  const firstPath = '/admin/' + pathname.split('/')[2];
   const router = useRouter();
 
   return (
@@ -38,7 +39,7 @@ const AdminHeader = () => {
               <Link
                 key={item.href}
                 className={`transition-colors hover:text-foreground/80 ${
-                  pathname === item.href ? '' : 'text-foreground/60'
+                  firstPath === item.href ? '' : 'text-foreground/60'
                 }`}
                 href={item.href}
                 scroll={false}

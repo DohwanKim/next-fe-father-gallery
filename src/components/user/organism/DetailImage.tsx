@@ -17,7 +17,7 @@ const DetailImage = ({ imgId }: Props) => {
         <DialogTrigger asChild>
           <div
             className={
-              'flex justify-center relative max-h-[400px] md:h-[500px] md:max-h-[700px] grow md:basis-7/12 bg-stone-100 drop-shadow-md cursor-pointer'
+              'flex justify-center relative max-h-[400px] md:h-[500px] md:max-h-[700px] grow md:basis-7/12 bg-stone-100 drop-shadow cursor-zoom-in'
             }
           >
             <Image

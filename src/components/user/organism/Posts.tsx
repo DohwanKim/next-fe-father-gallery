@@ -35,7 +35,7 @@ const Posts = () => {
 
   return (
     <div className={'relative container mx-auto'}>
-      <div className={'w-full pb-12'}>
+      <div className={'w-full mb-6'}>
         <PostFilter
           value={artTypes}
           onValueChange={(value) => {
@@ -44,11 +44,7 @@ const Posts = () => {
         />
       </div>
       {isPending ? (
-        <div
-          className={
-            'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-24'
-          }
-        >
+        <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'}>
           <PostItemSkeleton />
           <PostItemSkeleton />
           <PostItemSkeleton />
@@ -59,9 +55,7 @@ const Posts = () => {
             pageStart={0}
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
-            className={
-              'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-12 md:gap-y-24'
-            }
+            className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'}
           >
             {data.pages.map((pageData) =>
               pageData.items.map((post) => (

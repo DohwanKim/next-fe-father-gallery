@@ -12,7 +12,7 @@ const PostFilter = ({ value, onValueChange }: Props) => {
       type="single"
       value={value ? value : 'ALL'}
       size="lg"
-      className={'flex-wrap'}
+      className={'flex-wrap [&>button]:rounded-none'}
       onValueChange={(value) => {
         onValueChange(value === 'ALL' ? undefined : (value as ArtType));
       }}

@@ -40,7 +40,9 @@ const HeaderSocial = () => {
           href={item.href}
           target={'_blank'}
           scroll={false}
-          className={'transition-opacity hover:opacity-80'}
+          className={
+            'grayscale hover:grayscale-0 transition-grayscale duration-300'
+          }
         >
           {item.render ? item.render : item.name}
         </Link>

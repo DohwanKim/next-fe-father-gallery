@@ -15,7 +15,7 @@ interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
 export const PostItemSkeleton = () => {
   return Array.from({ length: 9 }, (_, index) => (
     <div key={index}>
-      <Skeleton className="w-full rounded-lg aspect-square drop-shadow-lg mb-5" />
+      <Skeleton className="w-full aspect-square drop-shadow mb-5" />
       <div className={'flex flex-col items-center'}>
         <Skeleton className="h-4 w-[200px] mb-2" />
         <Skeleton className="h-4 w-[100px]" />
@@ -31,13 +31,13 @@ const PostItem = ({ postItem, ...props }: Props) => {
   return (
     <Link
       href={`/gallery/${postItem.id}`}
-      className={'[&:hover_img]:scale-105'}
+      className={'[&:hover_img]:opacity-80'}
       {...props}
     >
       {img && (
         <div
           className={
-            'relative w-full aspect-square mb-5 overflow-hidden rounded-lg drop-shadow-lg'
+            'relative w-full aspect-square mb-2 overflow-hidden drop-shadow'
           }
         >
           {!originImgLoaded && (
@@ -47,7 +47,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
               alt={''}
               unoptimized
               priority
-              className={'object-cover transition-transform duration-500'}
+              className={'object-cover transition-opacity duration-200'}
             />
           )}
           <Image
@@ -55,7 +55,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
             unoptimized
-            className={'object-cover transition-transform duration-500'}
+            className={'object-cover transition-opacity duration-500'}
             onLoad={() => setOriginImgLoaded(true)}
           />
         </div>

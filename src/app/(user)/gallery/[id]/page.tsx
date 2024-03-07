@@ -55,7 +55,7 @@ export default async function GalleryDetail({ params }: Props) {
             'flex flex-col gap-y-2 grow [&_dl]:flex [&_dt]:w-[100px] [&_dd]:font-light [&_dd]:text-foreground/80'
           }
         >
-          <h1 className={'text-3xl border-b pb-2'}>{detailData.title}</h1>
+          <h1 className={'text-2xl border-b pb-2'}>{detailData.title}</h1>
           <dl>
             <dt>Category</dt>
             <dd>{artTypeToKorean(detailData.artType)}</dd>
@@ -72,22 +72,22 @@ export default async function GalleryDetail({ params }: Props) {
             <dt>Canvas Size</dt>
             <dd>{detailData.canvasSize}</dd>
           </dl>
-          <dl>
-            <dt>Price</dt>
-            <dd>{threeCommaNum(detailData.price)} ₩</dd>
-          </dl>
+          {detailData.price && detailData.price > 0 ? (
+            <dl>
+              <dt>Price</dt>
+              <dd>{threeCommaNum(detailData.price)} ₩</dd>
+            </dl>
+          ) : null}
           <p className={'text-sm font-light border-t pt-2'}>
             {detailData.contents}
           </p>
         </div>
       </div>
       <div className={'border-t mt-8 pt-8 md:mt-16 md:pt-16'}>
-        <h2 className={'text-2xl pb-4'}>다른 작품 감상하기</h2>
-        <div
-          className={
-            'grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 md:gap-x-12 md:gap-y-24'
-          }
-        >
+        <h2 className={'text-2xl text-foreground/80 mb-4'}>
+          You may also like
+        </h2>
+        <div className={'grid grid-cols-2 md:grid-cols-3 gap-6'}>
           {randomPost.map((post, index) => (
             <PostItem
               key={post.id}

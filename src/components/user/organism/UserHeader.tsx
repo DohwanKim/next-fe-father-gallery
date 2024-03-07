@@ -3,18 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import ThemeToggleButton from '@/components/common/atom/ThemeToggleButton';
 import HeaderNav from '@/components/user/organism/HeaderNav';
 import HeaderSocial from '@/components/user/organism/HeaderSocial';
+import useLayoutStore from '@/store/layout';
 
 const UserHeader = () => {
   const pathname = usePathname();
   const headerRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
-  const [isHeaderHideByScroll, setIsHeaderHideByScroll] =
-    useState<boolean>(false);
+  const { isHeaderHideByScroll, setIsHeaderHideByScroll } = useLayoutStore();
 
   const mainScrollEvent = useCallback(() => {
     const $header = headerRef.current;
@@ -29,7 +29,7 @@ const UserHeader = () => {
       }
       lastScrollY.current = window.scrollY;
     }
-  }, []);
+  }, [setIsHeaderHideByScroll]);
 
   useEffect(() => {
     if (window) {
@@ -45,7 +45,7 @@ const UserHeader = () => {
 
   useEffect(() => {
     setIsHeaderHideByScroll(false);
-  }, [pathname]);
+  }, [pathname, setIsHeaderHideByScroll]);
 
   return (
     <header

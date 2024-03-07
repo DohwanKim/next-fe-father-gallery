@@ -35,14 +35,12 @@ const Posts = () => {
 
   return (
     <div className={'relative container mx-auto'}>
-      <div className={'w-full mb-6'}>
-        <PostFilter
-          value={artTypes}
-          onValueChange={(value) => {
-            setArtTypes(value);
-          }}
-        />
-      </div>
+      <PostFilter
+        value={artTypes}
+        onValueChange={(value) => {
+          setArtTypes(value);
+        }}
+      />
       {isPending ? (
         <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'}>
           <PostItemSkeleton />

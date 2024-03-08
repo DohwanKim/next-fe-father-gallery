@@ -32,9 +32,11 @@ const PostFilter = ({ value, onValueChange }: Props) => {
         size="lg"
         className={'flex-wrap [&>button]:rounded-none'}
         onValueChange={(value) => {
-          scrollTo({ top: 0, behavior: 'smooth' });
-          setIsHeaderHideByScroll(false);
-          onValueChange(value === 'ALL' ? undefined : (value as ArtType));
+          scrollTo({ top: 0 });
+          setTimeout(() => {
+            setIsHeaderHideByScroll(false);
+            onValueChange(value === 'ALL' ? undefined : (value as ArtType));
+          }, 100);
         }}
       >
         <ToggleGroupItem value={'ALL'} aria-label="Toggle 전체">

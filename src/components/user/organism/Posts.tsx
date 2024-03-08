@@ -42,7 +42,7 @@ const Posts = () => {
         }}
       />
       {isPending ? (
-        <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}>
           <PostItemSkeleton />
           <PostItemSkeleton />
           <PostItemSkeleton />
@@ -53,7 +53,7 @@ const Posts = () => {
             pageStart={0}
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
-            className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'}
+            className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}
           >
             {data.pages.map((pageData) =>
               pageData.items.map((post) => (

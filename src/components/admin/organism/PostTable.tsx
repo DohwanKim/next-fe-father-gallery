@@ -40,7 +40,9 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
   };
 
   useEffect(() => {
-    setIsAllChecked(checkedPosts.length === items.length);
+    setIsAllChecked(
+      items.length === 0 ? false : checkedPosts.length === items.length,
+    );
   }, [checkedPosts, items.length]);
 
   return (

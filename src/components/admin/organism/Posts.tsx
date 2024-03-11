@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
 
+import PostsFilter from '@/components/admin/organism/PostsFilter';
 import PostTable from '@/components/admin/organism/PostTable';
 import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
 import { Button } from '@/components/ui/button';
+import { ArtType } from '@/constants/post.enum';
 import { useModal } from '@/hooks/useModal';
 import { deletePost, getPaginatePosts } from '@/service/posts';
 import useAdminPostsStore from '@/store/admin-posts';
@@ -21,12 +23,16 @@ const Posts = () => {
   const { alertDialog } = useModal();
   const { checkedPosts, setCheckedPosts } = useAdminPostsStore();
   const [pageQuery, setPageQuery] = useQueryState('page');
+  const [typeQuery, setTypeQuery] = useQueryState('type');
+  const [keywordQuery, setKeywordQuery] = useQueryState('keyword');
   const [limitQuery] = useQueryState('limit');
   const { data, refetch } = useQuery<Paginate<Post>>({
-    queryKey: ['posts', pageQuery],
+    queryKey: ['posts', pageQuery, typeQuery, keywordQuery],
     queryFn: () => {
       return getPaginatePosts({
         page: Number(pageQuery || 1),
+        artTypes: typeQuery === 'ALL' ? [] : [typeQuery as ArtType],
+        title: keywordQuery || undefined,
         limit: Number(limitQuery || 10),
       });
     },
@@ -35,6 +41,14 @@ const Posts = () => {
 
   return (
     <>
+      <PostsFilter
+        onFilterChange={async (value) => {
+          await setTypeQuery(value.type);
+          await setKeywordQuery(value.keyword);
+          setCheckedPosts([]);
+          await refetch();
+        }}
+      />
       <div className={'flex justify-between mb-3'}>
         <Button
           variant={'destructive'}

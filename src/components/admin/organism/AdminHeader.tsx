@@ -56,7 +56,7 @@ const AdminHeader = () => {
             size="icon"
             onClick={async () => {
               await signOut();
-              router.push('/admin');
+              router.push('/admin', { scroll: false });
             }}
           >
             <LogOut className="absolute h-[1.2rem] w-[1.2rem] transition-all" />

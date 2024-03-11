@@ -21,7 +21,7 @@ const Posts = () => {
       queryFn: ({ pageParam = 1 }) =>
         getPaginatePosts({
           page: pageParam as number,
-          limit: 9,
+          limit: 10,
           artTypes: artTypes ? [artTypes] : [],
         }),
       initialPageParam: 1,

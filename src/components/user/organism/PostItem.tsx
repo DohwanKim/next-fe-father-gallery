@@ -31,7 +31,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
   return (
     <Link
       href={`/gallery/${postItem.id}`}
-      className={'[&:hover_img]:opacity-80'}
+      className={'[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15'}
       {...props}
     >
       {img && (
@@ -47,7 +47,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
               alt={''}
               unoptimized
               priority
-              className={'object-cover transition-opacity duration-200'}
+              className={'object-cover duration-300'}
             />
           )}
           <Image
@@ -55,8 +55,13 @@ const PostItem = ({ postItem, ...props }: Props) => {
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
             unoptimized
-            className={'object-cover transition-opacity duration-500'}
+            className={'object-cover transition-transform duration-300'}
             onLoad={() => setOriginImgLoaded(true)}
+          />
+          <div
+            className={
+              'absolute w-full h-full transition-opacity duration-300 opacity-0 bg-black'
+            }
           />
         </div>
       )}

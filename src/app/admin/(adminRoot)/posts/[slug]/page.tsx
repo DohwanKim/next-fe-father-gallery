@@ -486,7 +486,8 @@ export default function PostDetailPage({ params }: Props) {
                   form.formState.isSubmitting || !form.formState.isDirty
                 }
               >
-                저장{isSaving && <LoadingSpinner className={'ml-2'} />}
+                {params.slug === 'new' ? '등록' : '수정'}
+                {isSaving && <LoadingSpinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

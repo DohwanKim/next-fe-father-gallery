@@ -5,5 +5,6 @@ export enum ImagesVariants {
   USER_POST_BLUR = 'userPostBlur',
   USER_POST = 'userPost',
   USER_POST_DETAIL = 'userPostDetail',
+  USER_POST_DETAIL_BLUR = 'userPostDetailBlur',
   USER_POST_DETAIL_OG = 'userPostDetailOG',
 }

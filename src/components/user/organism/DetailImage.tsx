@@ -1,7 +1,8 @@
 'use client';
 import Image from 'next/image';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useState } from 'react';
 
+import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ImagesVariants } from '@/constants/images.enum';
 import { getCFUrl } from '@/utils/common';
@@ -11,6 +12,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 const DetailImage = ({ imgId }: Props) => {
+  const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
+  const [detailOriginImgLoaded, setDetailOriginImgLoaded] =
+    useState<boolean>(false);
+
   return (
     <>
       <Dialog>
@@ -21,17 +26,36 @@ const DetailImage = ({ imgId }: Props) => {
             }
           >
             <Image
-              src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
+              src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL_BLUR)}
               alt={''}
               priority
+              className={`object-contain w-full h-auto duration-500 ${
+                originImgLoaded ? 'opacity-0' : 'opacity-100'
+              }`}
+              fill
+            />
+            <Image
+              src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
+              alt={''}
               unoptimized
-              className={'object-contain w-full h-auto'}
-              width={0}
-              height={0}
+              fill
+              className={`object-contain w-full h-auto transition-opacity duration-300 ${
+                originImgLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setOriginImgLoaded(true)}
             />
           </div>
         </DialogTrigger>
-        <DialogContent className={'max-w-[95vw] bg-transparent border-0 p-0'}>
+        <DialogContent
+          className={'max-w-[95vw] bg-transparent border-0 p-0 shadow-none'}
+        >
+          {!detailOriginImgLoaded && (
+            <LoadingSpinner
+              className={
+                'absolute h-full w-full flex items-center justify-center'
+              }
+            />
+          )}
           <Image
             src={getCFUrl(imgId)}
             width={0}
@@ -41,6 +65,7 @@ const DetailImage = ({ imgId }: Props) => {
             alt={''}
             unoptimized
             className={'object-contain max-h-[90dvh] w-full h-auto'}
+            onLoad={() => setDetailOriginImgLoaded(true)}
           />
         </DialogContent>
       </Dialog>

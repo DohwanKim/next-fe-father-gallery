@@ -39,27 +39,23 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
       )}
     >
       {img && (
-        <div
-          className={
-            'relative w-full aspect-square mb-2 overflow-hidden drop-shadow'
-          }
-        >
-          {!originImgLoaded && (
-            <Image
-              fill
-              src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
-              alt={''}
-              unoptimized
-              priority
-              className={'object-cover duration-300'}
-            />
-          )}
+        <div className={'relative w-full aspect-square mb-2 overflow-hidden'}>
+          <Image
+            fill
+            src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
+            alt={''}
+            priority
+            className={`object-cover transition-opacity duration-500 ${
+              originImgLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
           <Image
             fill
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
-            unoptimized
-            className={'object-cover transition-transform duration-300'}
+            className={`object-cover transition duration-300 ${
+              originImgLoaded ? 'opacity-100' : 'opacity-0'
+            }}`}
             onLoad={() => setOriginImgLoaded(true)}
           />
           <div

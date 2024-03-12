@@ -1,7 +1,7 @@
 'use client';
 
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQueryState } from 'nuqs';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PostFilter from '@/components/user/organism/PostFilter';
@@ -14,16 +14,17 @@ import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
 const Posts = () => {
-  const [artTypes, setArtTypes] = useState<ArtType | undefined>(undefined);
+  const [typeQuery, setTypeQuery] = useQueryState('type');
   const { data, isPending, hasNextPage, fetchNextPage } =
     useSuspenseInfiniteQuery<Paginate<Post>>({
-      queryKey: ['posts', artTypes],
-      queryFn: ({ pageParam = 1 }) =>
-        getPaginatePosts({
+      queryKey: ['posts', typeQuery],
+      queryFn: async ({ pageParam = 1 }) => {
+        return getPaginatePosts({
           page: pageParam as number,
           limit: 10,
-          artTypes: artTypes ? [artTypes] : [],
-        }),
+          artTypes: typeQuery ? [typeQuery as ArtType] : [],
+        });
+      },
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.meta.totalPages !== 0 &&
@@ -36,9 +37,9 @@ const Posts = () => {
   return (
     <div className={'relative container mx-auto'}>
       <PostFilter
-        value={artTypes}
-        onValueChange={(value) => {
-          setArtTypes(value);
+        value={(typeQuery as ArtType) || 'ALL'}
+        onValueChange={async (value) => {
+          await setTypeQuery(value || '');
         }}
       />
       {isPending ? (

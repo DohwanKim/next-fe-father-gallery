@@ -5,6 +5,7 @@ import { AnchorHTMLAttributes, useState } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { ImagesVariants } from '@/constants/images.enum';
+import { cn } from '@/lib/utils';
 import { Post } from '@/types/posts.type';
 import { artTypeToKorean, getCFUrl } from '@/utils/common';
 
@@ -24,15 +25,18 @@ export const PostItemSkeleton = () => {
   ));
 };
 
-const PostItem = ({ postItem, ...props }: Props) => {
+const PostItem = ({ postItem, className, ...props }: Props) => {
   const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
   const { img, title, artType } = postItem;
 
   return (
     <Link
       href={`/gallery/${postItem.id}`}
-      className={'[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15'}
       {...props}
+      className={cn(
+        '[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15',
+        className,
+      )}
     >
       {img && (
         <div

@@ -479,8 +479,15 @@ export default function PostDetailPage({ params }: Props) {
               >
                 취소
               </Button>
-              <Button className={'font-bold'} type="submit">
-                저장{isSaving && <LoadingSpinner className={'ml-2'} />}
+              <Button
+                className={'font-bold'}
+                type="submit"
+                disabled={
+                  form.formState.isSubmitting || !form.formState.isDirty
+                }
+              >
+                {params.slug === 'new' ? '등록' : '수정'}
+                {isSaving && <LoadingSpinner className={'ml-2'} />}
               </Button>
             </div>
           </div>

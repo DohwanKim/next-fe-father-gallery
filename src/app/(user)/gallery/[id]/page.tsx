@@ -87,12 +87,18 @@ export default async function GalleryDetail({ params }: Props) {
         <h2 className={'text-2xl text-foreground/80 mb-4'}>
           You may also like
         </h2>
-        <div className={'grid grid-cols-2 md:grid-cols-3 gap-6'}>
+        <div className={'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4'}>
           {randomPost.map((post, index) => (
             <PostItem
               key={post.id}
               postItem={post}
-              className={index === 2 ? 'hidden md:block' : ''}
+              className={
+                index === 2
+                  ? 'hidden sm:block'
+                  : index === 3 || index === 4
+                    ? 'hidden md:block'
+                    : ''
+              }
             />
           ))}
         </div>

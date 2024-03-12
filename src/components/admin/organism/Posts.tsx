@@ -104,6 +104,7 @@ const Posts = () => {
             pageNumbersCount={limitQuery ? Number(limitQuery) : 10}
             onChangePage={async (page) => {
               await setPageQuery(`${page}`);
+              setCheckedPosts([]);
             }}
           />
         )}

@@ -25,7 +25,7 @@ export const getPost = async (id: number): Promise<Post> => {
 export const getRandomPost = async (id: number): Promise<Post[]> => {
   return await apiFetch(`/api/posts/random-post`, { cache: 'no-cache' })
     .then((res) => res.body as Post[])
-    .then((res) => res.filter((post) => post.id !== id).slice(0, 3));
+    .then((res) => res.filter((post) => post.id !== id).slice(0, 5));
 };
 
 export const createPost = async (data: PostCore): Promise<boolean> => {

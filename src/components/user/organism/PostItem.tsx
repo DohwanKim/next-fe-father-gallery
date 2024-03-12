@@ -5,6 +5,7 @@ import { AnchorHTMLAttributes, useState } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { ImagesVariants } from '@/constants/images.enum';
+import { cn } from '@/lib/utils';
 import { Post } from '@/types/posts.type';
 import { artTypeToKorean, getCFUrl } from '@/utils/common';
 
@@ -24,15 +25,18 @@ export const PostItemSkeleton = () => {
   ));
 };
 
-const PostItem = ({ postItem, ...props }: Props) => {
+const PostItem = ({ postItem, className, ...props }: Props) => {
   const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
   const { img, title, artType } = postItem;
 
   return (
     <Link
       href={`/gallery/${postItem.id}`}
-      className={'[&:hover_img]:opacity-80'}
       {...props}
+      className={cn(
+        '[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15',
+        className,
+      )}
     >
       {img && (
         <div
@@ -47,7 +51,7 @@ const PostItem = ({ postItem, ...props }: Props) => {
               alt={''}
               unoptimized
               priority
-              className={'object-cover transition-opacity duration-200'}
+              className={'object-cover duration-300'}
             />
           )}
           <Image
@@ -55,8 +59,13 @@ const PostItem = ({ postItem, ...props }: Props) => {
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={''}
             unoptimized
-            className={'object-cover transition-opacity duration-500'}
+            className={'object-cover transition-transform duration-300'}
             onLoad={() => setOriginImgLoaded(true)}
+          />
+          <div
+            className={
+              'absolute w-full h-full transition-opacity duration-300 opacity-0 bg-black'
+            }
           />
         </div>
       )}

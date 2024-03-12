@@ -22,7 +22,7 @@ const PostFilter = ({ value, onValueChange }: Props) => {
 
   return (
     <div
-      className={`fixed w-full md:w-auto bottom-0 md:bottom-[20px] left-1/2 p-2 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transform -translate-x-1/2 transition-transform duration-300 ${
+      className={`fixed w-full md:w-auto bottom-0 md:bottom-[60px] left-1/2 p-3 border z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transform -translate-x-1/2 transition-transform duration-500 ${
         !isShowFilter ? 'translate-y-[300px]' : 'translate-y-0'
       }`}
     >
@@ -53,9 +53,6 @@ const PostFilter = ({ value, onValueChange }: Props) => {
         </ToggleGroupItem>
         <ToggleGroupItem value="OIL_PAINTING" aria-label="Toggle 유화">
           유화
-        </ToggleGroupItem>
-        <ToggleGroupItem value="NONE" aria-label="Toggle 기타">
-          기타
         </ToggleGroupItem>
       </ToggleGroup>
     </div>

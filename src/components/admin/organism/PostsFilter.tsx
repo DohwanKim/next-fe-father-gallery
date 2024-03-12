@@ -46,7 +46,7 @@ const PostsFilter = ({ onFilterChange }: Props) => {
             size="lg"
             className={'justify-start flex-wrap'}
             onValueChange={(value: ArtType | 'ALL') => {
-              const updatedValue = { ...filterData, type: value };
+              const updatedValue = { ...filterData, type: value || 'ALL' };
               setFilterData(updatedValue);
               onFilterChange(updatedValue);
             }}

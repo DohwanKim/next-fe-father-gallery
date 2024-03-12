@@ -11,6 +11,21 @@ export const threeCommaNum = (numString: string | number) => {
   }
 };
 
+export const numberPadding = (
+  number: number | string,
+  width: number,
+  customPad?: string,
+): string => {
+  if (typeof number === 'number') {
+    number = number.toString();
+  }
+  customPad = customPad || '0';
+
+  return number.length >= width
+    ? number
+    : new Array(width - number.length + 1).join(customPad) + number;
+};
+
 export const getFileSize = (bytes: number, dp = 0) => {
   const thresh = 1024;
 

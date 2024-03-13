@@ -54,6 +54,7 @@ const Posts = () => {
             pageStart={0}
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
+            loader={<PostItemSkeleton />}
             className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}
           >
             {data.pages.map((pageData) =>

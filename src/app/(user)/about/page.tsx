@@ -5,10 +5,10 @@ import Image from 'next/image';
 import SocialLinks from '@/components/user/organism/SocialLinks';
 
 export const metadata: Metadata = {
-  title: '소개',
+  title: 'About',
 };
 
-export default function Intro() {
+export default function About() {
   return (
     <div className={'container'}>
       <div className={'grid gap-6 grid-cols-2'}>

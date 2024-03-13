@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import SocialLinks from '@/components/user/organism/SocialLinks';
 
 export const metadata: Metadata = {
-  title: '홈',
+  title: 'Home',
 };
 
 export default async function Home() {

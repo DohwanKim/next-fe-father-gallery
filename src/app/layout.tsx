@@ -13,10 +13,10 @@ const faustina = Faustina({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | 김동철 그림세상',
-    default: '김동철 그림세상',
+    template: '%s | KimDongCheol Art',
+    default: 'KimDongCheol Art',
   },
-  description: '비전공자의 그림 도전',
+  description: 'A painting challenge by a non-majors',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

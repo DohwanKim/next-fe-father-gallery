@@ -39,20 +39,20 @@ const PostFilter = ({ value, onValueChange }: Props) => {
           }, 100);
         }}
       >
-        <ToggleGroupItem value={'ALL'} aria-label="Toggle 전체">
-          전체
+        <ToggleGroupItem value={'ALL'} aria-label="Toggle all">
+          All
         </ToggleGroupItem>
-        <ToggleGroupItem value="PENCIL_DRAWING" aria-label="Toggle 연필화">
-          연필화
+        <ToggleGroupItem value="WATERCOLOR" aria-label="Toggle watercolor">
+          Watercolor
         </ToggleGroupItem>
-        <ToggleGroupItem value="WATERCOLOR" aria-label="Toggle 수채화">
-          수채화
+        <ToggleGroupItem value="ACRYLIC_PAINTING" aria-label="Toggle acrylic">
+          Acrylic
         </ToggleGroupItem>
-        <ToggleGroupItem value="ACRYLIC_PAINTING" aria-label="Toggle 아크릴화">
-          아크릴화
+        <ToggleGroupItem value="OIL_PAINTING" aria-label="Toggle oil">
+          Oil
         </ToggleGroupItem>
-        <ToggleGroupItem value="OIL_PAINTING" aria-label="Toggle 유화">
-          유화
+        <ToggleGroupItem value="PENCIL_DRAWING" aria-label="Toggle pencil">
+          Pencil
         </ToggleGroupItem>
       </ToggleGroup>
     </div>

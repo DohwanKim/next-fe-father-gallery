@@ -2,13 +2,13 @@ import { ExternalLink, Home, Mail, Phone } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
-import HeaderSocial from '@/components/user/organism/HeaderSocial';
+import SocialLinks from '@/components/user/organism/SocialLinks';
 
 export const metadata: Metadata = {
-  title: '소개',
+  title: 'About',
 };
 
-export default function Intro() {
+export default function About() {
   return (
     <div className={'container'}>
       <div className={'grid gap-6 grid-cols-2'}>
@@ -77,7 +77,7 @@ export default function Intro() {
             </a>
             <div className={'flex items-center gap-4'}>
               <ExternalLink className={'h-[1rem] w-[1rem]'} />
-              <HeaderSocial />
+              <SocialLinks iconSize={16} isShowName />
             </div>
           </div>
         </div>

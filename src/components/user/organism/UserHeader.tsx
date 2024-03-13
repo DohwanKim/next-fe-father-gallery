@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import ThemeToggleButton from '@/components/common/atom/ThemeToggleButton';
 import HeaderNav from '@/components/user/organism/HeaderNav';
-import HeaderSocial from '@/components/user/organism/HeaderSocial';
+import SocialLinks from '@/components/user/organism/SocialLinks';
 import useLayoutStore from '@/store/layout';
 
 const UserHeader = () => {
@@ -75,7 +75,7 @@ const UserHeader = () => {
             />
           </Link>
         </h1>
-        <HeaderSocial />
+        <SocialLinks isGray />
         <ThemeToggleButton />
       </div>
       <div className={'border-t border-b'}>

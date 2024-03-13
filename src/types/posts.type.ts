@@ -4,14 +4,14 @@ export interface ImageUploadedResult {
   id: string;
   filename: string;
   requireSignedURLs: boolean;
-  metadata?: { [key: string]: string };
-  uploaded: Date;
+  metadata?: null | { [key: string]: string };
+  uploaded: Date | string;
   variants: string[];
 }
 
 export interface PostCore {
   title: string;
-  drawingDate: Date;
+  drawingDate: Date | string;
   artType: ArtType;
   canvasSize: string;
   price: number;
@@ -24,8 +24,8 @@ export interface PostCore {
 
 export interface Post extends PostCore {
   id: number;
-  createAt: Date;
-  updateAt: Date;
+  createAt: Date | string;
+  updateAt: Date | string;
   version: number;
 }
 

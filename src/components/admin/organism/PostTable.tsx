@@ -14,6 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { ImagesVariants } from '@/constants/images.enum';
+import { ArtType } from '@/constants/post.enum';
 import useAdminPostsStore from '@/store/admin-posts';
 import { Post } from '@/types/posts.type';
 import { artTypeToKorean, getCFUrl } from '@/utils/common';
@@ -113,7 +114,7 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
                 )}
               </TableCell>
               <TableCell>{item.title}</TableCell>
-              <TableCell>{artTypeToKorean(item.artType)}</TableCell>
+              <TableCell>{artTypeToKorean(item.artType as ArtType)}</TableCell>
               <TableCell className={'text-center'}>
                 {item.isSold ? 'Y' : 'N'}
               </TableCell>

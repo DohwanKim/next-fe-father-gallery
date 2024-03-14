@@ -1,6 +1,7 @@
 import { ArtType } from '@/constants/post.enum';
 
 export interface ImageUploadedResult {
+  uid: number;
   id: string;
   filename: string;
   requireSignedURLs: boolean;
@@ -11,8 +12,8 @@ export interface ImageUploadedResult {
 
 export interface PostCore {
   title: string;
-  drawingDate: Date | string;
-  artType: ArtType;
+  drawingDate: Date | string | null;
+  artType: ArtType | string;
   canvasSize: string;
   price: number;
   frameType: string;

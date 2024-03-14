@@ -5,6 +5,7 @@ import { AnchorHTMLAttributes, useState } from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { ImagesVariants } from '@/constants/images.enum';
+import { ArtType } from '@/constants/post.enum';
 import { cn } from '@/lib/utils';
 import { Post } from '@/types/posts.type';
 import { artTypeToKorean, getCFUrl } from '@/utils/common';
@@ -68,7 +69,7 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
       )}
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
-        <p className={'font-light'}>{artTypeToKorean(artType)}</p>
+        <p className={'font-light'}>{artTypeToKorean(artType as ArtType)}</p>
       </div>
     </Link>
   );

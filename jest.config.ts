@@ -5,13 +5,36 @@ const createJestConfig = nextJest({
   dir: './',
 });
 
-const config: Config = {
+const customJestConfig: Config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  setupFiles: ['./jest.polyfills.js'],
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testTimeout: 10000,
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
+  transformIgnorePatterns: [
+    'node_modules/?!(query-string)/',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
 };
 
-export default createJestConfig(config);
+const jestConfig = async () => {
+  const configFn = createJestConfig(customJestConfig);
+  const config = await configFn();
+
+  return {
+    ...config,
+    transformIgnorePatterns: [
+      'node_modules/?!(query-string)/',
+      '^.+\\.module\\.(css|sass|scss)$',
+    ],
+  };
+};
+
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+module.exports = jestConfig;

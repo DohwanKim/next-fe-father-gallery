@@ -2,6 +2,7 @@ import BackButton from '@/components/user/atom/BackButton';
 import DetailImage from '@/components/user/organism/DetailImage';
 import PostItem from '@/components/user/organism/PostItem';
 import { ImagesVariants } from '@/constants/images.enum';
+import { ArtType } from '@/constants/post.enum';
 import { getPost, getRandomPost } from '@/service/posts';
 import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
@@ -58,7 +59,7 @@ export default async function GalleryDetail({ params }: Props) {
           <h1 className={'text-2xl border-b pb-2'}>{detailData.title}</h1>
           <dl>
             <dt>Category</dt>
-            <dd>{artTypeToKorean(detailData.artType)}</dd>
+            <dd>{artTypeToKorean(detailData.artType as ArtType)}</dd>
           </dl>
           <dl>
             <dt>Date</dt>

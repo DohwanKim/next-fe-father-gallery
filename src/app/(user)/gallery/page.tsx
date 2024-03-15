@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { PostItemSkeleton } from '@/components/user/organism/PostItem';
+import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
 import Posts from '@/components/user/organism/Posts';
 
 export const metadata: Metadata = {

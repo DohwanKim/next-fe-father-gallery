@@ -5,9 +5,8 @@ import { useQueryState } from 'nuqs';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PostFilter from '@/components/user/organism/PostFilter';
-import PostItem, {
-  PostItemSkeleton,
-} from '@/components/user/organism/PostItem';
+import PostItem from '@/components/user/organism/PostItem';
+import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
 import { ArtType } from '@/constants/post.enum';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';

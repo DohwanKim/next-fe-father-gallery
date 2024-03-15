@@ -17,6 +17,7 @@ const customJestConfig: Config = {
   testEnvironmentOptions: {
     customExportConditions: [''],
   },
+  collectCoverageFrom: ['./src/components/user/**/*.{ts,tsx}'],
   transformIgnorePatterns: [
     'node_modules/?!(query-string)/',
     '^.+\\.module\\.(css|sass|scss)$',

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnchorHTMLAttributes, useState } from 'react';
 
-import { Skeleton } from '@/components/ui/skeleton';
 import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { cn } from '@/lib/utils';
@@ -13,18 +12,6 @@ import { artTypeToKorean, getCFUrl } from '@/utils/common';
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   postItem: Post;
 }
-
-export const PostItemSkeleton = () => {
-  return Array.from({ length: 9 }, (_, index) => (
-    <div key={index}>
-      <Skeleton className="w-full aspect-square drop-shadow mb-5" />
-      <div className={'flex flex-col items-center'}>
-        <Skeleton className="h-4 w-[200px] mb-2" />
-        <Skeleton className="h-4 w-[100px]" />
-      </div>
-    </div>
-  ));
-};
 
 const PostItem = ({ postItem, className, ...props }: Props) => {
   const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
@@ -43,7 +30,7 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
         <div className={'relative w-full aspect-square mb-2 overflow-hidden'}>
           <Image
             src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
-            alt={''}
+            alt={`${title} blur image`}
             fill
             priority
             className={`object-cover transition-opacity duration-500 ${
@@ -52,13 +39,13 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
           />
           <Image
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
-            alt={''}
+            alt={`${title} image`}
             fill
             unoptimized
             className={`object-cover transition-all duration-300 ${
               originImgLoaded ? 'opacity-100' : 'opacity-0'
             }`}
-            onLoad={() => setOriginImgLoaded(() => true)}
+            onLoad={() => setOriginImgLoaded(true)}
           />
           <div
             className={

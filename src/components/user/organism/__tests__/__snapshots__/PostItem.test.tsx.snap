@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostItem matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15"
+    href="/gallery/25"
+  >
+    <div
+      class="relative w-full aspect-square mb-2 overflow-hidden"
+    >
+      <img
+        alt="샘플 게시글1 blur image"
+        class="object-cover transition-opacity duration-500 opacity-100"
+        data-nimg="fill"
+        decoding="async"
+        fetchpriority="high"
+        sizes="100vw"
+        src="/_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=3840&q=75"
+        srcset="/_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=640&q=75 640w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=750&q=75 750w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=828&q=75 828w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=1080&q=75 1080w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=1200&q=75 1200w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=1920&q=75 1920w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=2048&q=75 2048w, /_next/image?url=https%3A%2F%2Fimagedelivery.net%2FMXlZJaCYonU_kO5E66JLvw%2Ff0a8866e-2b9a-4329-ba01-0ae7fc210b00%2FuserPostBlur&w=3840&q=75 3840w"
+        style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+      />
+      <img
+        alt="샘플 게시글1 image"
+        class="object-cover transition-all duration-300 opacity-0"
+        data-nimg="fill"
+        decoding="async"
+        loading="lazy"
+        src="https://imagedelivery.net/MXlZJaCYonU_kO5E66JLvw/f0a8866e-2b9a-4329-ba01-0ae7fc210b00/userPost"
+        style="position: absolute; height: 100%; width: 100%; left: 0px; top: 0px; right: 0px; bottom: 0px; color: transparent;"
+      />
+      <div
+        class="absolute w-full h-full transition-opacity duration-300 opacity-0 bg-black"
+      />
+    </div>
+    <div
+      class="text-center text-sm"
+    >
+      <h2>
+        샘플 게시글1
+      </h2>
+      <p
+        class="font-light"
+      >
+        수채화
+      </p>
+    </div>
+  </a>
+</DocumentFragment>
+`;

@@ -20,7 +20,7 @@ const UserFooter = () => {
             className={'flex gap-1 items-center'}
           >
             <Phone className={'h-[1rem] w-[1rem] transition-all'} />
-            010-3831-5338
+            +82 10 3831 5338
           </a>
           <a
             href={'mailto:kreator2006@naver.com'}

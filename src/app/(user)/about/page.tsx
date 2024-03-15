@@ -69,7 +69,7 @@ export default function About() {
             </address>
             <a href={'tel:+82 10 3831 5338'}>
               <Phone className={'h-[1rem] w-[1rem]'} />
-              <span>010-3831-5338</span>
+              <span>+82 10 3831 5338</span>
             </a>
             <a href={'mailto:kreator2006@naver.com'}>
               <Mail className={'h-[1rem] w-[1rem]'} />

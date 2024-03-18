@@ -32,6 +32,7 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
             src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
             alt={`${title} blur image`}
             fill
+            sizes={'100%'}
             priority
             className={`object-cover transition-opacity duration-500 ${
               originImgLoaded ? 'opacity-0' : 'opacity-100'
@@ -41,6 +42,7 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
             src={getCFUrl(img.id, ImagesVariants.USER_POST)}
             alt={`${title} image`}
             fill
+            sizes={'100%'}
             unoptimized
             className={`object-cover transition-all duration-300 ${
               originImgLoaded ? 'opacity-100' : 'opacity-0'

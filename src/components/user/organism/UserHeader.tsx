@@ -63,15 +63,20 @@ const UserHeader = () => {
       >
         <h1
           className={
-            'w-[100px] h-[40px] absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]'
+            'absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]'
           }
         >
-          <Link href={'/'} scroll={false}>
+          <Link
+            href={'/'}
+            scroll={false}
+            className={'relative block w-[100px] h-[40px]'}
+          >
             <Image
               src={'/sample-logo.png'}
               alt={'김동철 그림세상'}
               fill
-              objectFit={'contain'}
+              sizes={'100%'}
+              className={'object-contain'}
             />
           </Link>
         </h1>

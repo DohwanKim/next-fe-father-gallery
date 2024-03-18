@@ -53,13 +53,13 @@ const Posts = () => {
             pageStart={0}
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
-            loader={<PostItemSkeleton />}
+            loader={<PostItemSkeleton key={``} />}
             threshold={500}
             className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}
           >
             {data.pages.map((pageData) =>
-              pageData.items.map((post) => (
-                <PostItem key={post.id} postItem={post} />
+              pageData.items.map((post, index) => (
+                <PostItem key={`${index}-${post.id}}`} postItem={post} />
               )),
             )}
           </InfiniteScroll>

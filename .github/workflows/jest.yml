@@ -1,4 +1,4 @@
-name: jest UT, IT
+name: Jest UT, IT
 on:
   push:
     branches: [main, prod]

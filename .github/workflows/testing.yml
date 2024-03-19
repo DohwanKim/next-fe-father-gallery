@@ -36,13 +36,13 @@ jobs:
       NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_IMAGE_ACCOUNT_ID }}
       NEXT_PUBLIC_BASE_API_URL: http://localhost:3000/api
     steps:
-      #      - uses: actions/checkout@v4
-      #      - uses: actions/setup-node@v4
-      #        with:
-      #          node-version: lts/*
-      #      - name: Install dependencies
-      #        if: steps.cache.outputs.cache-hit != 'true'
-      #        run: npm ci
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Build Next.js

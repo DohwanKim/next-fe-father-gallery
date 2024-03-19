@@ -1,4 +1,4 @@
-name: Run integration testing
+name: jest UT, IT
 on:
   push:
     branches: [main, prod]

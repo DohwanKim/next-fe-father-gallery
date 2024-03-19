@@ -60,7 +60,6 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
           }
         />
       </div>
-
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
         <p className={'font-light'}>{artTypeToKorean(artType as ArtType)}</p>

@@ -22,40 +22,45 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
       href={`/gallery/${postItem.id}`}
       {...props}
       className={cn(
-        '[&:hover_img]:scale-105 [&:hover_div_div]:opacity-15',
+        'relative [&:hover_img]:scale-105 [&:hover_div_div]:opacity-15',
         className,
       )}
     >
-      {img && (
-        <div className={'relative w-full aspect-square mb-2 overflow-hidden'}>
-          <Image
-            src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
-            alt={`${title} blur image`}
-            fill
-            sizes={'100%'}
-            priority
-            className={`object-cover transition-opacity duration-500 ${
-              originImgLoaded ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <Image
-            src={getCFUrl(img.id, ImagesVariants.USER_POST)}
-            alt={`${title} image`}
-            fill
-            sizes={'100%'}
-            unoptimized
-            className={`object-cover transition-all duration-300 ${
-              originImgLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            onLoad={() => setOriginImgLoaded(true)}
-          />
-          <div
-            className={
-              'absolute w-full h-full transition-opacity duration-300 opacity-0 bg-black'
-            }
-          />
-        </div>
-      )}
+      <div className={'relative w-full aspect-square mb-2 overflow-hidden'}>
+        {img && (
+          <>
+            <Image
+              src={getCFUrl(img.id, ImagesVariants.USER_POST_BLUR)}
+              alt={`${title} blur image`}
+              fill
+              priority
+              unoptimized
+              sizes={'100vw'}
+              className={`object-cover w-full h-full transition-opacity duration-500 ${
+                originImgLoaded ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+            <Image
+              src={getCFUrl(img.id, ImagesVariants.USER_POST)}
+              alt={`${title} image`}
+              width={0}
+              height={0}
+              sizes={'100vw'}
+              unoptimized
+              className={`object-cover w-full h-full transition-all duration-300 ${
+                originImgLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setOriginImgLoaded(true)}
+            />
+          </>
+        )}
+        <div
+          className={
+            'absolute w-full h-full transition-opacity duration-300 opacity-0 bg-black'
+          }
+        />
+      </div>
+
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
         <p className={'font-light'}>{artTypeToKorean(artType as ArtType)}</p>

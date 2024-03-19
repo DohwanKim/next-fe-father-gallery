@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
+      NEXT_PUBLIC_DOMAIN: http://localhost:3001
+      NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID: MXlZJaCYonU_kO5E66JLvw
       NEXT_PUBLIC_BASE_API_URL: http://localhost:3000/api
     steps:
       - uses: actions/checkout@v4

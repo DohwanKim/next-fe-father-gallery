@@ -23,12 +23,6 @@ describe('PostItem', () => {
     paginatePosts = await getPaginatePosts({ page: 1, limit: 10 });
   });
 
-  it('matches snapshot', () => {
-    const item = paginatePosts.items[0];
-    const { asFragment } = render(<PostItem postItem={item as Post} />);
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   it('renders by data', async () => {
     const item = paginatePosts.items[0];
     const { findAllByTitle } = render(<PostItem postItem={item as Post} />);

@@ -1,4 +1,4 @@
-name: Playwright e2e Tests
+name: Run integration testing
 on:
   push:
     branches: [main, prod]
@@ -17,20 +17,12 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Setup npm modules
         run: npm install
-      - name: Build Next.js
-        run: npm run build
-      - name: Start server
-        run: npm run start & npx wait-on http://localhost:3001
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Unit, Integration testing
+        run: npm test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: jest-report
+          path: jest-report/
           retention-days: 30

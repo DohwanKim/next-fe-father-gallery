@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SocialLinks SocialLinks 스냅샷 일치 1`] = `
+<div>
+  <div
+    class="flex items-center gap-x-2"
+  >
+    <a
+      class="flex items-center relative duration-300 hover:text-foreground/60 transition-colors"
+      href="https://www.instagram.com/dongcheolkim_watercolor/"
+      target="_blank"
+    >
+      <span
+        style="width: 24px; height: 24px;"
+      >
+        <img
+          alt=""
+          class="aspect-square h-full w-full"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/img/instagram_logo_icon.svg"
+          style="color: transparent;"
+          width="0"
+        />
+      </span>
+    </a>
+    <a
+      class="flex items-center relative duration-300 hover:text-foreground/60 transition-colors"
+      href="https://blog.naver.com/kreator2006"
+      target="_blank"
+    >
+      <span
+        style="width: 24px; height: 24px;"
+      >
+        <img
+          alt=""
+          class="aspect-square h-full w-full"
+          data-nimg="1"
+          decoding="async"
+          height="0"
+          loading="lazy"
+          src="/img/naver_blog_icon.svg"
+          style="color: transparent;"
+          width="0"
+        />
+      </span>
+    </a>
+  </div>
+</div>
+`;

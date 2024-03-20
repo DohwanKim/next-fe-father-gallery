@@ -5,9 +5,8 @@ import { useQueryState } from 'nuqs';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import PostFilter from '@/components/user/organism/PostFilter';
-import PostItem, {
-  PostItemSkeleton,
-} from '@/components/user/organism/PostItem';
+import PostItem from '@/components/user/organism/PostItem';
+import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
 import { ArtType } from '@/constants/post.enum';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
@@ -37,7 +36,7 @@ const Posts = () => {
   return (
     <div className={'relative container mx-auto'}>
       <PostFilter
-        value={(typeQuery as ArtType) || 'ALL'}
+        value={(typeQuery as ArtType) || undefined}
         onValueChange={async (value) => {
           await setTypeQuery(value || '');
         }}
@@ -54,13 +53,13 @@ const Posts = () => {
             pageStart={0}
             loadMore={() => fetchNextPage()}
             hasMore={hasNextPage}
-            loader={<PostItemSkeleton />}
+            loader={<PostItemSkeleton key={``} />}
             threshold={500}
             className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}
           >
             {data.pages.map((pageData) =>
-              pageData.items.map((post) => (
-                <PostItem key={post.id} postItem={post} />
+              pageData.items.map((post, index) => (
+                <PostItem key={`${index}-${post.id}}`} postItem={post} />
               )),
             )}
           </InfiniteScroll>

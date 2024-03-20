@@ -11,7 +11,7 @@ const paginatePosts: Paginate<Post> = {
       createAt: '2024-02-21T11:32:53.093Z',
       updateAt: '2024-03-05T06:16:39.649Z',
       version: 7,
-      title: '샘플 게시글1',
+      title: 'MOCK 샘플 게시글1',
       drawingDate: null,
       artType: 'WATERCOLOR',
       canvasSize: '61x45cm',

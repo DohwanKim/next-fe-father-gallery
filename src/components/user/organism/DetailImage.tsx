@@ -19,7 +19,7 @@ const DetailImage = ({ imgId }: Props) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger asChild>
+        <DialogTrigger data-testid="trigger" asChild>
           <div
             className={
               'flex justify-center relative max-h-[400px] md:h-[500px] md:max-h-[700px] grow md:basis-7/12 bg-stone-100 drop-shadow cursor-zoom-in'
@@ -27,7 +27,7 @@ const DetailImage = ({ imgId }: Props) => {
           >
             <Image
               src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL_BLUR)}
-              alt={''}
+              alt={'blur image'}
               priority
               className={`object-contain w-full h-auto duration-500 ${
                 originImgLoaded ? 'opacity-0' : 'opacity-100'
@@ -36,9 +36,11 @@ const DetailImage = ({ imgId }: Props) => {
             />
             <Image
               src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
-              alt={''}
+              alt={'main image'}
               unoptimized
-              fill
+              width={0}
+              height={0}
+              sizes={'100vw'}
               className={`object-contain w-full h-auto transition-opacity duration-300 ${
                 originImgLoaded ? 'opacity-100' : 'opacity-0'
               }`}
@@ -57,12 +59,13 @@ const DetailImage = ({ imgId }: Props) => {
             />
           )}
           <Image
+            role="dialogImage"
             src={getCFUrl(imgId)}
             width={0}
             height={0}
             sizes={'100vw'}
             priority
-            alt={''}
+            alt={'detail image'}
             unoptimized
             className={'object-contain max-h-[90dvh] w-full h-auto'}
             onLoad={() => setDetailOriginImgLoaded(true)}

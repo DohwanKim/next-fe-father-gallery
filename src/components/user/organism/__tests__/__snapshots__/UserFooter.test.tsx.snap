@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFooter UserFooter 스냅샷 일치 1`] = `
+<div>
+  <footer
+    class="border-t"
+  >
+    <div
+      class="flex container text-xs justify-between min-h-[60px] gap-y-2 items-center flex-wrap py-4 text-foreground/60"
+    >
+      <div
+        class="flex gap-x-5 gap-y-2 mr-5 flex-wrap"
+      >
+        <address
+          class="flex not-italic gap-1 items-center"
+        >
+          <svg
+            class="lucide lucide-home h-[1rem] w-[1rem] transition-all"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+            />
+            <polyline
+              points="9 22 9 12 15 12 15 22"
+            />
+          </svg>
+          Sarim Street, ChangWon City, South Korea
+        </address>
+        <a
+          class="flex gap-1 items-center"
+          href="tel:+82 10 3831 5338"
+        >
+          <svg
+            class="lucide lucide-phone h-[1rem] w-[1rem] transition-all"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            />
+          </svg>
+          +82 10 3831 5338
+        </a>
+        <a
+          class="flex gap-1 items-center"
+          href="mailto:kreator2006@naver.com"
+        >
+          <svg
+            class="lucide lucide-mail h-[1rem] w-[1rem] transition-all"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="16"
+              rx="2"
+              width="20"
+              x="2"
+              y="4"
+            />
+            <path
+              d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+            />
+          </svg>
+          kreator2006@naver.com
+        </a>
+      </div>
+      <div>
+        <p>
+          @Copyright 
+          2024
+          . DongCheol Kim. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+`;

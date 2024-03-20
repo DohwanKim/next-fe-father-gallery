@@ -18,7 +18,12 @@ const customJestConfig: Config = {
     customExportConditions: [''],
   },
   testPathIgnorePatterns: ['<rootDir>/e2e/'],
-  collectCoverageFrom: ['./src/components/user/**/*.{ts,tsx}'],
+  collectCoverageFrom: [
+    './src/components/admin/**/*.{ts,tsx}',
+    './src/components/common/**/*.{ts,tsx}',
+    './src/components/user/atom/*.{ts,tsx}',
+    './src/components/user/organism/*.{ts,tsx}',
+  ],
   transformIgnorePatterns: [
     'node_modules/?!(query-string)/',
     '^.+\\.module\\.(css|sass|scss)$',

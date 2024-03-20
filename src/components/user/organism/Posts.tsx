@@ -36,7 +36,7 @@ const Posts = () => {
   return (
     <div className={'relative container mx-auto'}>
       <PostFilter
-        value={(typeQuery as ArtType) || 'ALL'}
+        value={(typeQuery as ArtType) || undefined}
         onValueChange={async (value) => {
           await setTypeQuery(value || '');
         }}

@@ -22,6 +22,7 @@ const PostFilter = ({ value, onValueChange }: Props) => {
 
   return (
     <div
+      data-testid={'post-filter'}
       className={`fixed w-full md:w-auto bottom-0 md:bottom-[60px] left-1/2 p-3 border z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transform -translate-x-1/2 transition-transform duration-500 ${
         !isShowFilter ? 'translate-y-[300px]' : 'translate-y-0'
       }`}

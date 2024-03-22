@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className={'container'}>
-      <div className={'grid gap-6 grid-cols-2'}>
+      <div className={'grid gap-4 grid-cols-1 md:grid-cols-2'}>
         <div className={'relative aspect-square drop-shadow'}>
           <Image
             src={'/img/profile.jpeg'}
@@ -21,7 +21,7 @@ export default function About() {
             fill
           />
         </div>
-        <div className={'flex flex-col justify-center gap-10'}>
+        <div className={'flex flex-col justify-center gap-3 md:gap-10'}>
           <div>
             <h1 className={'text-2xl font-light'}>
               Dongcheol Kim | Republic of Korea

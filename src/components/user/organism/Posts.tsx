@@ -55,6 +55,7 @@ const Posts = () => {
             hasMore={hasNextPage}
             loader={<PostItemSkeleton key={``} />}
             threshold={500}
+            data-testid="post-grid"
             className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}
           >
             {data.pages.map((pageData) =>

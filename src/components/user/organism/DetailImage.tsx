@@ -19,7 +19,12 @@ const DetailImage = ({ imgId }: Props) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger data-testid="trigger" asChild>
+        <DialogTrigger
+          role={'button'}
+          tabIndex={0}
+          data-testid="trigger"
+          asChild
+        >
           <div
             className={
               'flex justify-center relative max-h-[400px] md:h-[500px] md:max-h-[700px] grow md:basis-7/12 bg-stone-100 drop-shadow cursor-zoom-in'

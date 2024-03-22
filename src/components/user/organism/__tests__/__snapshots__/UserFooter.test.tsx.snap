@@ -4,6 +4,7 @@ exports[`UserFooter UserFooter 스냅샷 일치 1`] = `
 <div>
   <footer
     class="border-t"
+    data-testid="footer"
   >
     <div
       class="flex container text-xs justify-between min-h-[60px] gap-y-2 items-center flex-wrap py-4 text-foreground/60"

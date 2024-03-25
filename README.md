@@ -17,7 +17,8 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 </p>
 
 ## 배포된 사이트 바로가기
-[Go site](https://kimdongcheol-art.com/)
+- [KimDongcheol Art (김동철 그림세상)](https://kimdongcheol-art.com/)
+- [API 문서 (Swagger)](https://api.kimdongcheol-art.com/api)
 
 ## 스택
 - Next.js 14 boilerplate 

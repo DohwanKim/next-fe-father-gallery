@@ -8,14 +8,16 @@
 
 <p align="center">
 Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
-
+</p>
 
 <br>
-</p>
 <p align="center">
 <a target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 </p>
+
+## 배포된 사이트 바로가기
+[Go site](https://kimdongcheol-art.com/)
 
 ## 스택
 - Next.js 14 boilerplate 
@@ -44,12 +46,18 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
   - eslint
   - prettier
   - husky
+- 테스트
+  - API 모킹
+    - msw 2.0
+  - UT, IT
+    - jest
+    - testing-library
+  - E2E
+    - playwright
 
 
 ## 설명
 아버지의 그림 작품들을 전시하는 사이트 위한 프론트엔드 프로젝트 입니다.<br>
-차후 실제 서비스를 할 예정입니다.<br>
-현재는 개발을 위한 테스트용으로 사용하고 있습니다.<br>
 개인 프로젝트이지만 코드 작성의 맥락은 협업을 전제로 하여 작성하였습니다.<br>
 협업의 기준은 이 프로젝트의 맥락을 쉽게 이해하여 투입 될 수 있는가 입니다.<br>
 
@@ -58,20 +66,20 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
   - [x] `httponly=true` 값을 가진 엑세스 토큰과 리플래시 토큰으로 인증 구현
   - [x] 클라우드 플레어 이미지 업로드 구현
   - [x] 게시글 관리 페이지 구현
-- [ ] 유저페이지
-  - [ ] 메인 랜딩 페이지
-  - [ ] 소개 페이지
+- [x] 유저페이지
+  - [x] 메인 랜딩 페이지
+  - [x] 소개 페이지
   - [x] 게시글 페이지
-- [ ] 구현
-  - [ ] 글로벌 모달
+- [x] 구현
+  - [x] 글로벌 모달
   - [x] 페이지네이션 구현 (레퍼런스 [루리웹](https://bbs.ruliweb.com/pc/board/1020))
-- [ ] 테스팅
-  - [ ] 유닛 테스트
-  - [ ] 통합 테스트
-  - [ ] E2E 테스트
-- [ ] Vercel을 이용한 배포
-  - [x] 배포 및 도메인 연결
-  - [ ] CI 구축 (CD는 Vercel에서 제공)
+- [x] 테스팅
+  - [x] 유닛 테스트
+  - [x] 통합 테스트
+  - [x] E2E 테스트
+- [x] 배포
+  - [x] Vercel을 이용한 배포 및 도메인 연결
+  - [x] Github action 테스트 CI 구축 (CD는 Vercel에서 제공)
 - 추가 작업 옵션
   - [ ] 차후 벡엔드 프로젝트와 함께 Mono Repo로 변경
 

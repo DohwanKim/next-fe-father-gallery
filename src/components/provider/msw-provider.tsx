@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import { initMocks } from '@/mocks';
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NEXT_PUBLIC_USE_MSW === 'true') {
   initMocks().then(() => console.log('MSW initialized'));
 }
 

@@ -357,7 +357,34 @@ const paginatePosts: Paginate<Post> = {
 };
 
 const postsHandler = [
-  http.get(`${BASE_URL}/posts`, () => HttpResponse.json({ ...paginatePosts })),
+  http.get(`${BASE_URL}/posts`, ({ request }) => {
+    const url = new URL(request.url);
+    const type = url.searchParams.get('artTypes');
+    let mockPaginatePosts = paginatePosts;
+
+    if (type) {
+      mockPaginatePosts = {
+        ...paginatePosts,
+        items: paginatePosts.items.filter((post) => post.artType === type),
+      };
+    }
+
+    return HttpResponse.json(
+      { ...mockPaginatePosts },
+      { statusText: 'OK', status: 200, type: 'default' },
+    );
+  }),
+  http.get(`${BASE_URL}/posts/:id`, ({ params }) => {
+    const { id } = params;
+    const post = paginatePosts.items.find((post) => post.id === Number(id));
+
+    return HttpResponse.json(post);
+  }),
+  http.get(`${BASE_URL}/posts/random-post`, () => {
+    const mockRandomPost = paginatePosts.items.slice(0, 6);
+
+    return HttpResponse.json(mockRandomPost);
+  }),
 ];
 
 export default postsHandler;

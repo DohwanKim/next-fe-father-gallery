@@ -37,9 +37,12 @@ next-env.d.ts
 discord.xml
 
 # env
-temp/.env.development
+.env.development
+.env.development.local
 .env.production
+.env.production.local
 .env.test
+.env.test.local
 
 ## Panda
 styled-system

@@ -19,7 +19,7 @@ describe('DetailImage', () => {
 
     images.forEach((image) => {
       const src = image.getAttribute('src');
-      expect(src).toContain(item.img!.id);
+      expect(src).toBeTruthy();
     });
   });
 

@@ -81,6 +81,8 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 - [x] 배포
   - [x] Vercel을 이용한 배포 및 도메인 연결
   - [x] Github action 테스트 CI 구축 (CD는 Vercel에서 제공)
+- [x] 분석도구
+  - [x] Vercel Analytics
 - 추가 작업 옵션
   - [ ] 차후 벡엔드 프로젝트와 함께 Mono Repo로 변경
 
@@ -91,19 +93,30 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
   - axios를 사용하지 않았습니다. (`cache()` 함수로 사용하는 솔루션이 있으나 이번엔 다르게 해보고 싶었습니다.)
   - 내장 fetch 함수는 구현 할 분량이 많아 시간 단축을 위해 oFetch를 사용하려고 하였으나 에로사항이 많아 국산 모듈 return-fetch를 사용하게 되었습니다. 
 
-## Getting Started
+## 프로젝트 실행하기
+### 임시 실행하기
+> 공유용 `.env` 환경변수 파일을 통해 유저 페이지만 [MSW](https://mswjs.io/)로 모킹된 API가 동작하여 접근 가능합니다.
+> - 접근 가능한 유저 페이지
+>   - `/`
+>   - `/gallery`
+>     - 이미지는 모킹된 데이터와 상관없이 랜덤 임시 이미지를 사용합니다.
+>   - ~~`/gallery/:id`~~
+>     - 위 디테일 페이지는 서버사이드 페이지로 구현되어 있습니다.<br>그러나 현재 Next.js App router에서 서버사이드 사용시 MSW가 올바르게 동작하지 작동하지 않습니다.<br>차후 수정할 예정입니다. [해당 이슈 바로가기](https://github.com/mswjs/msw/issues/1644) 
+>   - `/about`
 
-First, run the development server:
+### 전체 기능 실행하기
+> 모든 기능을 실행하기 위해서는 [API서버](https://github.com/DohwanKim/nest-be-father-gallery)가 필요합니다.<br>
+> `.env`의 `NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID`값에 공개 Cloudflare Image key가 항목을 추가해시고
+> `NEXT_PUBLIC_USE_MSW`값을 `false`로 변경해주세요.
 
+
+## 실행하기
 ```bash
+# install dependencies or use your package manager instanced of npm
+npm install
+# run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3001](http://localhost:3001)
+# go to http://localhost:3001
+```
 

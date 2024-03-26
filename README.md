@@ -21,12 +21,12 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 - [API 문서 (Swagger)](https://api.kimdongcheol-art.com/api)
 
 ## 스택
-- Next.js 14 boilerplate 
+- Next.js 14 boilerplate
   - typescript
   - app router
   - import alias: '@'
 - UI 라이브러리
-  - tailwindcss 
+  - tailwindcss
   - shadcn/ui
 - 유틸
   - Data fetching
@@ -88,20 +88,20 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 
 ## TMI
 - PandaCSS를 사용하려 했으나 시간 단축을 위해 TailwindCSS + shadcn/ui 로 변경하였습니다.
-  - 차후 디자인만 차용하여 PandaCSS로 변경할 의향이 있습니다. 
+  - 차후 디자인만 차용하여 PandaCSS로 변경할 의향이 있습니다.
 - Next.js 데이터 캐싱 기능으로 인한 변화
   - axios를 사용하지 않았습니다. (`cache()` 함수로 사용하는 솔루션이 있으나 이번엔 다르게 해보고 싶었습니다.)
-  - 내장 fetch 함수는 구현 할 분량이 많아 시간 단축을 위해 oFetch를 사용하려고 하였으나 에로사항이 많아 국산 모듈 return-fetch를 사용하게 되었습니다. 
+  - 내장 fetch 함수는 구현 할 분량이 많아 시간 단축을 위해 oFetch를 사용하려고 하였으나 에로사항이 많아 국산 모듈 return-fetch를 사용하게 되었습니다.
 
 ## 프로젝트 실행하기
 ### 임시 실행하기
 > 공유용 `.env` 환경변수 파일을 통해 유저 페이지만 [MSW](https://mswjs.io/)로 모킹된 API가 동작하여 접근 가능합니다.
 > - 접근 가능한 유저 페이지
->   - `/`
+    >   - `/`
 >   - `/gallery`
->     - 이미지는 모킹된 데이터와 상관없이 랜덤 임시 이미지를 사용합니다.
+      >     - 이미지는 모킹된 데이터와 상관없이 랜덤 임시 이미지를 사용합니다.
 >   - ~~`/gallery/:id`~~
->     - 위 디테일 페이지는 서버사이드 페이지로 구현되어 있습니다.<br>그러나 현재 Next.js App router에서 서버사이드 사용시 MSW가 올바르게 동작하지 작동하지 않습니다.<br>차후 수정할 예정입니다. [해당 이슈 바로가기](https://github.com/mswjs/msw/issues/1644) 
+      >     - 위 디테일 페이지는 서버사이드 페이지로 구현되어 있습니다.<br>그러나 현재 Next.js App router에서 서버사이드 사용시 MSW가 올바르게 동작하지 작동하지 않습니다.<br>차후 수정할 예정입니다. [해당 이슈 바로가기](https://github.com/mswjs/msw/issues/1644)
 >   - `/about`
 
 ### 전체 기능 실행하기
@@ -119,4 +119,8 @@ npm run dev
 
 # go to http://localhost:3001
 ```
+
+## License
+[MIT licensed](LICENSE).
+
 

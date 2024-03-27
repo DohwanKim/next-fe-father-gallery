@@ -1,3 +1,5 @@
+import * as process from 'process';
+
 import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 
@@ -52,6 +54,35 @@ export const getCFUrl = (
   cloudflareImgId: string,
   variants: ImagesVariants = ImagesVariants.PUBLIC,
 ) => {
+  if (Boolean(process.env.NEXT_PUBLIC_USE_MSW)) {
+    let imageWidth = 200;
+    let imageHeight = 300;
+
+    switch (variants) {
+      case ImagesVariants.USER_POST:
+        imageWidth = 370;
+        imageHeight = 370;
+        break;
+      case ImagesVariants.USER_POST_BLUR:
+        imageWidth = 48;
+        imageHeight = 48;
+        break;
+      case ImagesVariants.USER_POST_DETAIL:
+        imageWidth = 900;
+        imageHeight = 500;
+        break;
+      case ImagesVariants.USER_POST_DETAIL_BLUR:
+        imageWidth = 128;
+        imageHeight = 128;
+        break;
+      case ImagesVariants.USER_POST_DETAIL_OG:
+        imageWidth = 1200;
+        imageHeight = 630;
+        break;
+    }
+    return `https://picsum.photos/${imageWidth}/${imageHeight}`;
+  }
+
   const accountId = process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGE_ACCOUNT_ID;
 
   return `https://imagedelivery.net/${accountId}/${cloudflareImgId}/${variants}`;

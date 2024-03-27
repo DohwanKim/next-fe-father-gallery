@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               {children}
             </ThemeProvider>
           </QueryProvider>
-          <Analytics />
+          {process.env.NODE_ENV === 'production' && <Analytics />}
         </MswProvider>
       </body>
     </html>

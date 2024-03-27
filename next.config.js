@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'imagedelivery.net',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+      },
     ],
   },
   async rewrites() {

@@ -88,19 +88,19 @@ export const getCFUrl = (
   return `https://imagedelivery.net/${accountId}/${cloudflareImgId}/${variants}`;
 };
 
-export const artTypeToKorean = (artType: ArtType) => {
+export const artTypeToReadableText = (artType: ArtType) => {
   let artTypeKorean = '';
 
   if (artType === 'NONE') {
-    artTypeKorean = '기타';
+    artTypeKorean = 'Etc';
   } else if (artType === 'WATERCOLOR') {
-    artTypeKorean = '수채화';
+    artTypeKorean = 'WaterColor';
   } else if (artType === 'PENCIL_DRAWING') {
-    artTypeKorean = '연필화';
+    artTypeKorean = 'Pencil';
   } else if (artType === 'ACRYLIC_PAINTING') {
-    artTypeKorean = '아크릴화';
+    artTypeKorean = 'Acrylic';
   } else if (artType === 'OIL_PAINTING') {
-    artTypeKorean = '유화';
+    artTypeKorean = 'Oil';
   }
 
   return artTypeKorean;

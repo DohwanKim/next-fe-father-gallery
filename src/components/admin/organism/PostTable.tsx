@@ -17,7 +17,7 @@ import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import useAdminPostsStore from '@/store/admin-posts';
 import { Post } from '@/types/posts.type';
-import { artTypeToKorean, getCFUrl } from '@/utils/common';
+import { artTypeToReadableText, getCFUrl } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
@@ -114,7 +114,9 @@ const PostTable = ({ items, totalItems, currentPage, itemsPerPage }: Props) => {
                 )}
               </TableCell>
               <TableCell>{item.title}</TableCell>
-              <TableCell>{artTypeToKorean(item.artType as ArtType)}</TableCell>
+              <TableCell>
+                {artTypeToReadableText(item.artType as ArtType)}
+              </TableCell>
               <TableCell className={'text-center'}>
                 {item.isSold ? 'Y' : 'N'}
               </TableCell>

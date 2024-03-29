@@ -4,7 +4,7 @@ import PostItem from '@/components/user/organism/PostItem';
 import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { getPost, getRandomPost } from '@/service/posts';
-import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
+import { artTypeToReadableText, getCFUrl, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
@@ -59,7 +59,7 @@ export default async function GalleryDetail({ params }: Props) {
           <h1 className={'text-2xl border-b pb-2'}>{detailData.title}</h1>
           <dl>
             <dt>Category</dt>
-            <dd>{artTypeToKorean(detailData.artType as ArtType)}</dd>
+            <dd>{artTypeToReadableText(detailData.artType as ArtType)}</dd>
           </dl>
           <dl>
             <dt>Date</dt>

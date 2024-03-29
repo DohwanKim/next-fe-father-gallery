@@ -3,6 +3,8 @@
 import { useQueryState } from 'nuqs';
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { ArtType } from '@/constants/post.enum';
+import { artTypeToReadableText } from '@/utils/common';
 
 const PostFilter = () => {
   const [typeQuery, setTypeQuery] = useQueryState('type');
@@ -23,16 +25,16 @@ const PostFilter = () => {
           All
         </ToggleGroupItem>
         <ToggleGroupItem value="WATERCOLOR" aria-label="Toggle watercolor">
-          Watercolor
+          {artTypeToReadableText('WATERCOLOR' as ArtType)}
         </ToggleGroupItem>
         <ToggleGroupItem value="ACRYLIC_PAINTING" aria-label="Toggle acrylic">
-          Acrylic
+          {artTypeToReadableText('ACRYLIC_PAINTING' as ArtType)}
         </ToggleGroupItem>
         <ToggleGroupItem value="OIL_PAINTING" aria-label="Toggle oil">
-          Oil
+          {artTypeToReadableText('OIL_PAINTING' as ArtType)}
         </ToggleGroupItem>
         <ToggleGroupItem value="PENCIL_DRAWING" aria-label="Toggle pencil">
-          Pencil
+          {artTypeToReadableText('PENCIL_DRAWING' as ArtType)}
         </ToggleGroupItem>
       </ToggleGroup>
     </div>

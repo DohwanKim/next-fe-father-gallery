@@ -5,9 +5,15 @@ import { useEffect } from 'react';
 
 import useLayoutStore from '@/store/layout';
 
-export const navItems = [
+type NavItem = {
+  name: string;
+  href: string;
+  query?: string;
+};
+
+export const navItems: NavItem[] = [
   { name: 'Home', href: '/' },
-  { name: 'Gallery', href: '/gallery' },
+  { name: 'Gallery', href: '/gallery', query: '?type=WATERCOLOR' },
   { name: 'About', href: '/about' },
 ];
 
@@ -30,11 +36,11 @@ const HeaderNav = () => {
       {navItems.map((item) => (
         <Link
           key={item.href}
+          href={item.href + (item.query || '')}
+          scroll={false}
           className={`flex items-center h-full transition-colors hover:text-foreground/80 ${
             `/${firstPath}` === item.href ? '' : 'text-foreground/60'
           }`}
-          href={item.href}
-          scroll={false}
         >
           {item.name}
         </Link>

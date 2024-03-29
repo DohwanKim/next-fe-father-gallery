@@ -1,43 +1,22 @@
 'use client';
-import { useEffect, useState } from 'react';
+
+import { useQueryState } from 'nuqs';
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { ArtType } from '@/constants/post.enum';
-import useLayoutStore from '@/store/layout';
 
-interface Props {
-  value: ArtType | undefined;
-  onValueChange: (value: ArtType | undefined) => void;
-}
-
-const PostFilter = ({ value, onValueChange }: Props) => {
-  const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
-  const setIsHeaderHideByScroll = useLayoutStore(
-    (state) => state.setIsHeaderHideByScroll,
-  );
-
-  useEffect(() => {
-    setIsShowFilter(true);
-  }, []);
+const PostFilter = () => {
+  const [typeQuery, setTypeQuery] = useQueryState('type');
 
   return (
-    <div
-      data-testid={'post-filter'}
-      className={`fixed w-full md:w-auto bottom-0 md:bottom-[60px] left-1/2 p-3 border z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transform -translate-x-1/2 transition-transform duration-500 ${
-        !isShowFilter ? 'translate-y-[300px]' : 'translate-y-0'
-      }`}
-    >
+    <div data-testid={'post-filter'}>
       <ToggleGroup
         type="single"
-        value={value ? value : 'ALL'}
+        value={typeQuery ? typeQuery : 'ALL'}
         size="lg"
         className={'flex-wrap [&>button]:rounded-none'}
-        onValueChange={(value) => {
+        onValueChange={async (value) => {
+          await setTypeQuery(value === 'ALL' ? '' : value);
           scrollTo({ top: 0 });
-          setTimeout(() => {
-            setIsHeaderHideByScroll(false);
-            onValueChange(value === 'ALL' ? undefined : (value as ArtType));
-          }, 100);
         }}
       >
         <ToggleGroupItem value={'ALL'} aria-label="Toggle all">

@@ -1,6 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+
+import useLayoutStore from '@/store/layout';
 
 export const navItems = [
   { name: 'Home', href: '/' },
@@ -9,8 +12,14 @@ export const navItems = [
 ];
 
 const HeaderNav = () => {
+  const { setIsShowSubMenu, setIsHeaderHide } = useLayoutStore();
   const pathname = usePathname();
   const firstPath = pathname.split('/')[1];
+
+  useEffect(() => {
+    setIsShowSubMenu(pathname === '/gallery');
+    setIsHeaderHide(false);
+  }, [pathname, setIsHeaderHide, setIsShowSubMenu]);
 
   return (
     <nav

@@ -4,7 +4,6 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useQueryState } from 'nuqs';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import PostFilter from '@/components/user/organism/PostFilter';
 import PostItem from '@/components/user/organism/PostItem';
 import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
 import { ArtType } from '@/constants/post.enum';
@@ -13,7 +12,7 @@ import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
 const Posts = () => {
-  const [typeQuery, setTypeQuery] = useQueryState('type');
+  const [typeQuery] = useQueryState('type');
   const { data, isPending, hasNextPage, fetchNextPage } =
     useSuspenseInfiniteQuery<Paginate<Post>>({
       queryKey: ['posts', typeQuery],
@@ -35,12 +34,6 @@ const Posts = () => {
 
   return (
     <div className={'relative container mx-auto'}>
-      <PostFilter
-        value={(typeQuery as ArtType) || undefined}
-        onValueChange={async (value) => {
-          await setTypeQuery(value || '');
-        }}
-      />
       {isPending ? (
         <div className={'grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4'}>
           {Array.from({ length: 10 }).map((_, index) => (

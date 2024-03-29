@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -6,7 +6,19 @@ import { Button } from '@/components/ui/button';
 import SocialLinks from '@/components/user/organism/SocialLinks';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  description: 'A painting challenge by a non-majors',
+  openGraph: {
+    title: 'KimDongCheol Art',
+    description: 'A painting challenge by a non-majors',
+    images: [
+      {
+        url: '/img/profile.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'KimDongCheol Art',
+      },
+    ],
+  },
 };
 
 export default async function Home() {

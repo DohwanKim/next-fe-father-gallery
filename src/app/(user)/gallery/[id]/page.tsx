@@ -16,10 +16,10 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { id } = params;
   const detailData = await getPost(Number(id));
-  const ogTitle = `${detailData.title || '갤러리'} | 김동철 그림세상`;
+  const ogTitle = `${detailData.title || 'Gallery'} | KimDongCheol Art`;
 
   return {
-    title: detailData.title || '갤러리',
+    title: detailData.title || 'Gallery',
     openGraph: {
       title: ogTitle,
       description: detailData.contents || '',

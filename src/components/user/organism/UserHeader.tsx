@@ -70,7 +70,7 @@ const UserHeader = () => {
           >
             <Image
               src={'/sample-logo.png'}
-              alt={'김동철 그림세상'}
+              alt={'KimDongCheol Art'}
               fill
               sizes={'100%'}
               className={'object-contain'}

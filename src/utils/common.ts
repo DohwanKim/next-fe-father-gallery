@@ -54,7 +54,7 @@ export const getCFUrl = (
   cloudflareImgId: string,
   variants: ImagesVariants = ImagesVariants.PUBLIC,
 ) => {
-  if (Boolean(process.env.NEXT_PUBLIC_USE_MSW)) {
+  if (process.env.NEXT_PUBLIC_USE_MSW === 'true') {
     let imageWidth = 200;
     let imageHeight = 300;
 

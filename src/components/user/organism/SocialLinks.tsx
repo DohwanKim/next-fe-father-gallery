@@ -5,7 +5,7 @@ const NaverBlogIcon = () => {
   return (
     <Image
       src={'/img/naver_blog_icon.svg'}
-      alt={''}
+      alt={'Naver Blog Icon'}
       width={0}
       height={0}
       sizes={'100vw'}
@@ -18,7 +18,7 @@ const InstagramIcon = () => {
   return (
     <Image
       src={'/img/instagram_logo_icon.svg'}
-      alt={''}
+      alt={'Instagram Icon'}
       width={0}
       height={0}
       sizes={'100vw'}

@@ -50,7 +50,7 @@ export default async function GalleryDetail({ params }: Props) {
         <BackButton />
       </div>
       <div className={'flex flex-col md:flex-row gap-x-10 gap-y-5 mb-10'}>
-        <DetailImage imgId={detailData.img!.id} />
+        <DetailImage imgId={detailData.img!.id} imgTitle={detailData.title} />
         <div
           className={
             'flex flex-col gap-y-2 grow [&_dl]:flex [&_dt]:w-[100px] [&_dd]:font-light [&_dd]:text-foreground/80'

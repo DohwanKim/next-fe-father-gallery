@@ -9,9 +9,10 @@ import { getCFUrl } from '@/utils/common';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   imgId: string;
+  imgTitle?: string;
 }
 
-const DetailImage = ({ imgId }: Props) => {
+const DetailImage = ({ imgId, imgTitle }: Props) => {
   const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
   const [detailOriginImgLoaded, setDetailOriginImgLoaded] =
     useState<boolean>(false);
@@ -32,7 +33,7 @@ const DetailImage = ({ imgId }: Props) => {
           >
             <Image
               src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL_BLUR)}
-              alt={'blur image'}
+              alt={`${imgTitle} blur image`}
               priority
               className={`object-contain w-full h-auto duration-500 ${
                 originImgLoaded ? 'opacity-0' : 'opacity-100'
@@ -41,7 +42,7 @@ const DetailImage = ({ imgId }: Props) => {
             />
             <Image
               src={getCFUrl(imgId, ImagesVariants.USER_POST_DETAIL)}
-              alt={'main image'}
+              alt={`${imgTitle} image`}
               unoptimized
               width={0}
               height={0}

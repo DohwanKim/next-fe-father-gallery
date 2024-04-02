@@ -4,7 +4,7 @@ import PostItem from '@/components/user/organism/PostItem';
 import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { getPost, getRandomPost } from '@/service/posts';
-import { artTypeToKorean, getCFUrl, threeCommaNum } from '@/utils/common';
+import { artTypeToReadableText, getCFUrl, threeCommaNum } from '@/utils/common';
 import dayjs from '@/utils/dayjs';
 
 interface Props {
@@ -16,10 +16,10 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { id } = params;
   const detailData = await getPost(Number(id));
-  const ogTitle = `${detailData.title || '갤러리'} | 김동철 그림세상`;
+  const ogTitle = `${detailData.title || 'Gallery'} | KimDongCheol Art`;
 
   return {
-    title: detailData.title || '갤러리',
+    title: detailData.title || 'Gallery',
     openGraph: {
       title: ogTitle,
       description: detailData.contents || '',
@@ -50,7 +50,7 @@ export default async function GalleryDetail({ params }: Props) {
         <BackButton />
       </div>
       <div className={'flex flex-col md:flex-row gap-x-10 gap-y-5 mb-10'}>
-        <DetailImage imgId={detailData.img!.id} />
+        <DetailImage imgId={detailData.img!.id} imgTitle={detailData.title} />
         <div
           className={
             'flex flex-col gap-y-2 grow [&_dl]:flex [&_dt]:w-[100px] [&_dd]:font-light [&_dd]:text-foreground/80'
@@ -59,7 +59,7 @@ export default async function GalleryDetail({ params }: Props) {
           <h1 className={'text-2xl border-b pb-2'}>{detailData.title}</h1>
           <dl>
             <dt>Category</dt>
-            <dd>{artTypeToKorean(detailData.artType as ArtType)}</dd>
+            <dd>{artTypeToReadableText(detailData.artType as ArtType)}</dd>
           </dl>
           <dl>
             <dt>Date</dt>

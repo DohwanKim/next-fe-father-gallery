@@ -7,7 +7,7 @@ import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { cn } from '@/lib/utils';
 import { Post } from '@/types/posts.type';
-import { artTypeToKorean, getCFUrl } from '@/utils/common';
+import { artTypeToReadableText, getCFUrl } from '@/utils/common';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   postItem: Post;
@@ -62,7 +62,9 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
       </div>
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
-        <p className={'font-light'}>{artTypeToKorean(artType as ArtType)}</p>
+        <p className={'font-light'}>
+          {artTypeToReadableText(artType as ArtType)}
+        </p>
       </div>
     </Link>
   );

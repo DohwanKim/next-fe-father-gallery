@@ -14,7 +14,7 @@ exports[`SocialLinks SocialLinks 스냅샷 일치 1`] = `
         style="width: 24px; height: 24px;"
       >
         <img
-          alt=""
+          alt="Instagram Icon"
           class="aspect-square h-full w-full"
           data-nimg="1"
           decoding="async"
@@ -35,7 +35,7 @@ exports[`SocialLinks SocialLinks 스냅샷 일치 1`] = `
         style="width: 24px; height: 24px;"
       >
         <img
-          alt=""
+          alt="Naver Blog Icon"
           class="aspect-square h-full w-full"
           data-nimg="1"
           decoding="async"

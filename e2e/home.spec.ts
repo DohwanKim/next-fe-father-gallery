@@ -32,7 +32,7 @@ test.describe('Home', () => {
 
   test.describe('레이아웃 정상 노출 확인', () => {
     test('헤더의 로고가 출력된다', async () => {
-      const logo = page.getByAltText('김동철 그림세상');
+      const logo = page.getByAltText('KimDongCheol Art');
 
       await expect(logo).toBeVisible();
     });

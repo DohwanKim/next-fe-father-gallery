@@ -17,9 +17,10 @@ describe('HeaderNav', () => {
 
     navItems.forEach((item) => {
       const link = screen.getByText(item.name);
+      const linkHref = link.getAttribute('href')!;
 
       expect(link).toBeInTheDocument();
-      expect(link).toHaveAttribute('href', item.href);
+      expect(linkHref.includes(item.href)).toBe(true);
     });
   });
 

@@ -4,12 +4,21 @@ import { act } from 'react-dom/test-utils';
 import UserHeader from '@/components/user/organism/UserHeader';
 
 const mockUsePathname = jest.fn();
-
-jest.mock('next/navigation', () => ({
-  usePathname() {
-    return mockUsePathname();
-  },
-}));
+jest.mock('next/navigation', () => {
+  return {
+    __esModule: true,
+    usePathname() {
+      return mockUsePathname();
+    },
+    useRouter: () => ({
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(),
+    }),
+    useSearchParams: () => ({ get: () => {} }),
+    useServerInsertedHTML: jest.fn(),
+  };
+});
 
 describe('UserHeader', () => {
   beforeEach(() => {
@@ -23,13 +32,13 @@ describe('UserHeader', () => {
     expect(header).toBeInTheDocument();
   });
 
-  it('스크롤 Y값, 122 미만에선 스크롤해도 "UserHeader"가 보인다', async () => {
+  it('스크롤이 지정된 고정값 미만에선 스크롤해도 "UserHeader"가 보인다', async () => {
     const { container } = render(<UserHeader />);
     const header = container.querySelector('header');
 
     act(() => {
       fireEvent.scroll(window, {
-        target: { scrollY: 100 },
+        target: { scrollY: 40 },
       });
     });
 
@@ -38,7 +47,7 @@ describe('UserHeader', () => {
     });
   });
 
-  it('스크롤이 122 이상 내려가면 "UserHeader"가 숨겨진다', async () => {
+  it('스크롤이 지정된 고정값 이상 내려가면 "UserHeader"가 숨겨진다', async () => {
     const { container } = render(<UserHeader />);
     const header = container.querySelector('header');
 
@@ -51,5 +60,14 @@ describe('UserHeader', () => {
     await waitFor(() => {
       expect(header).toHaveClass('translate-y-[-100%]');
     });
+  });
+
+  it('갤러리 페이지로 이동하면 서브 메뉴가 나온다', async () => {
+    mockUsePathname.mockReturnValue('/gallery');
+
+    const { findByTestId } = render(<UserHeader />);
+    const subMenu = await findByTestId('sub-menu');
+
+    expect(subMenu).toBeInTheDocument();
   });
 });

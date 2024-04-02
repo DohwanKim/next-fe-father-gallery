@@ -14,7 +14,9 @@ describe('DetailImage', () => {
 
   it('이미지 데이터를 받아서 랜더한다', async () => {
     const item = paginatePosts.items[0] as Post;
-    const { findAllByRole } = render(<DetailImage imgId={item.img!.id} />);
+    const { findAllByRole } = render(
+      <DetailImage imgId={item.img!.id} imgTitle={item.title} />,
+    );
     const images = await findAllByRole('img');
 
     images.forEach((image) => {
@@ -25,9 +27,10 @@ describe('DetailImage', () => {
 
   it('메인 이미지가 로드 되면, 메인 이미지는 보여지고 블러 이미지는 감춰진다', async () => {
     const item = paginatePosts.items[0] as Post;
-    render(<DetailImage imgId={item.img!.id} />);
-    const blurImg = screen.getByAltText('blur image');
-    const mainImg = screen.getByAltText('main image');
+    const imgTitle = item.title;
+    render(<DetailImage imgId={item.img!.id} imgTitle={imgTitle} />);
+    const blurImg = screen.getByAltText(`${imgTitle} blur image`);
+    const mainImg = screen.getByAltText(`${imgTitle} image`);
 
     expect(blurImg).toHaveClass('opacity-100');
     expect(mainImg).toHaveClass('opacity-0');

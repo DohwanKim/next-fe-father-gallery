@@ -89,7 +89,10 @@ const UserHeader = () => {
         </div>
       </div>
       {isShowSubMenu && (
-        <div className={'flex items-center justify-center border-t h-[60px]'}>
+        <div
+          data-testid={'sub-menu'}
+          className={'flex items-center justify-center border-t h-[60px]'}
+        >
           <PostFilter />
         </div>
       )}

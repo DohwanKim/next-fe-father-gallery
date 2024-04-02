@@ -1,38 +1,63 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import PostFilter from '@/components/user/organism/PostFilter';
-import { ArtType } from '@/constants/post.enum';
+
+const mockUsePathname = jest.fn();
+jest.mock('next/navigation', () => {
+  return {
+    __esModule: true,
+    usePathname() {
+      return mockUsePathname();
+    },
+    useRouter: () => ({
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(),
+    }),
+    useSearchParams: () => ({ get: () => {} }),
+    useServerInsertedHTML: jest.fn(),
+  };
+});
+
+const mockTypeQuery = jest.fn().mockReturnValue('');
+const mockSetTypeQuery = jest.fn();
+
+jest.mock('nuqs', () => {
+  return {
+    useQueryState: jest.fn(() => [mockTypeQuery, mockSetTypeQuery]),
+  };
+});
 
 describe('PostFilter', () => {
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockUsePathname.mockReturnValue('/gallery');
+  });
 
   it('All 선택되어 랜더링 된다', () => {
-    const { getByText } = render(
-      <PostFilter value={undefined} onValueChange={() => {}} />,
-    );
+    const { getByText } = render(<PostFilter />);
 
     expect(getByText('All').getAttribute('aria-label')).toBe('Toggle all');
   });
 
-  it('버튼을 누르면 값이 변경된다', async () => {
-    const onChange = jest.fn();
-    const { getByText } = render(
-      <PostFilter value={'OIL_PAINTING' as ArtType} onValueChange={onChange} />,
-    );
-    const watercolorButton = getByText('Watercolor');
+  it('버튼을 누르면 쿼리값 변경 함수가 작동한다', async () => {
+    window.scrollTo = jest.fn();
+    const { getByText } = render(<PostFilter />);
+    const watercolorButton = getByText('WaterColor');
     const allButton = getByText('All');
 
-    window.scrollTo = jest.fn();
     fireEvent.click(watercolorButton);
 
+    mockTypeQuery.mockReturnValue('WATERCOLOR');
     await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith('WATERCOLOR' as ArtType);
+      expect(mockSetTypeQuery).toHaveBeenCalledWith('WATERCOLOR');
       expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 });
     });
 
     fireEvent.click(allButton);
+    mockTypeQuery.mockReturnValue('');
     await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith(undefined);
+      expect(mockSetTypeQuery).toHaveBeenCalledWith('');
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 });
     });
   });
 });

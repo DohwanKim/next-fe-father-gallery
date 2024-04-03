@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className={'container'}>
-      <div className={'grid gap-4 grid-cols-1 md:grid-cols-2'}>
+      <div className={'grid gap-6 grid-cols-1 md:grid-cols-2'}>
         <div className={'relative aspect-square drop-shadow'}>
           <Image
             src={'/img/profile.jpeg'}
             alt={''}
             priority
-            className={'object-cover h-full filter grayscale'}
+            className={'object-cover h-full filter'}
             fill
           />
         </div>

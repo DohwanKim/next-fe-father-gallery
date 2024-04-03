@@ -110,7 +110,7 @@ const UserHeader = () => {
         <div
           data-testid={'sub-menu'}
           className={
-            'flex items-center justify-center border-t min-h-[60px] py-1'
+            'flex items-center justify-center border-t min-h-[60px] py-2'
           }
         >
           <PostFilter />

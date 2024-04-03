@@ -48,6 +48,7 @@ const config = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
+          strong: 'hsl(var(--accent-strong))',
           foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {

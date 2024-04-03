@@ -9,12 +9,11 @@ import useLayoutStore from '@/store/layout';
 type NavItem = {
   name: string;
   href: string;
-  query?: string;
 };
 
 export const navItems: NavItem[] = [
   { name: 'Home', href: '/' },
-  { name: 'Gallery', href: '/gallery', query: '?type=WATERCOLOR' },
+  { name: 'Gallery', href: '/gallery' },
   { name: 'About', href: '/about' },
 ];
 
@@ -42,7 +41,7 @@ const HeaderNav = ({ onClickNav, ...props }: Props) => {
       {navItems.map((item) => (
         <Link
           key={item.href}
-          href={item.href + (item.query || '')}
+          href={item.href}
           scroll={false}
           className={`flex items-center h-full transition-colors hover:text-foreground/80 ${
             `/${firstPath}` === item.href ? '' : 'text-foreground/60'

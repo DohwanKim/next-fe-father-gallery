@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { HTMLAttributes } from 'react';
+
+import { cn } from '@/lib/utils';
 
 const NaverBlogIcon = () => {
   return (
@@ -40,7 +43,7 @@ const socialItems = [
   },
 ];
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   isGray?: boolean;
   isShowName?: boolean;
   iconSize?: number;
@@ -50,13 +53,15 @@ const SocialLinks = ({
   isGray = false,
   isShowName = false,
   iconSize = 24,
+  className,
+  ...props
 }: Props) => {
   const interactionClassNames = isGray
     ? 'grayscale hover:grayscale-0 transition-grayscale'
     : 'hover:text-foreground/60 transition-colors';
 
   return (
-    <div className={'flex items-center gap-x-2'}>
+    <div className={cn('flex items-center gap-x-2', className)} {...props}>
       {socialItems.map((item) => (
         <Link
           key={item.name}

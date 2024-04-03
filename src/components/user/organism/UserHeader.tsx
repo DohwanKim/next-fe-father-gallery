@@ -85,12 +85,13 @@ const UserHeader = () => {
             </Link>
           </h1>
         </div>
-        <div className={'hidden md:flex gap-4'}>
+        <div className={'invisible md:visible flex gap-4'}>
           <SocialLinks isGray />
           <ThemeToggleButton />
         </div>
         <button
           className={'md:hidden'}
+          data-testid={'hamburger-button'}
           role={'menubar'}
           onClick={() => {
             setIsMobileHeaderShow(true);
@@ -100,7 +101,7 @@ const UserHeader = () => {
         </button>
         <div
           className={
-            'hidden md:block absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]'
+            'invisible md:visible absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]'
           }
         >
           <HeaderNav />

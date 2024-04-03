@@ -16,7 +16,7 @@ const PostFilter = () => {
         value={typeQuery ? typeQuery : 'WATERCOLOR'}
         className={'flex-wrap [&>button]:rounded-none'}
         onValueChange={async (value) => {
-          await setTypeQuery(value || 'WATERCOLOR');
+          await setTypeQuery(value);
           scrollTo({ top: 0 });
         }}
       >

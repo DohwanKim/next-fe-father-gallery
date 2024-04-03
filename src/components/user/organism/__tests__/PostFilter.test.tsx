@@ -36,14 +36,16 @@ describe('PostFilter', () => {
   it('All 선택되어 랜더링 된다', () => {
     const { getByText } = render(<PostFilter />);
 
-    expect(getByText('All').getAttribute('aria-label')).toBe('Toggle all');
+    expect(getByText('WaterColor').getAttribute('aria-label')).toBe(
+      'Toggle watercolor',
+    );
   });
 
   it('버튼을 누르면 쿼리값 변경 함수가 작동한다', async () => {
     window.scrollTo = jest.fn();
     const { getByText } = render(<PostFilter />);
     const watercolorButton = getByText('WaterColor');
-    const allButton = getByText('All');
+    const acrylicButton = getByText('Acrylic');
 
     fireEvent.click(watercolorButton);
 
@@ -53,10 +55,10 @@ describe('PostFilter', () => {
       expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 });
     });
 
-    fireEvent.click(allButton);
+    fireEvent.click(acrylicButton);
     mockTypeQuery.mockReturnValue('');
     await waitFor(() => {
-      expect(mockSetTypeQuery).toHaveBeenCalledWith('');
+      expect(mockSetTypeQuery).toHaveBeenCalledWith('ACRYLIC_PAINTING');
       expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 });
     });
   });

@@ -36,4 +36,14 @@ describe('HeaderNav', () => {
       }
     });
   });
+
+  it('프롭스로 함수를 전달 할 경우 링크 클릭 시 함수가 호출 된다.', () => {
+    mockUsePathname.mockReturnValue('/');
+    const onClickNav = jest.fn();
+    render(<HeaderNav onClickNav={onClickNav} />);
+    const link = screen.getByText(navItems[0].name);
+
+    link.click();
+    expect(onClickNav).toHaveBeenCalled();
+  });
 });

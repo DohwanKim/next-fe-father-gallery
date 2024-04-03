@@ -70,4 +70,6 @@ describe('UserHeader', () => {
 
     expect(subMenu).toBeInTheDocument();
   });
+
+  it.todo('햄버거 버튼 클릭 시 메뉴가 열린다');
 });

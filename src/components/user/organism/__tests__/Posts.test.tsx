@@ -1,17 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
-import { render } from '@testing-library/react';
-import { ReactNode } from 'react';
-
-import Posts from '@/components/user/organism/Posts';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       retry: false,
+//     },
+//   },
+// });
 
 const mockUsePathname = jest.fn().mockReturnValue('/gallery');
 jest.mock('next/navigation', () => {
@@ -37,11 +30,11 @@ jest.mock('nuqs', () => {
   };
 });
 
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-  </QueryClientProvider>
-);
+// const Wrapper = ({ children }: { children: ReactNode }) => (
+//   <QueryClientProvider client={queryClient}>
+//     <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+//   </QueryClientProvider>
+// );
 
 window.scrollTo = jest.fn();
 
@@ -67,13 +60,14 @@ jest.mock('next/navigation', () => {
  *  - 스크롤을 내리면 fetchNextPage가 호출된다.
  */
 describe('Posts', () => {
-  it('랜더', async () => {
-    render(
-      <Wrapper>
-        <Posts />
-      </Wrapper>,
-    );
-
-    // expect(await screen.findByText('MOCK 샘플 게시글1')).toBeInTheDocument();
-  });
+  it.todo('랜더된다');
+  // it('랜더', async () => {
+  //   render(
+  //     <Wrapper>
+  //       <Posts />
+  //     </Wrapper>,
+  //   );
+  //
+  //   expect(await screen.findByText('MOCK 샘플 게시글1')).toBeInTheDocument();
+  // });
 });

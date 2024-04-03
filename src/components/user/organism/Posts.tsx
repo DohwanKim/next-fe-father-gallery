@@ -17,10 +17,17 @@ const Posts = () => {
     useSuspenseInfiniteQuery<Paginate<Post>>({
       queryKey: ['posts', typeQuery],
       queryFn: async ({ pageParam = 1 }) => {
+        const artTypes =
+          typeQuery === 'ETC'
+            ? ['NONE']
+            : typeQuery
+              ? [typeQuery as ArtType]
+              : ['WATERCOLOR'];
+
         return getPaginatePosts({
           page: pageParam as number,
           limit: 10,
-          artTypes: typeQuery ? [typeQuery as ArtType] : [],
+          artTypes: artTypes as ArtType[],
         });
       },
       initialPageParam: 1,

@@ -10,20 +10,16 @@ const PostFilter = () => {
   const [typeQuery, setTypeQuery] = useQueryState('type');
 
   return (
-    <div data-testid={'post-filter'}>
+    <div data-testid={'post-filter'} className={'container'}>
       <ToggleGroup
         type="single"
-        value={typeQuery ? typeQuery : 'ALL'}
-        size="lg"
+        value={typeQuery ? typeQuery : 'WATERCOLOR'}
         className={'flex-wrap [&>button]:rounded-none'}
         onValueChange={async (value) => {
-          await setTypeQuery(value === 'ALL' ? '' : value);
+          await setTypeQuery(value || 'WATERCOLOR');
           scrollTo({ top: 0 });
         }}
       >
-        <ToggleGroupItem value={'ALL'} aria-label="Toggle all">
-          All
-        </ToggleGroupItem>
         <ToggleGroupItem value="WATERCOLOR" aria-label="Toggle watercolor">
           {artTypeToReadableText('WATERCOLOR' as ArtType)}
         </ToggleGroupItem>
@@ -35,6 +31,9 @@ const PostFilter = () => {
         </ToggleGroupItem>
         <ToggleGroupItem value="PENCIL_DRAWING" aria-label="Toggle pencil">
           {artTypeToReadableText('PENCIL_DRAWING' as ArtType)}
+        </ToggleGroupItem>
+        <ToggleGroupItem value="ETC" aria-label="Toggle etc">
+          {artTypeToReadableText('NONE' as ArtType)}
         </ToggleGroupItem>
       </ToggleGroup>
     </div>

@@ -11,9 +11,10 @@ import { artTypeToReadableText, getCFUrl } from '@/utils/common';
 
 interface Props extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   postItem: Post;
+  isShowSubTitle?: boolean;
 }
 
-const PostItem = ({ postItem, className, ...props }: Props) => {
+const PostItem = ({ postItem, isShowSubTitle, className, ...props }: Props) => {
   const [originImgLoaded, setOriginImgLoaded] = useState<boolean>(false);
   const { img, title, artType } = postItem;
 
@@ -34,6 +35,7 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
               alt={`${title} blur image`}
               fill
               priority
+              loading={'eager'}
               unoptimized
               sizes={'100vw'}
               className={`object-cover w-full h-full transition-opacity duration-500 ${
@@ -62,9 +64,11 @@ const PostItem = ({ postItem, className, ...props }: Props) => {
       </div>
       <div className={'text-center text-sm'}>
         <h2>{title}</h2>
-        <p className={'font-light'}>
-          {artTypeToReadableText(artType as ArtType)}
-        </p>
+        {isShowSubTitle && (
+          <p className={'font-light'}>
+            {artTypeToReadableText(artType as ArtType)}
+          </p>
+        )}
       </div>
     </Link>
   );

@@ -5,7 +5,6 @@ import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { getPost, getRandomPost } from '@/service/posts';
 import { artTypeToReadableText, getCFUrl, threeCommaNum } from '@/utils/common';
-import dayjs from '@/utils/dayjs';
 
 interface Props {
   params: {
@@ -62,15 +61,11 @@ export default async function GalleryDetail({ params }: Props) {
             <dd>{artTypeToReadableText(detailData.artType as ArtType)}</dd>
           </dl>
           <dl>
-            <dt>Date</dt>
-            <dd>{dayjs(detailData.drawingDate).format('YYYY.MM.DD')}</dd>
-          </dl>
-          <dl>
-            <dt>Canvas</dt>
+            <dt>Type</dt>
             <dd>{detailData.frameType}</dd>
           </dl>
           <dl>
-            <dt>Canvas Size</dt>
+            <dt>Size</dt>
             <dd>{detailData.canvasSize}</dd>
           </dl>
           {detailData.price && detailData.price > 0 ? (
@@ -93,6 +88,7 @@ export default async function GalleryDetail({ params }: Props) {
             <PostItem
               key={post.id}
               postItem={post}
+              isShowSubTitle
               className={
                 index === 2
                   ? 'hidden sm:block'

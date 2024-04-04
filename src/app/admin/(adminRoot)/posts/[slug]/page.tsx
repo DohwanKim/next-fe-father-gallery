@@ -67,7 +67,7 @@ export default function PostDetailPage({ params }: Props) {
     defaultValues: {
       title: '',
       drawingDate: new Date(),
-      artType: 'NONE' as ArtType,
+      artType: 'WATERCOLOR' as ArtType,
       canvasSize: '',
       price: 0,
       frameType: '',
@@ -322,7 +322,6 @@ export default function PostDetailPage({ params }: Props) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value={ArtType.NONE}>분류 없음</SelectItem>
                         <SelectItem value={ArtType.WATERCOLOR}>
                           수채화
                         </SelectItem>
@@ -335,6 +334,7 @@ export default function PostDetailPage({ params }: Props) {
                         <SelectItem value={ArtType.OIL_PAINTING}>
                           유화
                         </SelectItem>
+                        <SelectItem value={ArtType.NONE}>Etc</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -348,7 +348,7 @@ export default function PostDetailPage({ params }: Props) {
             name="frameType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={'w-24 font-bold'}>캔버스 정보</FormLabel>
+                <FormLabel className={'w-24 font-bold'}>Type</FormLabel>
                 <FormControl>
                   <Input
                     className={'w-1/2'}
@@ -366,9 +366,7 @@ export default function PostDetailPage({ params }: Props) {
             name="canvasSize"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={'w-24 font-bold'}>
-                  캔버스 사이즈
-                </FormLabel>
+                <FormLabel className={'w-24 font-bold'}>Size</FormLabel>
                 <FormControl>
                   <Input
                     className={'w-1/2'}

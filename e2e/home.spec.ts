@@ -60,7 +60,7 @@ test.describe('Home', () => {
       await page.waitForURL('**/about');
       const aboutPageTitle = page.getByRole('heading', {
         level: 1,
-        name: 'Dongcheol Kim | Republic of Korea',
+        name: 'Dongcheol Kim | South Korea',
       });
 
       await expect(aboutPageTitle).toBeVisible();

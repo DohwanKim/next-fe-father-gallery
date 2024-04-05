@@ -24,7 +24,7 @@ export default function About() {
         <div className={'flex flex-col justify-center gap-3 md:gap-10'}>
           <div>
             <h1 className={'text-2xl font-light'}>
-              Dongcheol Kim | Republic of Korea
+              Dongcheol Kim | South Korea
             </h1>
           </div>
           <div
@@ -64,7 +64,7 @@ export default function About() {
             <address className={'not-italic'}>
               <Home className={'h-[1rem] w-[1rem]'} />
               <span className={'not-italic'}>
-                Sarim Street, ChangWon City, Republic of Korea
+                Sarim Street, ChangWon City, South Korea
               </span>
             </address>
             <a href={'tel:+82 10 3831 5338'}>

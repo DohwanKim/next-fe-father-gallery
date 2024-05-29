@@ -9,7 +9,15 @@ interface Props {
 }
 
 const QueryProvider = ({ children }: Props) => {
-  const [client] = useState(new QueryClient());
+  const [client] = useState(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 60 * 1000,
+        },
+      },
+    }),
+  );
 
   return (
     <QueryClientProvider client={client}>

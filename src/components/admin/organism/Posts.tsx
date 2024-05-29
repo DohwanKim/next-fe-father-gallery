@@ -27,7 +27,7 @@ const Posts = () => {
   const [keywordQuery, setKeywordQuery] = useQueryState('keyword');
   const [limitQuery] = useQueryState('limit');
   const { data, refetch } = useQuery<Paginate<Post>>({
-    queryKey: ['posts', pageQuery, typeQuery, keywordQuery],
+    queryKey: ['posts', pageQuery, typeQuery, keywordQuery, limitQuery],
     queryFn: () => {
       return getPaginatePosts({
         page: Number(pageQuery || 1),

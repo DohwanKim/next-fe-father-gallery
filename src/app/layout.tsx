@@ -17,7 +17,23 @@ export const metadata: Metadata = {
     template: '%s | KimDongCheol Art',
     default: 'KimDongCheol Art',
   },
+  applicationName: 'KimDongCheol Art',
+  generator: 'KimDongCheol Art',
+  authors: {
+    name: 'KimDongCheol',
+    url: 'https://kimdongcheol-art.com/',
+  },
   description: 'A painting challenge by a non-majors',
+  keywords: [
+    'painting',
+    'challenge',
+    'non-majors',
+    'watercolors',
+    'gallery',
+    'KimDongCheol',
+    'art',
+  ],
+  creator: 'KimDoHwan',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

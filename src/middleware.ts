@@ -1,76 +1,58 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_API_URL}`;
-let newResponse: Response;
 
-const isUserLogged = async (headers: Headers) => {
+const getLoggedInfo = async (headers: Headers) => {
+  let newResponse = null;
   let isLogged = false;
 
-  await fetch(`${BASE_URL}/users/info`, {
-    method: 'GET',
-    headers,
-    credentials: 'include',
-  })
-    .then((res) => res.json())
-    .then(async (data) => {
-      if (data.id && data.username && data.role === 'ADMIN') {
+  // 아래의 과정에서 예측하지 못한 에러를 대비하여 try-catch 랩핑
+  try {
+    const { id, username, role, message } = await fetch(
+      `${BASE_URL}/users/info`,
+      {
+        method: 'GET',
+        headers,
+        credentials: 'include',
+      },
+    ).then((res) => res.json());
+
+    if (id && username && role === 'ADMIN') {
+      isLogged = true;
+    }
+    if (message === 'JWT_ACCESS_TOKEN_UNAUTHORIZED') {
+      const res = await fetch(`${BASE_URL}/auth/refresh`, {
+        method: 'GET',
+        headers,
+        credentials: 'include',
+      });
+      const isHasGetSetCookie = res.headers.getSetCookie().length > 0;
+
+      if (isHasGetSetCookie) {
+        newResponse = NextResponse.next({
+          headers: res.headers,
+        });
         isLogged = true;
       }
-      if (data.message === 'JWT_ACCESS_TOKEN_UNAUTHORIZED') {
-        await fetch(`${BASE_URL}/auth/refresh`, {
-          method: 'GET',
-          headers,
-          credentials: 'include',
-        }).then((res) => {
-          const isHasGetSetCookie = res.headers.getSetCookie().length > 0;
+    }
+  } catch (e) {
+    console.error(e);
+  }
 
-          if (isHasGetSetCookie) {
-            newResponse = NextResponse.next({
-              headers: res.headers,
-            });
-            isLogged = true;
-          } else {
-            throw new Error('failed to refresh token');
-          }
-        });
-      }
-    })
-    .catch(async () => {
-      try {
-        await fetch(`${BASE_URL}/auth/signout`, {
-          method: 'POST',
-          headers,
-          credentials: 'include',
-        });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        const requestHeaders = new Headers(headers);
-
-        newResponse = NextResponse.next({
-          request: {
-            headers: requestHeaders,
-          },
-        });
-        newResponse.headers.set(
-          'Set-Cookie',
-          'accessToken=; expires = Thu, 01 Jan 1970 00:00:00 GMT, refreshToken=; expires = Thu, 01 Jan 1970 00:00:00 GMT',
-        );
-      }
-    });
-
-  return isLogged;
+  return { isLogged, newResponse };
 };
 
 export async function middleware(request: NextRequest) {
   const { headers } = request;
   const { pathname, origin } = request.nextUrl;
-  const isLogged = await isUserLogged(headers);
+  const { isLogged, newResponse } = await getLoggedInfo(headers);
 
-  if (pathname !== '/admin' && !isLogged) {
+  // 로그아웃 되어 있는데 어드민 관리 페이지로 왔을때
+  if (pathname !== '/admin' && pathname !== '/admin/signout' && !isLogged) {
     return NextResponse.redirect(new URL('/admin', origin));
   }
 
+  // 로그인 되어 있는데 로그인 페이지로 왔을때
   if (pathname === '/admin' && isLogged) {
     return NextResponse.redirect(new URL('/admin/posts', origin));
   }
@@ -78,6 +60,8 @@ export async function middleware(request: NextRequest) {
   if (newResponse) {
     return newResponse;
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

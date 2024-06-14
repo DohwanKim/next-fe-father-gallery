@@ -40,7 +40,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <title>KimDongCheol Art</title>
         <MetaIconHeader />
       </head>
       <body className={`${faustina.className} flex flex-col min-h-dvh`}>

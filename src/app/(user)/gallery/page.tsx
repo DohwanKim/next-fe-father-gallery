@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
-import Posts from '@/components/user/organism/Posts';
+import PostItemSkeleton from '@/components/user/organism/post-item-skeleton';
+import Posts from '@/components/user/organism/posts';
 
 export const metadata: Metadata = {
   title: 'Gallery',

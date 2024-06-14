@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
 
-import ThemeToggleButton from '@/components/common/atom/ThemeToggleButton';
-import HeaderNav from '@/components/user/organism/HeaderNav';
-import PostFilter from '@/components/user/organism/PostFilter';
-import SocialLinks from '@/components/user/organism/SocialLinks';
+import ThemeToggleButton from '@/components/common/atom/theme-toggle-button';
+import HeaderNav from '@/components/user/organism/header-nav';
+import PostFilter from '@/components/user/organism/post-filter';
+import SocialLinks from '@/components/user/organism/social-links';
 import useLayoutStore from '@/store/layout';
 
 const HEADER_HEIGHT = 60 as const;

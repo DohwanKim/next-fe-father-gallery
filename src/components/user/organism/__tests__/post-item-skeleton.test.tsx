@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
+import PostItemSkeleton from '@/components/user/organism/post-item-skeleton';
 
 describe('PostItemSkeleton', () => {
   it('PostItemSkeleton 스냅샷 일치', () => {

@@ -4,8 +4,8 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useQueryState } from 'nuqs';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import PostItem from '@/components/user/organism/PostItem';
-import PostItemSkeleton from '@/components/user/organism/PostItemSkeleton';
+import PostItem from '@/components/user/organism/post-item';
+import PostItemSkeleton from '@/components/user/organism/post-item-skeleton';
 import { ArtType } from '@/constants/post.enum';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';

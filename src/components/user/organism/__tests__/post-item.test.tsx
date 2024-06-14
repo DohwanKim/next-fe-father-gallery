@@ -4,7 +4,7 @@ import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
-import PostItem from '../PostItem';
+import PostItem from '../post-item';
 
 describe('PostItem', () => {
   let paginatePosts: Paginate<Post>;

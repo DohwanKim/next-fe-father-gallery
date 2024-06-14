@@ -2,7 +2,7 @@ import { ExternalLink, Home, Mail, Phone } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
-import SocialLinks from '@/components/user/organism/SocialLinks';
+import SocialLinks from '@/components/user/organism/social-links';
 
 export const metadata: Metadata = {
   title: 'About',

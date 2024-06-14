@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import UserFooter from '@/components/user/organism/UserFooter';
-import UserHeader from '@/components/user/organism/UserHeader';
+import UserFooter from '@/components/user/organism/user-footer';
+import UserHeader from '@/components/user/organism/user-header';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

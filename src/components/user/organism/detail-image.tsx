@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { HTMLAttributes, useState } from 'react';
 
-import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
+import { LoadingSpinner } from '@/components/common/atom/loading-spinner';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ImagesVariants } from '@/constants/images.enum';
 import { getCFUrl } from '@/utils/common';

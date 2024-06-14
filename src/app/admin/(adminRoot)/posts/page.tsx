@@ -1,4 +1,4 @@
-import Posts from '@/components/admin/organism/Posts';
+import Posts from '@/components/admin/organism/posts';
 
 export default async function PostPage() {
   return (

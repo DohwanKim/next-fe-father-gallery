@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import DetailImage from '@/components/user/organism/DetailImage';
+import DetailImage from '@/components/user/organism/detail-image';
 import { getPaginatePosts } from '@/service/posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';

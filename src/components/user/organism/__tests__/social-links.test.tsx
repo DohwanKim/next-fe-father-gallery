@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import SocialLinks from '@/components/user/organism/SocialLinks';
+import SocialLinks from '@/components/user/organism/social-links';
 
 describe('SocialLinks', () => {
   it('SocialLinks 스냅샷 일치', () => {

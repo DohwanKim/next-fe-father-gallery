@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import PostFilter from '@/components/user/organism/PostFilter';
+import PostFilter from '@/components/user/organism/post-filter';
 
 const mockUsePathname = jest.fn();
 jest.mock('next/navigation', () => {

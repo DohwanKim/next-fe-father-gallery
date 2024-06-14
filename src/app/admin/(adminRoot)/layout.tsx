@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import AdminHeader from '@/components/admin/organism/AdminHeader';
-import Modal from '@/components/admin/organism/Modal';
+import AdminHeader from '@/components/admin/organism/admin-header';
+import Modal from '@/components/admin/organism/modal';
 
 export const metadata: Metadata = {
   title: 'ADMIN',

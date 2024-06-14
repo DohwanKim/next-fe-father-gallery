@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
-import UserHeader from '@/components/user/organism/UserHeader';
+import UserHeader from '@/components/user/organism/user-header';
 
 const mockUsePathname = jest.fn();
 jest.mock('next/navigation', () => {

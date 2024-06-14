@@ -4,7 +4,7 @@ import { Home, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import ThemeToggleButton from '@/components/common/atom/ThemeToggleButton';
+import ThemeToggleButton from '@/components/common/atom/theme-toggle-button';
 import { Button } from '@/components/ui/button';
 import { signOut } from '@/service/auth';
 

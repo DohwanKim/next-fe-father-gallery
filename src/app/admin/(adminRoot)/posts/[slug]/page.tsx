@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
-import DatePicker from '@/components/common/organism/DatePicker';
+import { LoadingSpinner } from '@/components/common/atom/loading-spinner';
+import DatePicker from '@/components/common/organism/date-picker';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {

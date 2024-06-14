@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import BackButton from '@/components/user/atom/BackButton';
+import BackButton from '@/components/user/atom/back-button';
 
 describe('BackButton', () => {
   it('BackButton 스냅샷 일치', () => {

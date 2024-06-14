@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import SocialLinks from '@/components/user/organism/SocialLinks';
+import SocialLinks from '@/components/user/organism/social-links';
 
 export const metadata: Metadata = {
   description: 'A painting challenge by a non-majors',

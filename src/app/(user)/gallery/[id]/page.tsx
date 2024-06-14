@@ -1,6 +1,6 @@
-import BackButton from '@/components/user/atom/BackButton';
-import DetailImage from '@/components/user/organism/DetailImage';
-import PostItem from '@/components/user/organism/PostItem';
+import BackButton from '@/components/user/atom/back-button';
+import DetailImage from '@/components/user/organism/detail-image';
+import PostItem from '@/components/user/organism/post-item';
 import { ImagesVariants } from '@/constants/images.enum';
 import { ArtType } from '@/constants/post.enum';
 import { getPost, getRandomPost } from '@/service/posts';

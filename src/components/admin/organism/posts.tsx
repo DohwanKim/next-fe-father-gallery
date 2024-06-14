@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { useQueryState } from 'nuqs';
 import { useState } from 'react';
 
-import PostsFilter from '@/components/admin/organism/PostsFilter';
-import PostTable from '@/components/admin/organism/PostTable';
-import { LoadingSpinner } from '@/components/common/atom/LoadingSpinner';
+import PostTable from '@/components/admin/organism/post-table';
+import PostsFilter from '@/components/admin/organism/posts-filter';
+import { LoadingSpinner } from '@/components/common/atom/loading-spinner';
 import { Button } from '@/components/ui/button';
 import { ArtType } from '@/constants/post.enum';
 import { useModal } from '@/hooks/useModal';
@@ -16,7 +16,7 @@ import useAdminPostsStore from '@/store/admin-posts';
 import { Paginate } from '@/types/paginate.type';
 import { Post } from '@/types/posts.type';
 
-import BasicPagination from './BasicPagination';
+import BasicPagination from './basic-pagination';
 
 const Posts = () => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);

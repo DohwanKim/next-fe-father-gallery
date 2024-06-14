@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import HeaderNav, { navItems } from '@/components/user/organism/HeaderNav';
+import HeaderNav, { navItems } from '@/components/user/organism/header-nav';
 
 const mockUsePathname = jest.fn();
 

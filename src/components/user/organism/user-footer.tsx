@@ -8,12 +8,13 @@ const UserFooter = () => {
           'flex container text-xs justify-between min-h-[60px] gap-y-2 items-center flex-wrap py-4 text-foreground/60'
         }
       >
-        <div>
-          <p>
-            @Copyright {dayjs().format('YYYY')}. DongCheol Kim. All rights
-            reserved.
-          </p>
-        </div>
+        <p>
+          @Copyright {dayjs().format('YYYY')}. DongCheol Kim. All rights
+          reserved.
+        </p>
+        <p>
+          madeby. <a href="https://github.com/DohwanKim">@DohwanKim</a>
+        </p>
       </div>
     </footer>
   );

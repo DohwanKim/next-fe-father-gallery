@@ -36,6 +36,7 @@ const getLoggedInfo = async (headers: Headers) => {
       }
     }
   } catch (e) {
+    // 인증 관련 에러 logging 삽입 부분
     console.error(e);
   }
 

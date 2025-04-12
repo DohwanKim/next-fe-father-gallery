@@ -33,8 +33,10 @@ declare module 'dayjs' {
 
 export default dayjs;
 
-export const dayOfWeekNumberToKoName = (weekNumber: number): string => {
-  let weekKoName;
+type KoWeekName = '일' | '월' | '화' | '수' | '목' | '금' | '토' | null;
+
+export const dayOfWeekNumberToKoName = (weekNumber: number): KoWeekName => {
+  let weekKoName: KoWeekName;
 
   switch (weekNumber) {
     case 0:
@@ -60,16 +62,18 @@ export const dayOfWeekNumberToKoName = (weekNumber: number): string => {
       break;
     default:
       console.error('error');
-      weekKoName = '잘못된 요일 값';
+      weekKoName = null;
       break;
   }
 
   return weekKoName;
 };
 
-export const weekOfDayNameToNumber = (name: string): number => {
+type WeekNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export const weekOfDayNameToNumber = (name: string): WeekNumber => {
   const formatName = `${name}`.toUpperCase();
-  let weekOfDayNumber;
+  let weekOfDayNumber: WeekNumber;
 
   switch (formatName) {
     case 'SUNDAY':

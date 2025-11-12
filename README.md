@@ -83,8 +83,6 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
   - [x] Github action 테스트 CI 구축 (CD는 Vercel에서 제공)
 - [x] 분석도구
   - [x] Vercel Analytics
-- 추가 작업 옵션
-  - [ ] 차후 벡엔드 프로젝트와 함께 Mono Repo로 변경
 
 ## TMI
 - PandaCSS를 사용하려 했으나 시간 단축을 위해 TailwindCSS + shadcn/ui 로 변경하였습니다.

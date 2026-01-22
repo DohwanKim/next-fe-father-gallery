@@ -16,7 +16,7 @@ Next.js 14로 개발한 Frontend 프로젝트 입니다.<br>
 <a target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 </p>
 
-## 배포된 사이트 바로가기
+## 배포된 사이트 바로가기 -> 현재 종료됨
 - [KimDongcheol Art (김동철 그림세상)](https://kimdongcheol-art.com/)
 - [API 문서 (Swagger)](https://api.kimdongcheol-art.com/api)
 
